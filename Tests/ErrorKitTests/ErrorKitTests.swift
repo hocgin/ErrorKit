@@ -7,14 +7,14 @@ import XCTest
 import ErrorKitMacros
 
 let testMacros: [String: Macro.Type] = [
-    "stringify": StringifyMacro.self,
+   "stringify": StringifyMacro.self,
 ]
 #endif
 
 final class ErrorKitTests: XCTestCase {
-    func testMacro() throws {
-        #if canImport(ErrorKitMacros)
-        assertMacroExpansion(
+   func testMacro() throws {
+      #if canImport(ErrorKitMacros)
+      assertMacroExpansion(
             """
             #stringify(a + b)
             """,
@@ -22,15 +22,15 @@ final class ErrorKitTests: XCTestCase {
             (a + b, "a + b")
             """,
             macros: testMacros
-        )
-        #else
-        throw XCTSkip("macros are only supported when running tests for the host platform")
-        #endif
-    }
+      )
+      #else
+      throw XCTSkip("macros are only supported when running tests for the host platform")
+      #endif
+   }
 
-    func testMacroWithStringLiteral() throws {
-        #if canImport(ErrorKitMacros)
-        assertMacroExpansion(
+   func testMacroWithStringLiteral() throws {
+      #if canImport(ErrorKitMacros)
+      assertMacroExpansion(
             #"""
             #stringify("Hello, \(name)")
             """#,
@@ -38,9 +38,9 @@ final class ErrorKitTests: XCTestCase {
             ("Hello, \(name)", #""Hello, \(name)""#)
             """#,
             macros: testMacros
-        )
-        #else
-        throw XCTSkip("macros are only supported when running tests for the host platform")
-        #endif
-    }
+      )
+      #else
+      throw XCTSkip("macros are only supported when running tests for the host platform")
+      #endif
+   }
 }
