@@ -5,7 +5,7 @@ final class Database {
    static func loadMovies(byGenre genre: Movie.Genre) throws -> [Movie] {
       let randomInt = (0..<100).randomElement()!
       if randomInt < 33 {
-         throw NSError.generic(code: 54934, message: "Loading movies from database failed!")
+         throw #RichError(code: 54934, message: "Loading movies from database failed!")
       } else if randomInt < 66 {
          return []
       } else {
@@ -35,13 +35,15 @@ struct Movie: Equatable {
       var movies = try Database.loadMovies(byGenre: genre)
 
       guard !movies.isEmpty else {
-         throw NSError.generic(code: 21693, message: "No movies found matching the genre '\(genre)'.")
+         throw #RichError(code: 21693, message: "No movies found matching the genre '\(genre)'.")
       }
+
+
 
       var randomMovies: [Movie] = []
       for _ in 0..<count {
          guard let randomMovie = movies.randomElement() else {
-            throw NSError.generic(code: 89316, message: "Not enough movies matching the genre '\(genre)'.")
+            throw #RichError(code: 89316, message: "Not enough movies matching the genre '\(genre)'.")
          }
          
          movies.removeAll { $0 == randomMovie }
@@ -52,10 +54,12 @@ struct Movie: Equatable {
    }
 }
 
+// TODO: replace later with custom type-specific auto-generated error type?
 extension NSError {
     static func generic(code: Int, message: String) -> NSError {
         NSError(domain: Bundle.main.bundleIdentifier ?? "App", code: code, userInfo: [NSLocalizedDescriptionKey: message])
     }
 }
+
 
 print(try Movie.randomMovies(genre: .action, count: 5).map(\.title))

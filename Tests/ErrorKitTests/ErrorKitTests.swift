@@ -7,7 +7,7 @@ import XCTest
 import ErrorKitMacros
 
 let testMacros: [String: Macro.Type] = [
-   "stringify": StringifyMacro.self,
+   "RichError": RichErrorMacro.self,
 ]
 #endif
 
@@ -16,27 +16,11 @@ final class ErrorKitTests: XCTestCase {
       #if canImport(ErrorKitMacros)
       assertMacroExpansion(
             """
-            #stringify(a + b)
+            #RichError(code: 1156, message: "parsing failed with error code \\(someVariable)")
             """,
             expandedSource: """
-            (a + b, "a + b")
+            NSError.generic(code: 1156, message: "parsing failed with error code \\(someVariable)")
             """,
-            macros: testMacros
-      )
-      #else
-      throw XCTSkip("macros are only supported when running tests for the host platform")
-      #endif
-   }
-
-   func testMacroWithStringLiteral() throws {
-      #if canImport(ErrorKitMacros)
-      assertMacroExpansion(
-            #"""
-            #stringify("Hello, \(name)")
-            """#,
-            expandedSource: #"""
-            ("Hello, \(name)", #""Hello, \(name)""#)
-            """#,
             macros: testMacros
       )
       #else
