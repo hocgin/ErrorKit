@@ -80,7 +80,7 @@ This protocol is simple and clear. It’s named `Throwable` to align with Swift�
 Here’s how you use it:
 
 ```swift
-enum NetworkError: Throwable, CaseIterable {
+enum NetworkError: Throwable {
    case noConnectionToServer
    case parsingFailed
 
@@ -100,7 +100,7 @@ When you print `error.localizedDescription`, you'll get exactly the message you 
 Not all apps are localized, and developers may not have time to provide localized descriptions immediately. To make error handling even simpler, `Throwable` allows you to define your error messages using raw values:
 
 ```swift
-enum NetworkError: String, Throwable, CaseIterable {
+enum NetworkError: String, Throwable {
    case noConnectionToServer = "Unable to connect to the server."
    case parsingFailed = "Data parsing failed."
 }
