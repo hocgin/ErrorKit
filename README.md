@@ -1,16 +1,18 @@
 # ErrorKit
 
-ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate while providing more insights. Helpful for users, fun for developers!
+**ErrorKit** makes error handling in Swift more intuitive. It reduces boilerplate code while providing clearer insights. Helpful for users, fun for developers!
 
-TODO: list all the advantages when using ErrorKit over Swift's native types
+*TODO: Add a list of advantages of using ErrorKit over Swift’s native error handling types.*
 
-## Why we are introducing the `Throwable` protocol to replace `Error`
+---
 
-### Confusing `Error` API
+## Why We Introduced the `Throwable` Protocol to Replace `Error`
 
-The `Error` type in Swift is a very simple protocol that has no requirements. But it has exactly one computed property we can call named `localizedDescription` which returns a text we can log or show users.
+### The Confusing `Error` API
 
-You might have written something like this, providing a `localizedDescription`:
+Swift's `Error` protocol is simple – too simple. It has no requirements, but it offers one computed property, `localizedDescription`, which is often used to log errors or display messages to users.
+
+Consider the following example where we provide a `localizedDescription` for an enum:
 
 ```swift
 enum NetworkError: Error, CaseIterable {
@@ -19,17 +21,14 @@ enum NetworkError: Error, CaseIterable {
 
    var localizedDescription: String {
       switch self {
-      case .noConnectionToServer:
-         return "No Connection to Server Established"
-
-      case .parsingFailed:
-         return "Parsing Failed"
+      case .noConnectionToServer: "No connection to the server."
+      case .parsingFailed: "Data parsing failed."
       }
    }
 }
 ```
 
-But actually, this doesn't work. If we randomly throw an error and print it's `localizedDescription` like in this view:
+You might expect this to work seamlessly, but it doesn’t. If we randomly throw an error and print its `localizedDescription`, like in the following SwiftUI view:
 
 ```swift
 struct ContentView: View {
@@ -45,19 +44,30 @@ struct ContentView: View {
 }
 ```
 
-The console output is cryptic and not at all what we would expect: 😱
+The console output will surprise you: 😱
 
 ```bash
 Caught error with message: The operation couldn’t be completed. (ErrorKitDemo.NetworkError error 0.)
 ```
 
-There is zero info about what error case was thrown – heck, not even the enum case name was provided, let alone our provided message! Why is that? That's because the Swift `Error` type is actually bridged to `NSError` which works entirely differently (with `domain`, `code`, and `userInfo`).
+There’s no information about the specific error case. Not even the enum case name appears, let alone the custom message! Why? Because Swift’s `Error` protocol is bridged to `NSError`, which uses `domain`, `code`, and `userInfo` instead.
 
-The correct way in Swift to provide your own error type is actually to conform to `LocalizedError`! It has the following requirements: `errorDescription: String?`, `failureReason: String?`, `recoverySuggestion: String?`, and `helpAnchor: String?`.
+### The "Correct" Way: `LocalizedError`
 
-But all of these are optional, so you won't get any build errors when writing your own error types, making it easy to forget providing a user-friendly message. And the only field that is being used for `localizedDescription` actually is `errorDescription`, the failure reason or recovery suggestions, for example, get completely ignored. And the help anchor is a legacy leftover from old macOS error dialogs, it's very uncommon nowadays.
+The correct approach is to conform to `LocalizedError`, which defines the following optional properties:  
 
-All this makes `LocalizedError` confusing and unsafe to use. Which is why we provide our own protocol:
+- `errorDescription: String?`
+- `failureReason: String?`
+- `recoverySuggestion: String?`
+- `helpAnchor: String?`
+
+However, since all of these properties are optional, you won’t get any compiler errors if you forget to implement them. Worse, only `errorDescription` affects `localizedDescription`. Fields like `failureReason` and `recoverySuggestion` are ignored, while `helpAnchor` is rarely used today.
+
+This makes `LocalizedError` both confusing and error-prone.
+
+### The Solution: `Throwable`
+
+To address these issues, **ErrorKit** introduces the `Throwable` protocol:
 
 ```swift
 public protocol Throwable: LocalizedError {
@@ -65,9 +75,9 @@ public protocol Throwable: LocalizedError {
 }
 ```
 
-It is super simple and clear. We named it `Throwable` which is consistent with the `throw` keyword and has the common `able` ending used for protocols in Swift (like `Codable`, `Identifiable` and many others). And it actually requires a field and that field is named exactly like the `localizedDescription` we call when catching errors in Swift, making errors intuitive to write.
+This protocol is simple and clear. It’s named `Throwable` to align with Swift’s `throw` keyword and follows Swift’s convention of using the `able` suffix (like `Codable` and `Identifiable`). Most importantly, it requires the `localizedDescription` property, ensuring your errors behave exactly as expected.
 
-With this we can simply write:
+Here’s how you use it:
 
 ```swift
 enum NetworkError: Throwable, CaseIterable {
@@ -83,9 +93,11 @@ enum NetworkError: Throwable, CaseIterable {
 }
 ```
 
-Now when printing `error.localizedDescription` we get exactly the message we expect! 🥳
+When you print `error.localizedDescription`, you'll get exactly the message you expect! 🥳
 
-But it doesn't end there. We know that not all apps are localized, and not all developer have the time to localize all their errors right away. So we even provide a shorter version that you can use in your first iteration if your cases have no parameters. Just provide raw values like so, making your error type definition even shorter while maintaining descriptive error message:
+### Even Shorter Error Definitions
+
+Not all apps are localized, and developers may not have time to provide localized descriptions immediately. To make error handling even simpler, `Throwable` allows you to define your error messages using raw values:
 
 ```swift
 enum NetworkError: String, Throwable, CaseIterable {
@@ -94,6 +106,8 @@ enum NetworkError: String, Throwable, CaseIterable {
 }
 ```
 
-Section summary:
+This approach eliminates boilerplate code while keeping the error definitions concise and descriptive.
 
-> We recommend conforming all your custom error types to `Throwable` rather than `Error` or `LocalizedError`. It has one requirement, `localizedDescription: String`, which will be exactly what you expect it to be.
+### Summary
+
+> Conform your custom error types to `Throwable` instead of `Error` or `LocalizedError`. The `Throwable` protocol requires only `localizedDescription: String`, ensuring your error messages are exactly what you expect – no surprises.
