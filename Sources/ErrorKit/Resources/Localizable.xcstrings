@@ -1,0 +1,292 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CommonErrors.CocoaError.default" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A file system error occurred: %@"
+          }
+        }
+      }
+    },
+    "CommonErrors.CocoaError.fileNoSuchFile" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file could not be found."
+          }
+        }
+      }
+    },
+    "CommonErrors.CocoaError.fileReadNoPermission" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You do not have permission to read this file."
+          }
+        }
+      }
+    },
+    "CommonErrors.CocoaError.fileWriteOutOfSpace" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There is not enough disk space to complete the operation."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSManagedObjectValidationError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An object validation error occurred."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSPersistentStoreIncompatibleVersionHashError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The data store is incompatible with the current model version."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSPersistentStoreOpenError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unable to open the persistent store. Please check your storage or permissions."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSPersistentStoreSaveError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Failed to save the data. Please try again."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSValidationMissingMandatoryPropertyError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A mandatory property is missing. Please fill all required fields."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSValidationMultipleErrorsError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Multiple validation errors occurred while saving."
+          }
+        }
+      }
+    },
+    "CommonErrors.CoreData.NSValidationRelationshipLacksMinimumCountError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A relationship is missing required related objects."
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.default" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A MapKit error occurred: %@"
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.directionsNotFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No directions could be found for the specified route."
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.loadingThrottled" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Map loading is being throttled. Please wait a moment and try again."
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.placemarkNotFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The requested placemark could not be found. Please check the location details."
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.serverFailure" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The MapKit server returned an error. Please try again later."
+          }
+        }
+      }
+    },
+    "CommonErrors.MKError.unknown" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An unknown error occurred in MapKit."
+          }
+        }
+      }
+    },
+    "CommonErrors.POSIXError.default" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A system error occurred: %@"
+          }
+        }
+      }
+    },
+    "CommonErrors.POSIXError.EACCES" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Permission denied. Please check your file permissions."
+          }
+        }
+      }
+    },
+    "CommonErrors.POSIXError.EBADF" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Bad file descriptor. The file may be closed or invalid."
+          }
+        }
+      }
+    },
+    "CommonErrors.POSIXError.ENOSPC" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There is no space left on the device."
+          }
+        }
+      }
+    },
+    "CommonErrors.URLError.cannotFindHost" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unable to find the server. Please check the URL or your network."
+          }
+        }
+      }
+    },
+    "CommonErrors.URLError.default" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A network error occurred: %@"
+          }
+        }
+      }
+    },
+    "CommonErrors.URLError.networkConnectionLost" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The network connection was lost. Please try again."
+          }
+        }
+      }
+    },
+    "CommonErrors.URLError.notConnectedToInternet" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You are not connected to the Internet. Please check your connection."
+          }
+        }
+      }
+    },
+    "CommonErrors.URLError.timedOut" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request timed out. Please try again later."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
