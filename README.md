@@ -111,3 +111,44 @@ This approach eliminates boilerplate code while keeping the error definitions co
 ### Summary
 
 > Conform your custom error types to `Throwable` instead of `Error` or `LocalizedError`. The `Throwable` protocol requires only `localizedDescription: String`, ensuring your error messages are exactly what you expect – no surprises.
+
+
+## Enhanced Error Descriptions with `enhancedDescription(for:)`
+
+ErrorKit goes beyond simplifying error handling — it enhances the clarity of error messages by providing improved, localized descriptions. With the `ErrorKit.enhancedDescription(for:)` function, developers can deliver clear, user-friendly error messages tailored to their audience.
+
+### How It Works
+
+The `enhancedDescription(for:)` function analyzes the provided `Error` and returns an enhanced, localized message. It draws on a community-maintained collection of descriptions to ensure the messages are accurate, helpful, and continuously evolving.
+
+### Supported Error Domains
+
+ErrorKit supports errors from various domains such as `Foundation`, `CoreData`, `MapKit`, and more. These domains are continuously updated, providing coverage for the most common error types in Swift development.
+
+### Usage Example
+
+Here’s how to use `enhancedDescription(for:)` to handle errors gracefully:
+
+```swift
+do {
+    // Attempt a network request
+    let url = URL(string: "https://example.com")!
+    let _ = try Data(contentsOf: url)
+} catch {
+    // Print or show the enhanced error message to a user
+    print(ErrorKit.enhancedDescription(for: error))
+    // Example output: "You are not connected to the Internet. Please check your connection."
+}
+```
+
+### Why Use `enhancedDescription(for:)`?
+
+- **Localization**: Error messages are localized to ~40 languages to provide a better user experience.
+- **Clarity**: Returns clear and concise error messages, avoiding cryptic system-generated descriptions.
+- **Community Contributions**: The descriptions are regularly improved by the developer community. If you encounter a new or unexpected error, feel free to contribute by submitting a pull request.
+
+### Contribution Welcome!
+
+Found a bug or missing description? We welcome your contributions! Submit a pull request (PR), and we’ll gladly review and merge it to enhance the library further.
+
+> **Note:** The enhanced error descriptions are constantly evolving, and we’re committed to making them as accurate and helpful as possible.
