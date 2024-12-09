@@ -20,14 +20,14 @@ public enum ErrorKit {
    ///     let url = URL(string: "https://example.com")!
    ///     let _ = try Data(contentsOf: url)
    /// } catch {
-   ///     print(ErrorKit.enhancedDescription(for: error))
+   ///     print(ErrorKit.userFriendlyMessage(for: error))
    ///     // Output: "You are not connected to the Internet. Please check your connection." (if applicable)
    /// }
    /// ```
-   public static func enhancedDescription(for error: Error) -> String {
+   public static func userFriendlyMessage(for error: Error) -> String {
       // Any types conforming to `Throwable` are assumed to already have a good description
       if let throwable = error as? Throwable {
-         return throwable.localizedDescription
+         return throwable.userFriendlyMessage
       }
 
       if let foundationDescription = Self.enhancedFoundationDescription(for: error) {

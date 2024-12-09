@@ -12,43 +12,43 @@ extension ErrorKit {
 
          case NSPersistentStoreSaveError:
             return String(
-               localized: "CommonErrors.CoreData.NSPersistentStoreSaveError",
+               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError",
                defaultValue: "Failed to save the data. Please try again.",
                bundle: .module
             )
          case NSValidationMultipleErrorsError:
             return String(
-               localized: "CommonErrors.CoreData.NSValidationMultipleErrorsError",
+               localized: "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError",
                defaultValue: "Multiple validation errors occurred while saving.",
                bundle: .module
             )
          case NSValidationMissingMandatoryPropertyError:
             return String(
-               localized: "CommonErrors.CoreData.NSValidationMissingMandatoryPropertyError",
+               localized: "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError",
                defaultValue: "A mandatory property is missing. Please fill all required fields.",
                bundle: .module
             )
          case NSValidationRelationshipLacksMinimumCountError:
             return String(
-               localized: "CommonErrors.CoreData.NSValidationRelationshipLacksMinimumCountError",
+               localized: "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError",
                defaultValue: "A relationship is missing required related objects.",
                bundle: .module
             )
          case NSPersistentStoreIncompatibleVersionHashError:
             return String(
-               localized: "CommonErrors.CoreData.NSPersistentStoreIncompatibleVersionHashError",
+               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError",
                defaultValue: "The data store is incompatible with the current model version.",
                bundle: .module
             )
          case NSPersistentStoreOpenError:
             return String(
-               localized: "CommonErrors.CoreData.NSPersistentStoreOpenError",
+               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError",
                defaultValue: "Unable to open the persistent store. Please check your storage or permissions.",
                bundle: .module
             )
          case NSManagedObjectValidationError:
             return String(
-               localized: "CommonErrors.CoreData.NSManagedObjectValidationError",
+               localized: "EnhancedDescriptions.CoreData.NSManagedObjectValidationError",
                defaultValue: "An object validation error occurred.",
                bundle: .module
             )
