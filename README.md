@@ -152,3 +152,60 @@ do {
 Found a bug or missing description? We welcome your contributions! Submit a pull request (PR), and we’ll gladly review and merge it to enhance the library further.
 
 > **Note:** The enhanced error descriptions are constantly evolving, and we’re committed to making them as accurate and helpful as possible.
+
+## Overloads of Common System Functions with Typed Throws
+
+ErrorKit introduces typed-throws overloads for common system APIs like `FileManager` and `URLSession`, providing more granular error handling and improved code clarity. These overloads allow you to handle specific error scenarios with tailored responses, making your code more robust and easier to maintain.
+
+To streamline discovery, ErrorKit uses the same API names prefixed with `throwable`. These functions throw specific errors that conform to `Throwable`, allowing for clear and informative error messages.
+
+**Enhanced User-Friendly Error Messages:**
+
+One of the key advantages of ErrorKit's typed throws is the improved `localizedDescription` property. This property provides user-friendly error messages that are tailored to the specific error type. This eliminates the need for manual error message construction and ensures a consistent and informative user experience.
+
+**Example: Creating a Directory**
+
+```swift
+do {
+  try FileManager.default.throwableCreateDirectory(at: URL(string: "file:///path/to/directory")!)
+} catch {
+   switch error {
+   case FileManagerError.noWritePermission:
+      // Request write permission from the user intead of showing error message
+   default:
+      // Common error cases have a more descriptive message
+      showErrorDialog(error.localizedDescription)
+   }
+}
+```
+
+The code demonstrates how to handle errors for specific error cases with an improved UX rather than just showing an error message to the user, which can still be the fallback. And the error cases are easy to discover thanks to the typed enum error.
+
+**Example: Handling network request errors**
+
+```swift
+do {
+  let (data, response) = try await URLSession.shared.throwableData(from: URL(string: "https://api.example.com/data")!)
+  // Process the data and response
+} catch {
+  // Error is of type `URLSessionError`
+  print(error.localizedDescription)
+
+  switch error {
+  case .timeout, .requestTimeout, .tooManyRequests:
+    // Automatically retry the request with a backoff strategy
+  case .noNetwork:
+    // Show an SF Symbol indicating the user is offline plus a retry button
+  case .unauthorized:
+    // Redirect the user to your login-flow (e.g. because token expired)
+  default:
+    // Fall back to showing error message
+  }
+}
+```
+
+Here, the code leverages the specific error types to implement various kinds of custom logic. This demonstrates the power of typed throws in providing fine-grained control over error handling.
+
+### Summary
+
+By utilizing these typed-throws overloads, you can write more robust and maintainable code. ErrorKit's enhanced user-friendly messages and ability to handle specific errors with code lead to a better developer and user experience. As the library continues to evolve, we encourage the community to contribute additional overloads and error types for common system APIs to further enhance its capabilities.
