@@ -61,7 +61,7 @@ The correct approach is to conform to `LocalizedError`, which defines the follow
 - `recoverySuggestion: String?`
 - `helpAnchor: String?`
 
-However, since all of these properties are optional, you won’t get any compiler errors if you forget to implement them. Worse, only `errorDescription` affects `localizedDescription`. Fields like `failureReason` and `recoverySuggestion` are ignored, while `helpAnchor` is rarely used today.
+However, since all of these properties are optional, you won’t get any compiler errors if you forget to implement them. Worse, only `errorDescription` affects `localizedDescription`. Fields like `failureReason` and `recoverySuggestion` are ignored, while `helpAnchor` is rarely used nowadays.
 
 This makes `LocalizedError` both confusing and error-prone.
 
@@ -71,11 +71,11 @@ To address these issues, **ErrorKit** introduces the `Throwable` protocol:
 
 ```swift
 public protocol Throwable: LocalizedError {
-   var localizedDescription: String { get }
+   var userFriendlyMessage: String { get }
 }
 ```
 
-This protocol is simple and clear. It’s named `Throwable` to align with Swift’s `throw` keyword and follows Swift’s convention of using the `able` suffix (like `Codable` and `Identifiable`). Most importantly, it requires the `localizedDescription` property, ensuring your errors behave exactly as expected.
+This protocol is simple and clear. It’s named `Throwable` to align with Swift’s `throw` keyword and follows Swift’s convention of using the `able` suffix (like `Codable` and `Identifiable`). Most importantly, it requires the `userFriendlyMessage` property, ensuring your errors behave exactly as expected.
 
 Here’s how you use it:
 
@@ -84,7 +84,7 @@ enum NetworkError: Throwable {
    case noConnectionToServer
    case parsingFailed
 
-   var localizedDescription: String {
+   var userFriendlyMessage: String {
       switch self {
       case .noConnectionToServer: "Unable to connect to the server."
       case .parsingFailed: "Data parsing failed."
@@ -110,16 +110,16 @@ This approach eliminates boilerplate code while keeping the error definitions co
 
 ### Summary
 
-> Conform your custom error types to `Throwable` instead of `Error` or `LocalizedError`. The `Throwable` protocol requires only `localizedDescription: String`, ensuring your error messages are exactly what you expect – no surprises.
+> Conform your custom error types to `Throwable` instead of `Error` or `LocalizedError`. The `Throwable` protocol requires only `userFriendlyMessage: String`, ensuring your error messages are exactly what you expect – no surprises.
 
 
-## Enhanced Error Descriptions with `enhancedDescription(for:)`
+## Enhanced Error Descriptions with `userFriendlyMessage(for:)`
 
-ErrorKit goes beyond simplifying error handling — it enhances the clarity of error messages by providing improved, localized descriptions. With the `ErrorKit.enhancedDescription(for:)` function, developers can deliver clear, user-friendly error messages tailored to their audience.
+ErrorKit goes beyond simplifying error handling — it enhances the clarity of error messages by providing improved, localized descriptions. With the `ErrorKit.userFriendlyMessage(for:)` function, developers can deliver clear, user-friendly error messages tailored to their audience.
 
 ### How It Works
 
-The `enhancedDescription(for:)` function analyzes the provided `Error` and returns an enhanced, localized message. It draws on a community-maintained collection of descriptions to ensure the messages are accurate, helpful, and continuously evolving.
+The `userFriendlyMessage(for:)` function analyzes the provided `Error` and returns an enhanced, localized message. It draws on a community-maintained collection of descriptions to ensure the messages are accurate, helpful, and continuously evolving.
 
 ### Supported Error Domains
 
@@ -127,7 +127,7 @@ ErrorKit supports errors from various domains such as `Foundation`, `CoreData`, 
 
 ### Usage Example
 
-Here’s how to use `enhancedDescription(for:)` to handle errors gracefully:
+Here’s how to use `userFriendlyMessage(for:)` to handle errors gracefully:
 
 ```swift
 do {
@@ -136,12 +136,12 @@ do {
     let _ = try Data(contentsOf: url)
 } catch {
     // Print or show the enhanced error message to a user
-    print(ErrorKit.enhancedDescription(for: error))
+    print(ErrorKit.userFriendlyMessage(for: error))
     // Example output: "You are not connected to the Internet. Please check your connection."
 }
 ```
 
-### Why Use `enhancedDescription(for:)`?
+### Why Use `userFriendlyMessage(for:)`?
 
 - **Localization**: Error messages are localized to ~40 languages to provide a better user experience.
 - **Clarity**: Returns clear and concise error messages, avoiding cryptic system-generated descriptions.

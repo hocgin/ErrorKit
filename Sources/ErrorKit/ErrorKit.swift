@@ -6,11 +6,11 @@ public enum ErrorKit {
    /// This function analyzes the given `Error` and returns a clearer, more helpful message than the default system-provided description.
    /// All descriptions are localized, ensuring that users receive messages in their preferred language where available.
    ///
-   /// The list of enhanced descriptions is maintained and regularly improved by the developer community. Contributions are welcome—if you find bugs or encounter new errors, feel free to submit a pull request (PR) for review.
+   /// The list of user-friendly messages is maintained and regularly improved by the developer community. Contributions are welcome—if you find bugs or encounter new errors, feel free to submit a pull request (PR) for review.
    ///
    /// Errors from various domains, such as `Foundation`, `CoreData`, `MapKit`, and more, are supported. As the project evolves, additional domains may be included to ensure comprehensive coverage.
    ///
-   /// - Parameter error: The `Error` instance for which an enhanced description is needed.
+   /// - Parameter error: The `Error` instance for which a user-friendly message is needed.
    /// - Returns: A `String` containing an enhanced, localized, user-readable error message.
    ///
    /// ## Usage Example:
@@ -30,15 +30,15 @@ public enum ErrorKit {
          return throwable.userFriendlyMessage
       }
 
-      if let foundationDescription = Self.enhancedFoundationDescription(for: error) {
+      if let foundationDescription = Self.userFriendlyFoundationMessage(for: error) {
          return foundationDescription
       }
 
-      if let coreDataDescription = Self.enhancedCoreDataDescription(for: error) {
+      if let coreDataDescription = Self.userFriendlyCoreDataMessage(for: error) {
          return coreDataDescription
       }
 
-      if let mapKitDescription = Self.enhancedMapKitDescription(for: error) {
+      if let mapKitDescription = Self.userFriendlyMapKitMessage(for: error) {
          return mapKitDescription
       }
 

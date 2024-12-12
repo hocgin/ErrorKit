@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "CommonErrors.CocoaError.default" : {
+    "EnhancedDescriptions.CocoaError.default" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -12,7 +12,7 @@
         }
       }
     },
-    "CommonErrors.CocoaError.fileNoSuchFile" : {
+    "EnhancedDescriptions.CocoaError.fileNoSuchFile" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -23,7 +23,7 @@
         }
       }
     },
-    "CommonErrors.CocoaError.fileReadNoPermission" : {
+    "EnhancedDescriptions.CocoaError.fileReadNoPermission" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -34,7 +34,7 @@
         }
       }
     },
-    "CommonErrors.CocoaError.fileWriteOutOfSpace" : {
+    "EnhancedDescriptions.CocoaError.fileWriteOutOfSpace" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -45,7 +45,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSManagedObjectValidationError" : {
+    "EnhancedDescriptions.CoreData.NSManagedObjectValidationError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -56,7 +56,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSPersistentStoreIncompatibleVersionHashError" : {
+    "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -67,7 +67,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSPersistentStoreOpenError" : {
+    "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -78,7 +78,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSPersistentStoreSaveError" : {
+    "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -89,7 +89,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSValidationMissingMandatoryPropertyError" : {
+    "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -100,7 +100,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSValidationMultipleErrorsError" : {
+    "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -111,7 +111,7 @@
         }
       }
     },
-    "CommonErrors.CoreData.NSValidationRelationshipLacksMinimumCountError" : {
+    "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -122,7 +122,7 @@
         }
       }
     },
-    "CommonErrors.MKError.default" : {
+    "EnhancedDescriptions.MKError.default" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -133,7 +133,7 @@
         }
       }
     },
-    "CommonErrors.MKError.directionsNotFound" : {
+    "EnhancedDescriptions.MKError.directionsNotFound" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -144,7 +144,7 @@
         }
       }
     },
-    "CommonErrors.MKError.loadingThrottled" : {
+    "EnhancedDescriptions.MKError.loadingThrottled" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -155,7 +155,7 @@
         }
       }
     },
-    "CommonErrors.MKError.placemarkNotFound" : {
+    "EnhancedDescriptions.MKError.placemarkNotFound" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -166,7 +166,7 @@
         }
       }
     },
-    "CommonErrors.MKError.serverFailure" : {
+    "EnhancedDescriptions.MKError.serverFailure" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -177,7 +177,7 @@
         }
       }
     },
-    "CommonErrors.MKError.unknown" : {
+    "EnhancedDescriptions.MKError.unknown" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -188,7 +188,7 @@
         }
       }
     },
-    "CommonErrors.POSIXError.default" : {
+    "EnhancedDescriptions.POSIXError.default" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -199,7 +199,7 @@
         }
       }
     },
-    "CommonErrors.POSIXError.EACCES" : {
+    "EnhancedDescriptions.POSIXError.EACCES" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -210,7 +210,7 @@
         }
       }
     },
-    "CommonErrors.POSIXError.EBADF" : {
+    "EnhancedDescriptions.POSIXError.EBADF" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -221,7 +221,7 @@
         }
       }
     },
-    "CommonErrors.POSIXError.ENOSPC" : {
+    "EnhancedDescriptions.POSIXError.ENOSPC" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -232,7 +232,7 @@
         }
       }
     },
-    "CommonErrors.URLError.cannotFindHost" : {
+    "EnhancedDescriptions.URLError.cannotFindHost" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -243,7 +243,7 @@
         }
       }
     },
-    "CommonErrors.URLError.default" : {
+    "EnhancedDescriptions.URLError.default" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -254,7 +254,7 @@
         }
       }
     },
-    "CommonErrors.URLError.networkConnectionLost" : {
+    "EnhancedDescriptions.URLError.networkConnectionLost" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -265,7 +265,7 @@
         }
       }
     },
-    "CommonErrors.URLError.notConnectedToInternet" : {
+    "EnhancedDescriptions.URLError.notConnectedToInternet" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -276,13 +276,365 @@
         }
       }
     },
-    "CommonErrors.URLError.timedOut" : {
+    "EnhancedDescriptions.URLError.timedOut" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "The request timed out. Please try again later."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.corruptFile" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file is corrupted or in an unreadable format."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.fileExists" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file or directory already exists."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.fileLocked" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file is locked and cannot be modified."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.fileNotFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The specified file or directory could not be found."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.fileTooLarge" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file is too large to be processed."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.invalidFileName" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file name is invalid and cannot be used."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.noReadPermission" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You do not have permission to read this file or directory."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.noWritePermission" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You do not have permission to write to this file or directory."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.outOfSpace" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There is not enough disk space to complete the operation."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.readError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An unknown error occurred while reading the file."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.unsupportedEncoding" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file's character encoding is not supported."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.volumeReadOnly" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The storage volume is read-only and cannot be modified."
+          }
+        }
+      }
+    },
+    "TypedOverloads.FileManager.writeError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An unknown error occurred while writing the file."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.badRequest" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request was malformed (400). Please review and try again."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.badURL" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The URL is malformed. Please check it and try again or report a bug."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.cancelled" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request was cancelled. Please try again if this wasn't intended."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.cannotFindHost" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Cannot find host. Please check your internet connection and try again."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.conflict" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was a conflict with the request (409). Please review and try again."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.forbidden" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You do not have permission to access this resource (403)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.methodNotAllowed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The HTTP method is not allowed for this resource (405)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.noNetwork" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No network connection found. Please check your internet."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.notAcceptable" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The requested resource cannot produce an acceptable response (406)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.notFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The requested resource could not be found (404)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.paymentRequired" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Payment is required to access this resource (402)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.requestTimeout" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request timed out (408). Please try again."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.serverError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The server encountered an error (500). Please try again later."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.sslError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was an SSL error. Please check the server's certificate."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.timeout" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request timed out. Please try again."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.tooManyRequests" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Too many requests have been sent. Please wait and try again (429)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.unauthorized" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "You are not authorized to access this resource (401)."
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.unknown" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An unknown status code was received from the server: %lld"
+          }
+        }
+      }
+    },
+    "TypedOverloads.URLSession.unsupportedMediaType" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request entity has an unsupported media type (415)."
           }
         }
       }

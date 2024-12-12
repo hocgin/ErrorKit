@@ -3,7 +3,7 @@ import MapKit
 #endif
 
 extension ErrorKit {
-   static func enhancedMapKitDescription(for error: Error) -> String? {
+   static func userFriendlyMapKitMessage(for error: Error) -> String? {
       #if canImport(MapKit)
       if let mkError = error as? MKError {
          switch mkError.code {

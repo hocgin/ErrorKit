@@ -4,7 +4,7 @@ import FoundationNetworking
 #endif
 
 extension ErrorKit {
-   static func enhancedFoundationDescription(for error: Error) -> String? {
+   static func userFriendlyFoundationMessage(for error: Error) -> String? {
       switch error {
 
       // URLError: Networking errors

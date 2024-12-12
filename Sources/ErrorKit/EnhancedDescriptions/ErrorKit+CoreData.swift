@@ -3,7 +3,7 @@ import CoreData
 #endif
 
 extension ErrorKit {
-   static func enhancedCoreDataDescription(for error: Error) -> String? {
+   static func userFriendlyCoreDataMessage(for error: Error) -> String? {
       #if canImport(CoreData)
       let nsError = error as NSError
 

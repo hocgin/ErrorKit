@@ -152,8 +152,8 @@ extension FileManager {
    public func throwableCreateDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool = false, attributes: [FileAttributeKey : Any]? = nil) throws(FileManagerError) {
       do {
          try self.createDirectory(at: url, withIntermediateDirectories: createIntermediates, attributes: attributes)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -161,8 +161,8 @@ extension FileManager {
    public func throwableCreateDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: [FileAttributeKey : Any]? = nil) throws(FileManagerError) {
       do {
          try self.createDirectory(atPath: path, withIntermediateDirectories: createIntermediates, attributes: attributes)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -170,8 +170,8 @@ extension FileManager {
    public func throwableRemoveItem(at url: URL) throws(FileManagerError) {
       do {
          try self.removeItem(at: url)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -179,8 +179,8 @@ extension FileManager {
    public func throwableRemoveItem(atPath path: String) throws(FileManagerError) {
       do {
          try self.removeItem(atPath: path)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -188,8 +188,8 @@ extension FileManager {
    public func throwableCopyItem(at sourceURL: URL, to destinationURL: URL) throws(FileManagerError) {
       do {
          try self.copyItem(at: sourceURL, to: destinationURL)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -197,8 +197,8 @@ extension FileManager {
    public func throwableCopyItem(atPath sourcePath: String, toPath destinationPath: String) throws(FileManagerError) {
       do {
          try self.copyItem(atPath: sourcePath, toPath: destinationPath)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -206,8 +206,8 @@ extension FileManager {
    public func throwableMoveItem(at sourceURL: URL, to destinationURL: URL) throws(FileManagerError) {
       do {
          try self.moveItem(at: sourceURL, to: destinationURL)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -215,8 +215,8 @@ extension FileManager {
    public func throwableMoveItem(atPath sourcePath: String, toPath destinationPath: String) throws(FileManagerError) {
       do {
          try self.moveItem(atPath: sourcePath, toPath: destinationPath)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -224,8 +224,8 @@ extension FileManager {
    public func throwableAttributesOfItem(atPath path: String) throws(FileManagerError) -> [FileAttributeKey: Any] {
       do {
          return try self.attributesOfItem(atPath: path)
-      } catch let error as NSError {
-         throw self.mapToThrowable(error: error)
+      } catch {
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 

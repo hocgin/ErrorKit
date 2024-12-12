@@ -5,7 +5,7 @@ enum ExplicitDescriptionError: Throwable {
    case somethingFailed
    case reuestTimeout
 
-   var localizedDescription: String {
+   var userFriendlyMessage: String {
       switch self {
       case .somethingFailed: "Something failed unexpectedly"
       case .reuestTimeout: "Request timed out"
