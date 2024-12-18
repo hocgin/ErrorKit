@@ -1,6 +1,281 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "BuiltInErrors.DatabaseError.connectionFailed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Failed to connect to the database. Please try again later."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.DatabaseError.operationFailed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "An error occurred while performing the operation: %@. Please try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.DatabaseError.recordNotFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %1$@ record could not be found.%2$@ Please check and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.FileError.fileNotFound" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The file %@ could not be found. Please check the file path."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.FileError.readError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was an issue reading the file %@. Please try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.FileError.writeError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was an issue writing to the file %@. Please try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.NetworkError.badRequest" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request was malformed (%1$lld): %2$@. Please review and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.NetworkError.decodingFailure" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The data received from the server could not be processed. Please try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.NetworkError.noInternet" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "No internet connection is available. Please check your network settings and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.NetworkError.serverError" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The server encountered an error (Code: %lld)."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.NetworkError.timeout" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The request timed out. Please try again later."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.OperationError.canceled" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The operation was canceled. Please try again if necessary."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.OperationError.dependencyFailed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The operation could not be completed due to a failed dependency: %@."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.OperationError.unknownFailure" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The operation failed due to an unknown reason: %@. Please try again or contact support."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.ParsingError.invalidInput" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The provided input is invalid: %@. Please correct it and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.ParsingError.missingField" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A required field is missing: %@. Please review and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.PermissionError.denied" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %@ permission was denied. Please enable it in Settings to continue."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.PermissionError.notDetermined" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %@ permission has not been determined. Please try again or check your Settings."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.PermissionError.restricted" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %@ permission is restricted. This may be due to parental controls or other system restrictions."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.StateError.alreadyFinalized" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The operation cannot be performed because the state is already finalized."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.StateError.invalidState" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The operation cannot proceed due to an invalid state: %@."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.StateError.preconditionFailed" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A required condition was not met: %@. Please review and try again."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.ValidationError.inputTooLong" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ exceeds the maximum allowed length of %2$lld characters. Please shorten it."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.ValidationError.invalidInput" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The value provided for %@ is invalid. Please correct it."
+          }
+        }
+      }
+    },
+    "BuiltInErrors.ValidationError.missingField" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%@ is a required field. Please provide a value."
+          }
+        }
+      }
+    },
     "EnhancedDescriptions.CocoaError.default" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {

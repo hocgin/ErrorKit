@@ -59,7 +59,7 @@ import Foundation
 /// Caught error with message: Unable to connect to the server.
 /// ```
 ///
-public protocol Throwable: LocalizedError {
+public protocol Throwable: LocalizedError, Sendable {
    /// A human-readable error message describing the error.
    var userFriendlyMessage: String { get }
 }
