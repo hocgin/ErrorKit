@@ -1,24 +1,105 @@
 import Foundation
 
 /// Represents errors related to validation failures.
+///
+/// # Examples of Use
+///
+/// ## Validating Form Input
+/// ```swift
+/// struct UserRegistrationValidator {
+///     func validateUsername(_ username: String) throws(ValidationError) {
+///         guard !username.isEmpty else {
+///             throw .missingField(field: "Username")
+///         }
+///
+///         guard username.count <= 30 else {
+///             throw .inputTooLong(field: "Username", maxLength: 30)
+///         }
+///
+///         guard isValidUsername(username) else {
+///             throw .invalidInput(field: "Username")
+///         }
+///     }
+/// }
+/// ```
+///
+/// ## Handling Required Fields
+/// ```swift
+/// struct PaymentFormValidator {
+///     func validatePaymentDetails(_ details: [String: String]) throws(ValidationError) {
+///         guard let cardNumber = details["cardNumber"], !cardNumber.isEmpty else {
+///             throw .missingField(field: "Card Number")
+///         }
+///         // Additional validation logic
+///     }
+/// }
+/// ```
 public enum ValidationError: Throwable {
    /// The input provided is invalid.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct EmailValidator {
+   ///     func validateEmail(_ email: String) throws(ValidationError) {
+   ///         guard isValidEmailFormat(email) else {
+   ///             throw .invalidInput(field: "Email Address")
+   ///         }
+   ///         // Additional email validation
+   ///     }
+   /// }
+   /// ```
    /// - Parameters:
    ///   - field: The name of the field that caused the error.
    case invalidInput(field: String)
 
    /// A required field is missing.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct ShippingAddressValidator {
+   ///     func validateAddress(_ address: Address) throws(ValidationError) {
+   ///         guard !address.street.isEmpty else {
+   ///             throw .missingField(field: "Street Address")
+   ///         }
+   ///         // Additional address validation
+   ///     }
+   /// }
+   /// ```
    /// - Parameters:
    ///   - field: The name of the required fields.
    case missingField(field: String)
 
    /// The input exceeds the maximum allowed length.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct CommentValidator {
+   ///     func validateComment(_ text: String) throws(ValidationError) {
+   ///         guard text.count <= 1000 else {
+   ///             throw .inputTooLong(field: "Comment", maxLength: 1000)
+   ///         }
+   ///         // Additional comment validation
+   ///     }
+   /// }
+   /// ```
    /// - Parameters:
    ///   - field: The name of the field that caused the error.
    ///   - maxLength: The maximum allowed length for the field.
    case inputTooLong(field: String, maxLength: Int)
 
    /// Generic error message if the existing cases don't provide the required details.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct CustomValidator {
+   ///     func validateSpecialCase(_ input: String) throws(ValidationError) {
+   ///         guard meetsCustomRequirements(input) else {
+   ///             throw .generic(userFriendlyMessage: "Input does not meet requirements")
+   ///         }
+   ///         // Special validation logic
+   ///     }
+   /// }
+   /// ```
    case generic(userFriendlyMessage: String)
 
    /// A user-friendly error message suitable for display to end users.
@@ -27,19 +108,19 @@ public enum ValidationError: Throwable {
       case .invalidInput(let field):
          return String(
             localized: "BuiltInErrors.ValidationError.invalidInput",
-            defaultValue: "The value provided for \(field) is invalid. Please correct it.",
+            defaultValue: "The value entered for \(field) is not in the correct format. Please review the requirements and try again.",
             bundle: .module
          )
       case .missingField(let field):
          return String(
             localized: "BuiltInErrors.ValidationError.missingField",
-            defaultValue: "\(field) is a required field. Please provide a value.",
+            defaultValue: "Please provide a value for \(field). This information is required to proceed.",
             bundle: .module
          )
       case .inputTooLong(let field, let maxLength):
          return String(
             localized: "BuiltInErrors.ValidationError.inputTooLong",
-            defaultValue: "\(field) exceeds the maximum allowed length of \(maxLength) characters. Please shorten it.",
+            defaultValue: "The \(field) field cannot be longer than \(maxLength) characters. Please shorten your input and try again.",
             bundle: .module
          )
       case .generic(let userFriendlyMessage):
