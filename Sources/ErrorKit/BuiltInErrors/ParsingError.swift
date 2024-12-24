@@ -122,7 +122,7 @@ public enum ParsingError: Throwable, Catching {
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
       case .caught(let error):
-         return error.localizedDescription
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }

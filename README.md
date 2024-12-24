@@ -383,7 +383,7 @@ enum AppError: Throwable, Catching {
         case .invalidConfiguration:
             return String(localized: "The app configuration is invalid.")
         case .caught(let error):
-            return error.localizedDescription
+            return ErrorKit.userFriendlyMessage(for: error)
         }
     }
 }
