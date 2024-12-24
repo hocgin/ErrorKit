@@ -34,7 +34,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum ValidationError: Throwable {
+public enum ValidationError: Throwable, Catching {
    /// The input provided is invalid.
    ///
    /// # Example
@@ -102,6 +102,36 @@ public enum ValidationError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during validation, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include data validation errors, format validation errors, or any other errors encountered during validation checks.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct UserProfileValidator {
+   ///     func validateProfile(_ profile: UserProfile) throws(ValidationError) {
+   ///         // Regular error for field validation
+   ///         guard !profile.name.isEmpty else {
+   ///             throw ValidationError.missingField(field: "Name")
+   ///         }
+   ///
+   ///         // Automatically wrap complex validation errors
+   ///         try ValidationError.catch {
+   ///             try emailValidator.validateEmailFormat(profile.email)
+   ///             try addressValidator.validateAddress(profile.address)
+   ///             try customFieldsValidator.validate(profile.customFields)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the validation operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -125,6 +155,8 @@ public enum ValidationError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return error.localizedDescription
       }
    }
 }

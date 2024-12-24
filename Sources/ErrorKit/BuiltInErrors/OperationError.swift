@@ -27,7 +27,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum OperationError: Throwable {
+public enum OperationError: Throwable, Catching {
    /// The operation could not start due to a dependency failure.
    ///
    /// # Example
@@ -74,6 +74,36 @@ public enum OperationError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during an operation execution, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include task cancellation errors, operation queue errors, or any other errors encountered during complex operations.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct DataProcessor {
+   ///     func processLargeDataset(_ dataset: Dataset) throws(OperationError) {
+   ///         // Regular error for operation prerequisites
+   ///         guard meetsMemoryRequirements(dataset) else {
+   ///             throw OperationError.dependencyFailed(dependency: "Memory Requirements")
+   ///         }
+   ///
+   ///         // Automatically wrap operation and processing errors
+   ///         let result = try OperationError.catch {
+   ///             let operation = try ProcessingOperation(dataset)
+   ///             try operation.validateInputs()
+   ///             return try operation.execute()
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -91,6 +121,8 @@ public enum OperationError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return error.localizedDescription
       }
    }
 }

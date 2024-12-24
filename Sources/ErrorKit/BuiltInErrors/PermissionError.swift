@@ -33,7 +33,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum PermissionError: Throwable {
+public enum PermissionError: Throwable, Catching {
    /// The user denied the required permission.
    ///
    /// # Example
@@ -96,6 +96,35 @@ public enum PermissionError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during permission handling, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include authorization errors, system permission errors, or any other errors encountered during permission requests.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct MediaAccessManager {
+   ///     func requestMediaAccess() throws(PermissionError) {
+   ///         // Regular error for denied permission
+   ///         guard !isPermissionExplicitlyDenied else {
+   ///             throw PermissionError.denied(permission: "Media Library")
+   ///         }
+   ///
+   ///         // Automatically wrap authorization and system permission errors
+   ///         try PermissionError.catch {
+   ///             try await AVCaptureDevice.requestAccess(for: .video)
+   ///             try await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the permission operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -119,6 +148,8 @@ public enum PermissionError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return error.localizedDescription
       }
    }
 }
