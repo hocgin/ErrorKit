@@ -293,3 +293,131 @@ When contributing:
 - Follow the existing naming conventions
 
 Together, we can build a comprehensive set of error types that cover most common scenarios in Swift development and create a more unified error handling experience across the ecosystem.
+
+
+## Simplified Error Nesting with the `Catching` Protocol
+
+ErrorKit's `Catching` protocol simplifies error handling in modular applications by providing an elegant way to handle nested error hierarchies. It eliminates the need for explicit wrapper cases while maintaining type safety through typed throws.
+
+### The Problem with Manual Error Wrapping
+
+In modular applications, errors often need to be propagated up through multiple layers. The traditional approach requires defining explicit wrapper cases for each possible error type:
+
+```swift
+enum ProfileError: Error {
+    case validationFailed(field: String)
+    case databaseError(DatabaseError)    // Wrapper case needed
+    case networkError(NetworkError)      // Another wrapper case
+    case fileError(FileError)           // Yet another wrapper
+}
+
+// And manual error wrapping in code:
+ do {
+     try database.fetch(id)
+ } catch let error as DatabaseError {
+     throw .databaseError(error)
+ }
+```
+
+This leads to verbose error types and tedious error handling code when attempting to use typed throws.
+
+### The Solution: `Catching` Protocol
+
+ErrorKit's `Catching` protocol provides a single `caught` case that can wrap any error, plus a convenient `catch` function for automatic error wrapping:
+
+```swift
+enum ProfileError: Throwable, Catching {
+    case validationFailed(field: String)
+    case caught(Error)  // Single case handles all nested errors!
+}
+
+struct ProfileRepository {
+    func loadProfile(id: String) throws(ProfileError) {
+        // Regular error throwing for validation
+        guard id.isValidFormat else {
+            throw ProfileError.validationFailed(field: "id")
+        }
+        
+        // Automatically wrap any database or file errors
+        let userData = try ProfileError.catch {
+            let user = try database.loadUser(id)
+            let settings = try fileSystem.readUserSettings(user.settingsPath)
+            return UserProfile(user: user, settings: settings)
+        }
+    }
+}
+```
+
+Note the `ProfileError.catch` function call, which wraps any errors into the `caught` case and also passes through the return type.
+
+### Built-in Support in ErrorKit Types
+
+All of ErrorKit's built-in error types (`DatabaseError`, `FileError`, `NetworkError`, etc.) already conform to `Catching`, allowing you to easily wrap system errors or other error types:
+
+```swift
+func saveUserData() throws(DatabaseError) {
+    // Automatically wraps SQLite errors, file system errors, etc.
+    try DatabaseError.catch {
+        try database.beginTransaction()
+        try database.execute(query)
+        try database.commit()
+    }
+}
+```
+
+### Adding Catching to Your Error Types
+
+Making your own error types support automatic error wrapping is simple:
+
+1. Conform to the `Catching` protocol
+2. Add the `caught(Error)` case to your error type
+3. Use the `catch` function for automatic wrapping
+
+```swift
+enum AppError: Throwable, Catching {
+    case invalidConfiguration
+    case caught(Error)  // Required for Catching protocol
+    
+    var userFriendlyMessage: String {
+        switch self {
+        case .invalidConfiguration:
+            return String(localized: "The app configuration is invalid.")
+        case .caught(let error):
+            return error.localizedDescription
+        }
+    }
+}
+
+// Usage is clean and simple:
+func appOperation() throws(AppError) {
+    // Explicit error throwing for known cases
+    guard configFileExists else {
+        throw AppError.invalidConfiguration
+    }
+    
+    // Automatic wrapping for system errors and other error types
+    try AppError.catch {
+        try riskyOperation()
+        try anotherRiskyOperation()
+    }
+}
+```
+
+### Benefits of Using `Catching`
+
+- **Less Boilerplate**: No need for explicit wrapper cases for each error type
+- **Type Safety**: Maintains typed throws while simplifying error handling
+- **Clean Code**: Reduces error handling verbosity
+- **Automatic Message Propagation**: User-friendly messages flow through the error chain
+- **Easy Integration**: Works seamlessly with existing error types
+- **Return Value Support**: The `catch` function preserves return values from wrapped operations
+
+### Best Practices
+
+- Use `Catching` for error types that might wrap other errors
+- Keep error hierarchies shallow when possible
+- Use specific error cases for known errors, `caught` for others
+- Preserve user-friendly messages when wrapping errors
+- Consider error recovery strategies at each level
+
+The `Catching` protocol makes error handling in Swift more intuitive and maintainable, especially in larger applications with complex error hierarchies. Combined with typed throws, it provides a powerful way to handle errors while keeping your code clean and maintainable.
