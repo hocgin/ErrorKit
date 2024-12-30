@@ -56,7 +56,94 @@ public enum ErrorKit {
       return "[\(nsError.domain): \(nsError.code)] \(nsError.localizedDescription)"
    }
 
-   // TODO: add documentation
+   /// Generates a detailed, hierarchical description of an error chain for debugging purposes.
+   ///
+   /// This function provides a comprehensive view of nested errors, particularly useful when errors are wrapped through multiple layers
+   /// of an application. While ``userFriendlyMessage(for:)`` is designed for end users, this function helps developers understand
+   /// the complete error chain during debugging, similar to a stack trace.
+   ///
+   /// One key advantage of using typed throws with ``Catching`` is that it maintains the full error chain hierarchy, allowing you to trace
+   /// exactly where in your application's call stack the error originated. Without this, errors caught from deep within system frameworks
+   /// or different modules would lose their context, making it harder to identify the source. The error chain description preserves both
+   /// the original error (as the leaf node) and the complete path of error wrapping, effectively reconstructing the error's journey
+   /// through your application's layers.
+   ///
+   /// The combination of nested error types often creates a unique signature that helps pinpoint exactly where in your codebase
+   /// the error occurred, without requiring symbolicated crash reports or complex debugging setups. For instance, if you see
+   /// `ProfileError` wrapping `DatabaseError` wrapping `FileError`, this specific chain might only be possible in one code path
+   /// in your application.
+   ///
+   /// The output includes:
+   /// - The full type hierarchy of nested errors
+   /// - Detailed enum case information including associated values
+   /// - Type metadata ([Struct] or [Class] for non-enum types)
+   /// - User-friendly message at the leaf level
+   ///
+   /// This is particularly valuable when:
+   /// - Using typed throws in Swift 6 wrapping nested errors using ``Catching``
+   /// - Debugging complex error flows across multiple modules
+   /// - Understanding where and how errors are being wrapped
+   /// - Investigating error handling in modular applications
+   ///
+   /// The structured output format makes it ideal for error analytics and monitoring:
+   /// - The entire chain description can be sent to analytics services
+   /// - A hash of the string split by ":" and "(" can group similar errors which is provided in ``groupingID(for:)``
+   /// - Error patterns can be monitored and analyzed systematically across your user base
+   ///
+   /// ## Example Output:
+   /// ```swift
+   /// // For a deeply nested error chain:
+   /// StateError
+   /// └─ OperationError
+   ///    └─ DatabaseError
+   ///       └─ FileError
+   ///          └─ PermissionError.denied(permission: "~/Downloads/Profile.png")
+   ///             └─ userFriendlyMessage: "Access to ~/Downloads/Profile.png was declined."
+   /// ```
+   ///
+   /// ## Usage Example:
+   /// ```swift
+   /// struct ProfileManager {
+   ///     enum ProfileError: Throwable, Catching {
+   ///         case validationFailed
+   ///         case caught(Error)
+   ///     }
+   ///
+   ///     func updateProfile() throws {
+   ///         do {
+   ///             try ProfileError.catch {
+   ///                 try databaseOperation()
+   ///             }
+   ///         } catch {
+   ///             let chainDescription = ErrorKit.errorChainDescription(for: error)
+   ///
+   ///             // Log the complete error chain for debugging
+   ///             Logger().error("Error updating profile:\n\(chainDescription)")
+   ///             // Output might show:
+   ///             // ProfileError
+   ///             // └─ DatabaseError.connectionFailed
+   ///             //    └─ userFriendlyMessage: "Could not connect to the database."
+   ///
+   ///             // Optional: Send to analytics
+   ///             Analytics.logError(
+   ///                 identifier: chainDescription.hashValue,
+   ///                 details: chainDescription
+   ///             )
+   ///
+   ///             // forward error to handle in caller
+   ///             throw error
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// This output helps developers trace the error's path through the application:
+   /// 1. Identifies the entry point (ProfileError)
+   /// 2. Shows the underlying cause (DatabaseError.connectionFailed)
+   /// 3. Provides the user-friendly message for context (users will report this)
+   ///
+   /// - Parameter error: The error to describe, potentially containing nested errors
+   /// - Returns: A formatted string showing the complete error hierarchy with indentation
    public static func errorChainDescription(for error: Error) -> String {
       return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
    }
