@@ -1,18 +1,21 @@
 # ErrorKit
 
-**ErrorKit** makes error handling in Swift more intuitive. It reduces boilerplate code while providing clearer insights. Helpful for users, fun for developers!
+ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate code while providing clearer insights into errors - helpful for users, fun for developers!
 
-*TODO: Add a list of advantages of using ErrorKit over Swift’s native error handling types.*
+## Table of Contents
+- [The Problem with Swift's Error Protocol](#the-problem-with-swifts-error-protocol)
+- [The Throwable Protocol Solution](#the-throwable-protocol-solution)
+- [Built-in Error Types](#built-in-error-types)
+- [Enhanced Error Descriptions](#enhanced-error-descriptions)
+- [Typed Throws for System Functions](#typed-throws-for-system-functions)
+- [Error Nesting with Catching](#error-nesting-with-catching)
+- [Error Chain Debugging](#error-chain-debugging)
 
----
+## The Problem with Swift's Error Protocol
 
-## Why We Introduced the `Throwable` Protocol to Replace `Error`
+Swift's `Error` protocol is simple – too simple. While it has no requirements, it provides a computed property `localizedDescription` that's commonly used for logging errors and displaying messages to users. However, this simplicity leads to unexpected behavior and confusion.
 
-### The Confusing `Error` API
-
-Swift's `Error` protocol is simple – too simple. It has no requirements, but it offers one computed property, `localizedDescription`, which is often used to log errors or display messages to users.
-
-Consider the following example where we provide a `localizedDescription` for an enum:
+Consider this example of providing a `localizedDescription` for an error enum:
 
 ```swift
 enum NetworkError: Error, CaseIterable {
@@ -28,7 +31,7 @@ enum NetworkError: Error, CaseIterable {
 }
 ```
 
-You might expect this to work seamlessly, but it doesn’t. If we randomly throw an error and print its `localizedDescription`, like in the following SwiftUI view:
+You might expect this to work seamlessly, but trying it out reveals a surprise: 😱
 
 ```swift
 struct ContentView: View {
@@ -44,30 +47,33 @@ struct ContentView: View {
 }
 ```
 
-The console output will surprise you: 😱
+The console output is not what you'd expect:
 
 ```bash
-Caught error with message: The operation couldn’t be completed. (ErrorKitDemo.NetworkError error 0.)
+Caught error with message: The operation couldn't be completed. (ErrorKitDemo.NetworkError error 0.)
 ```
 
-There’s no information about the specific error case. Not even the enum case name appears, let alone the custom message! Why? Because Swift’s `Error` protocol is bridged to `NSError`, which uses `domain`, `code`, and `userInfo` instead.
+There's no information about the specific error case - not even the enum case name appears, let alone your custom message! This happens because Swift's `Error` protocol is bridged to `NSError`, which uses a different system of `domain`, `code`, and `userInfo`.
 
 ### The "Correct" Way: `LocalizedError`
 
-The correct approach is to conform to `LocalizedError`, which defines the following optional properties:  
-
+Swift provides `LocalizedError` as the "proper" solution, with these optional properties:
 - `errorDescription: String?`
 - `failureReason: String?`
 - `recoverySuggestion: String?`
 - `helpAnchor: String?`
 
-However, since all of these properties are optional, you won’t get any compiler errors if you forget to implement them. Worse, only `errorDescription` affects `localizedDescription`. Fields like `failureReason` and `recoverySuggestion` are ignored, while `helpAnchor` is rarely used nowadays.
+However, this approach has serious issues:
+- All properties are optional - no compiler enforcement
+- Only `errorDescription` affects `localizedDescription`
+- `failureReason` and `recoverySuggestion` are often ignored
+- `helpAnchor` is rarely used in modern development
 
 This makes `LocalizedError` both confusing and error-prone.
 
-### The Solution: `Throwable`
+## The Throwable Protocol Solution
 
-To address these issues, **ErrorKit** introduces the `Throwable` protocol:
+ErrorKit introduces the `Throwable` protocol to solve these issues:
 
 ```swift
 public protocol Throwable: LocalizedError {
@@ -75,9 +81,13 @@ public protocol Throwable: LocalizedError {
 }
 ```
 
-This protocol is simple and clear. It’s named `Throwable` to align with Swift’s `throw` keyword and follows Swift’s convention of using the `able` suffix (like `Codable` and `Identifiable`). Most importantly, it requires the `userFriendlyMessage` property, ensuring your errors behave exactly as expected.
+This protocol is simple and clear:
+- Named to align with Swift's `throw` keyword
+- Follows Swift's naming convention (`able` suffix like `Codable`)
+- Requires single, non-optional `userFriendlyMessage` property
+- Guarantees your errors behave as expected
 
-Here’s how you use it:
+Here's how you use it:
 
 ```swift
 enum NetworkError: Throwable {
@@ -86,8 +96,8 @@ enum NetworkError: Throwable {
 
    var userFriendlyMessage: String {
       switch self {
-      case .noConnectionToServer: "Unable to connect to the server."
-      case .parsingFailed: "Data parsing failed."
+      case .noConnectionToServer: String(localized: "Unable to connect to the server.")
+      case .parsingFailed: String(localized: "Data parsing failed.")
       }
    }
 }
@@ -95,9 +105,9 @@ enum NetworkError: Throwable {
 
 When you print `error.localizedDescription`, you'll get exactly the message you expect! 🥳
 
-### Even Shorter Error Definitions
+### Quick Start During Development
 
-Not all apps are localized, and developers may not have time to provide localized descriptions immediately. To make error handling even simpler, `Throwable` allows you to define your error messages using raw values:
+During early development phases when you're rapidly prototyping, `Throwable` allows you to define error messages using raw values for maximum speed:
 
 ```swift
 enum NetworkError: String, Throwable {
@@ -106,28 +116,33 @@ enum NetworkError: String, Throwable {
 }
 ```
 
-This approach eliminates boilerplate code while keeping the error definitions concise and descriptive.
+This approach eliminates boilerplate code while keeping error definitions concise and descriptive. However, remember to transition to proper localization using `String(localized:)` before shipping your app.
 
 ### Summary
 
 > Conform your custom error types to `Throwable` instead of `Error` or `LocalizedError`. The `Throwable` protocol requires only `userFriendlyMessage: String`, ensuring your error messages are exactly what you expect – no surprises.
 
-
 ## Enhanced Error Descriptions with `userFriendlyMessage(for:)`
 
-ErrorKit goes beyond simplifying error handling — it enhances the clarity of error messages by providing improved, localized descriptions. With the `ErrorKit.userFriendlyMessage(for:)` function, developers can deliver clear, user-friendly error messages tailored to their audience.
+ErrorKit enhances error clarity through the `ErrorKit.userFriendlyMessage(for:)` function, designed to provide improved error descriptions for any error type.
 
 ### How It Works
 
-The `userFriendlyMessage(for:)` function analyzes the provided `Error` and returns an enhanced, localized message. It draws on a community-maintained collection of descriptions to ensure the messages are accurate, helpful, and continuously evolving.
+The `userFriendlyMessage(for:)` function analyzes the provided `Error` and returns an enhanced message that's clear and helpful. It leverages a community-maintained collection of descriptions to ensure messages are accurate and continuously improving.
 
 ### Supported Error Domains
 
-ErrorKit supports errors from various domains such as `Foundation`, `CoreData`, `MapKit`, and more. These domains are continuously updated, providing coverage for the most common error types in Swift development.
+ErrorKit provides enhanced messages for errors from various domains:
+- Foundation
+- CoreData
+- MapKit
+- And many more...
+
+These domains are continuously updated to provide coverage for the most common error types in Swift development.
 
 ### Usage Example
 
-Here’s how to use `userFriendlyMessage(for:)` to handle errors gracefully:
+Here's how to use `userFriendlyMessage(for:)` to handle errors gracefully:
 
 ```swift
 do {
@@ -143,19 +158,22 @@ do {
 
 ### Why Use `userFriendlyMessage(for:)`?
 
-- **Localization**: Error messages are localized to ~40 languages to provide a better user experience.
-- **Clarity**: Returns clear and concise error messages, avoiding cryptic system-generated descriptions.
-- **Community Contributions**: The descriptions are regularly improved by the developer community. If you encounter a new or unexpected error, feel free to contribute by submitting a pull request.
+- **Clarity**: Returns clear and concise error messages, avoiding cryptic system-generated descriptions
+- **Consistency**: Provides standardized error messaging across your application
+- **Community-Driven**: Messages are regularly improved through developer contributions
+- **Comprehensive**: Covers a wide range of common Swift error scenarios
 
 ### Contribution Welcome!
 
-Found a bug or missing description? We welcome your contributions! Submit a pull request (PR), and we’ll gladly review and merge it to enhance the library further.
+Found a bug or missing description? We welcome your contributions! Submit a pull request (PR), and we'll gladly review and merge it to enhance the library further.
 
-> **Note:** The enhanced error descriptions are constantly evolving, and we’re committed to making them as accurate and helpful as possible.
+> **Note:** The enhanced error descriptions are constantly evolving, and we're committed to making them as accurate and helpful as possible.
 
 ## Overloads of Common System Functions with Typed Throws
 
 ErrorKit introduces typed-throws overloads for common system APIs like `FileManager` and `URLSession`, providing more granular error handling and improved code clarity. These overloads allow you to handle specific error scenarios with tailored responses, making your code more robust and easier to maintain.
+
+### Discovery and Usage
 
 To streamline discovery, ErrorKit uses the same API names prefixed with `throwable`. These functions throw specific errors that conform to `Throwable`, allowing for clear and informative error messages.
 
@@ -171,7 +189,7 @@ do {
 } catch {
    switch error {
    case FileManagerError.noWritePermission:
-      // Request write permission from the user intead of showing error message
+      // Request write permission from the user instead of showing error message
    default:
       // Common error cases have a more descriptive message
       showErrorDialog(error.localizedDescription)
@@ -209,7 +227,6 @@ Here, the code leverages the specific error types to implement various kinds of 
 ### Summary
 
 By utilizing these typed-throws overloads, you can write more robust and maintainable code. ErrorKit's enhanced user-friendly messages and ability to handle specific errors with code lead to a better developer and user experience. As the library continues to evolve, we encourage the community to contribute additional overloads and error types for common system APIs to further enhance its capabilities.
-
 
 ## Built-in Error Types for Common Scenarios
 
@@ -294,7 +311,6 @@ When contributing:
 
 Together, we can build a comprehensive set of error types that cover most common scenarios in Swift development and create a more unified error handling experience across the ecosystem.
 
-
 ## Simplified Error Nesting with the `Catching` Protocol
 
 ErrorKit's `Catching` protocol simplifies error handling in modular applications by providing an elegant way to handle nested error hierarchies. It eliminates the need for explicit wrapper cases while maintaining type safety through typed throws.
@@ -319,8 +335,6 @@ enum ProfileError: Error {
  }
 ```
 
-This leads to verbose error types and tedious error handling code when attempting to use typed throws.
-
 ### The Solution: `Catching` Protocol
 
 ErrorKit's `Catching` protocol provides a single `caught` case that can wrap any error, plus a convenient `catch` function for automatic error wrapping:
@@ -329,6 +343,8 @@ ErrorKit's `Catching` protocol provides a single `caught` case that can wrap any
 enum ProfileError: Throwable, Catching {
     case validationFailed(field: String)
     case caught(Error)  // Single case handles all nested errors!
+    
+    var userFriendlyMessage: String { /* ... */ }
 }
 
 struct ProfileRepository {
@@ -421,7 +437,6 @@ func appOperation() throws(AppError) {
 - Consider error recovery strategies at each level
 
 The `Catching` protocol makes error handling in Swift more intuitive and maintainable, especially in larger applications with complex error hierarchies. Combined with typed throws, it provides a powerful way to handle errors while keeping your code clean and maintainable.
-
 
 ## Enhanced Error Debugging with Error Chain Description
 
