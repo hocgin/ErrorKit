@@ -512,10 +512,12 @@ For example, these errors have the same grouping ID since they differ only in th
 ProfileError
 └─ DatabaseError
    └─ FileError.notFound(path: "/Users/john/data.db")
+      └─ userFriendlyMessage: "Could not find database file."
 
 ProfileError
 └─ DatabaseError
    └─ FileError.notFound(path: "/Users/jane/backup.db")
+      └─ userFriendlyMessage: "Die Backup-Datenbank konnte nicht gefunden werden."
 ```
 
 This precise grouping allows you to:
