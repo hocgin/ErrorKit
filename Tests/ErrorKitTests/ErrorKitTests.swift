@@ -54,52 +54,44 @@ enum ErrorKitTests {
       @Test
       static func nsError() {
          let nsError = NSError(domain: "SOME", code: 1245, userInfo: [NSLocalizedDescriptionKey: "Something failed."])
-         #expect(
-            ErrorKit.errorChainDescription(for: nsError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nsError)
+         let expectedErrorChainDescription = """
             NSError [Class]
             └─ userFriendlyMessage: "[SOME: 1245] Something failed."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
       static func throwableStruct() {
-         #expect(
-            ErrorKit.errorChainDescription(for: SomeThrowable())
-            == 
-            """
-            SomeThrowable [Struct]
-            └─ userFriendlyMessage: "Something failed hard."
-            """
-         )
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: SomeThrowable())
+         let expectedErrorChainDescription = """
+          SomeThrowable [Struct]
+          └─ userFriendlyMessage: "Something failed hard."
+          """
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
       static func throwableEnum() {
-         #expect(
-            ErrorKit.errorChainDescription(for: PermissionError.restricted(permission: "~/Downloads/Profile.png"))
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: PermissionError.restricted(permission: "~/Downloads/Profile.png"))
+         let expectedErrorChainDescription = """
             PermissionError.restricted(permission: "~/Downloads/Profile.png")
             └─ userFriendlyMessage: "Access to ~/Downloads/Profile.png is currently restricted. This may be due to system settings or parental controls."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
       static func shallowNested() {
          let nestedError = DatabaseError.caught(FileError.fileNotFound(fileName: "App.sqlite"))
-         #expect(
-            ErrorKit.errorChainDescription(for: nestedError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nestedError)
+         let expectedErrorChainDescription = """
             DatabaseError
             └─ FileError.fileNotFound(fileName: "App.sqlite")
                └─ userFriendlyMessage: "The file App.sqlite could not be located. Please verify the file path and try again."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
@@ -113,10 +105,8 @@ enum ErrorKitTests {
                )
             )
          )
-         #expect(
-            ErrorKit.errorChainDescription(for: nestedError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nestedError)
+         let expectedErrorChainDescription = """
             StateError
             └─ OperationError
                └─ DatabaseError
@@ -124,11 +114,11 @@ enum ErrorKitTests {
                      └─ PermissionError.denied(permission: "~/Downloads/Profile.png")
                         └─ userFriendlyMessage: "Access to ~/Downloads/Profile.png was declined. To use this feature, please enable the permission in your device Settings."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
-      static func shallowNestedThrowablesWithStructLeaf() {
+      static func deeplyNestedThrowablesWithStructLeaf() {
          let nestedError = StateError.caught(
             OperationError.caught(
                DatabaseError.caught(
@@ -138,10 +128,8 @@ enum ErrorKitTests {
                )
             )
          )
-         #expect(
-            ErrorKit.errorChainDescription(for: nestedError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nestedError)
+         let expectedErrorChainDescription = """
             StateError
             └─ OperationError
                └─ DatabaseError
@@ -149,11 +137,11 @@ enum ErrorKitTests {
                      └─ SomeThrowable [Struct]
                         └─ userFriendlyMessage: "Something failed hard."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
-      static func shallowNestedThrowablesWithLocalizedErrorLeaf() {
+      static func deeplyNestedThrowablesWithLocalizedErrorLeaf() {
          let nestedError = StateError.caught(
             OperationError.caught(
                DatabaseError.caught(
@@ -163,10 +151,8 @@ enum ErrorKitTests {
                )
             )
          )
-         #expect(
-            ErrorKit.errorChainDescription(for: nestedError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nestedError)
+         let expectedErrorChainDescription = """
             StateError
             └─ OperationError
                └─ DatabaseError
@@ -174,11 +160,11 @@ enum ErrorKitTests {
                      └─ SomeLocalizedError [Struct]
                         └─ userFriendlyMessage: "Something failed. It failed because it wanted to. Try again later."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
       @Test
-      static func shallowNestedThrowablesWithNSErrorLeaf() {
+      static func deeplyNestedThrowablesWithNSErrorLeaf() {
          let nsError = NSError(domain: "SOME", code: 1245, userInfo: [NSLocalizedDescriptionKey: "Something failed."])
          let nestedError = StateError.caught(
             OperationError.caught(
@@ -187,10 +173,8 @@ enum ErrorKitTests {
                )
             )
          )
-         #expect(
-            ErrorKit.errorChainDescription(for: nestedError)
-            ==
-            """
+         let generatedErrorChainDescription = ErrorKit.errorChainDescription(for: nestedError)
+         let expectedErrorChainDescription = """
             StateError
             └─ OperationError
                └─ DatabaseError
@@ -198,7 +182,7 @@ enum ErrorKitTests {
                      └─ NSError [Class]
                         └─ userFriendlyMessage: "[SOME: 1245] Something failed."
             """
-         )
+         #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
    }
 

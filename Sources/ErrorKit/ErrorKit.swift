@@ -58,71 +58,44 @@ public enum ErrorKit {
 
    // TODO: add documentation
    public static func errorChainDescription(for error: Error) -> String {
-      return self.chainDescription(for: error, isRoot: true)
+      return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
    }
 
-   private static func chainDescription(for error: Error, isRoot: Bool = false, prefix: String = "") -> String {
-      // Get type information
-      let typeName = String(describing: type(of: error))
-      var output = ""
-
-      // Handle root level format
-      if isRoot {
-         if isLeafNode(error) {
-            output += "─ " + typeNameWithKind(error)
-         } else {
-            output += typeName  // No prefix for nested error chains
-         }
-      } else {
-         // For non-root nodes, we need to check if this is a 'caught' case or a regular error case
-         if let catchingError = error as? any Catching,
-            Mirror(reflecting: catchingError).children.first?.label == "caught" {
-            // Just show the type name for catching errors
-            output += prefix + "└─ \(typeName)"
-         } else {
-            // For regular error cases, show the full type name and case
-            let caseDescription = String(describing: error)
-            let errorTypeName = String(describing: type(of: error))
-            output += prefix + "└─ \(errorTypeName).\(caseDescription)"
-         }
-      }
-
-      // If this is a Catching error, check for nested errors
-      if let catchingError = error as? any Catching,
-         let mirror = Mirror(reflecting: catchingError).children.first,
-         mirror.label == "caught" {
-         // Recursively build trace for nested error
-         let nextPrefix = isRoot ? "   " : prefix + "   "
-         output += "\n" + self.chainDescription(
-            for: mirror.value as! Error,
-            prefix: nextPrefix
-         )
-      } else {
-         // For leaf nodes or non-Catching errors, add userFriendlyMessage
-         let message = ErrorKit.userFriendlyMessage(for: error)
-         output += "\n" + prefix + "  └─ userFriendlyMessage: \"\(message)\""
-      }
-
-      return output
-   }
-
-   private static func isLeafNode(_ error: Error) -> Bool {
-      // Check if it's not a Catching error or if it doesn't have a caught error
-      if let catchingError = error as? any Catching,
-         let mirror = Mirror(reflecting: catchingError).children.first,
-         mirror.label == "caught" {
-         return false
-      }
-      return true
-   }
-
-   private static func typeNameWithKind(_ error: Error) -> String {
+   private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
       let mirror = Mirror(reflecting: error)
-      if mirror.displayStyle == .struct {
-         return "\(String(describing: type(of: error))) [Struct]"
-      } else if mirror.displayStyle == .class {
-         return "\(String(describing: type(of: error))) [Class]"
+
+      // Helper function to format the type name with optional metadata
+      func typeDescription(_ error: Error, enclosingType: Any.Type?) -> String {
+         let typeName = String(describing: type(of: error))
+
+         // For structs and classes (non-enums), append [Struct] or [Class]
+         if mirror.displayStyle != .enum {
+            let isClass = Swift.type(of: error) is AnyClass
+            return "\(typeName) [\(isClass ? "Class" : "Struct")]"
+         } else {
+            // For enums, include the full case description with type name
+            if let enclosingType {
+               return "\(enclosingType).\(error)"
+            } else {
+               return String(describing: error)
+            }
+         }
       }
-      return String(describing: type(of: error))
+
+      // Check if this is a nested error (conforms to Catching and has a caught case)
+      if let caughtError = mirror.children.first(where: { $0.label == "caught" })?.value as? Error {
+         let currentErrorType = type(of: error)
+         let nextIndent = indent + "   "
+         return """
+            \(currentErrorType)
+            \(indent)└─ \(Self.chainDescription(for: caughtError, indent: nextIndent, enclosingType: type(of: caughtError)))
+            """
+      } else {
+         // This is a leaf node
+         return """
+            \(typeDescription(error, enclosingType: enclosingType))
+            \(indent)└─ userFriendlyMessage: \"\(Self.userFriendlyMessage(for: error))\"
+            """
+      }
    }
 }
