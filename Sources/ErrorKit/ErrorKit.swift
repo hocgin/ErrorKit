@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 
 public enum ErrorKit {
    /// Provides enhanced, user-friendly, localized error descriptions for a wide range of system errors.
@@ -146,6 +147,72 @@ public enum ErrorKit {
    /// - Returns: A formatted string showing the complete error hierarchy with indentation
    public static func errorChainDescription(for error: Error) -> String {
       return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
+   }
+
+   /// Generates a stable identifier that groups similar errors based on their type structure.
+   ///
+   /// While ``errorChainDescription(for:)`` provides a detailed view of an error chain including all parameters and messages,
+   /// this function creates a consistent hash that only considers the error type hierarchy. This allows grouping similar errors
+   /// that differ only in their specific parameters or localized messages.
+   ///
+   /// This is particularly useful for:
+   /// - Error analytics and aggregation
+   /// - Identifying common error patterns across your user base
+   /// - Grouping similar errors in logging systems
+   /// - Creating stable identifiers for error monitoring
+   ///
+   /// For example, these two errors would generate the same grouping ID despite having different parameters:
+   /// ```swift
+   /// // Error 1:
+   /// DatabaseError
+   /// └─ FileError.notFound(path: "/Users/john/data.db")
+   ///    └─ userFriendlyMessage: "Could not find database file."
+   ///    // Grouping ID: "3f9d2a"
+   ///
+   /// // Error 2:
+   /// DatabaseError
+   /// └─ FileError.notFound(path: "/Users/jane/backup.db")
+   ///    └─ userFriendlyMessage: "Database file missing."
+   ///    // Grouping ID: "3f9d2a"
+   /// ```
+   ///
+   /// ## Usage Example:
+   /// ```swift
+   /// struct ErrorMonitor {
+   ///     static func track(_ error: Error) {
+   ///         // Get a stable ID that ignores specific parameters
+   ///         let groupID = ErrorKit.groupingID(for: error) // e.g. "3f9d2a"
+   ///
+   ///         // Get the full description for detailed logging
+   ///         let details = ErrorKit.errorChainDescription(for: error)
+   ///
+   ///         // Track error occurrence with analytics
+   ///         Analytics.logError(
+   ///             identifier: groupID, // Short, readable identifier
+   ///             occurrence: Date.now,
+   ///             details: details
+   ///         )
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The generated ID is a prefix of the SHA-256 hash of the error chain stripped of all parameters and messages,
+   /// ensuring that only the structure of error types influences the grouping. The 6-character prefix provides
+   /// enough uniqueness for practical error grouping while remaining readable in logs and analytics.
+   ///
+   /// - Parameter error: The error to generate a grouping ID for
+   /// - Returns: A stable 6-character hexadecimal string that can be used to group similar errors
+   public static func groupingID(for error: Error) -> String {
+      let errorChainDescription = Self.errorChainDescription(for: error)
+
+      // Split at first occurrence of "(" or ":" to remove specific parameters and user-friendly messages
+      let descriptionWithoutDetails = errorChainDescription.components(separatedBy: CharacterSet(charactersIn: "(:")).first!
+
+      let digest = SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
+      let fullHash = digest.compactMap { String(format: "%02x", $0) }.joined()
+
+      // Return first 6 characters for a shorter but still practically unique identifier
+      return String(fullHash.prefix(6))
    }
 
    private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
