@@ -209,3 +209,87 @@ Here, the code leverages the specific error types to implement various kinds of 
 ### Summary
 
 By utilizing these typed-throws overloads, you can write more robust and maintainable code. ErrorKit's enhanced user-friendly messages and ability to handle specific errors with code lead to a better developer and user experience. As the library continues to evolve, we encourage the community to contribute additional overloads and error types for common system APIs to further enhance its capabilities.
+
+
+## Built-in Error Types for Common Scenarios
+
+ErrorKit provides a set of pre-defined error types for common scenarios that developers encounter frequently. These built-in types conform to `Throwable` and can be used with both typed throws (`throws(DatabaseError)`) and classical throws declarations.
+
+### Why Built-in Types?
+
+Built-in error types offer several advantages:
+- **Quick Start**: Begin with well-structured error handling without defining custom types
+- **Consistency**: Use standardized error cases and messages across your codebase
+- **Flexibility**: Easily transition to custom error types when you need more specific cases
+- **Discoverability**: Clear naming conventions make it easy to find the right error type
+- **Localization**: All error messages are pre-localized and user-friendly
+- **Ecosystem Impact**: As more Swift packages adopt these standardized error types, apps can implement smarter error handling that works across dependencies. Instead of just showing error messages, apps could provide specific UI or recovery actions for known error types, creating a more cohesive error handling experience throughout the ecosystem.
+
+### Available Error Types
+
+ErrorKit includes the following built-in error types:
+
+- **DatabaseError** (connectionFailed, operationFailed, recordNotFound)
+- **FileError** (fileNotFound, readFailed, writeFailed)
+- **NetworkError** (noInternet, timeout, badRequest, serverError, decodingFailure)
+- **OperationError** (dependencyFailed, canceled, unknownFailure)
+- **ParsingError** (invalidInput, missingField, inputTooLong)
+- **PermissionError** (denied, restricted, notDetermined)
+- **StateError** (invalidState, alreadyFinalized, preconditionFailed)
+- **ValidationError** (invalidInput, missingField, inputTooLong)
+- **GenericError** (for ad-hoc custom messages)
+
+All built-in error types include a `generic` case that accepts a custom `userFriendlyMessage`, allowing for quick additions of edge cases without creating new error types. Use the `GenericError` struct when you want to quickly throw a one-off error without having to define your own type if none of the other fit, useful especially during early phases of development. 
+
+### Usage Examples
+
+```swift
+func fetchUserData() throws(DatabaseError) {
+    guard isConnected else {
+        throw .connectionFailed
+    }
+    // Fetching logic
+}
+
+// Or with classical throws
+func processData() throws {
+    guard isValid else {
+        throw ValidationError.invalidInput(field: "email")
+    }
+    // Processing logic
+}
+
+// Quick error throwing with GenericError
+func quickOperation() throws {
+    guard condition else {
+        throw GenericError(userFriendlyMessage: String(localized: "The condition X was not fulfilled, please check again."))
+    }
+    // Operation logic
+}
+
+// Using generic case for edge cases
+func handleSpecialCase() throws(DatabaseError) {
+    guard specialCondition else {
+        throw .generic(userFriendlyMessage: String(localized: "Database is in maintenance mode"))
+    }
+    // Special case handling
+}
+```
+
+### Contributing New Error Types
+
+We need your help! If you find yourself:
+- Defining similar error types across projects
+- Missing a common error scenario in our built-in types
+- Seeing patterns in error handling that could benefit others
+- Having ideas for better error messages or new cases
+
+Please contribute! Submit a pull request to add your error types or cases to ErrorKit. Your contribution helps build a more robust error handling ecosystem for Swift developers.
+
+When contributing:
+- Ensure error cases are generic enough for broad use
+- Provide clear, actionable error messages
+- Include real-world usage examples in documentation
+- Follow the existing naming conventions
+
+Together, we can build a comprehensive set of error types that cover most common scenarios in Swift development and create a more unified error handling experience across the ecosystem.
