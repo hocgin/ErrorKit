@@ -421,3 +421,111 @@ func appOperation() throws(AppError) {
 - Consider error recovery strategies at each level
 
 The `Catching` protocol makes error handling in Swift more intuitive and maintainable, especially in larger applications with complex error hierarchies. Combined with typed throws, it provides a powerful way to handle errors while keeping your code clean and maintainable.
+
+
+## Enhanced Error Debugging with Error Chain Description
+
+One of the most challenging aspects of error handling in Swift is tracing where exactly an error originated, especially when using error wrapping across multiple layers of an application. ErrorKit solves this with powerful debugging tools that help you understand the complete error chain.
+
+### The Problem with Traditional Error Logging
+
+When logging errors in Swift, you typically lose context about how an error propagated through your application:
+
+```swift
+} catch {
+    // 😕 Only shows the leaf error with no chain information
+    Logger().error("Error occurred: \(error)")
+    
+    // 😕 Shows a better message but still no error chain
+    Logger().error("Error: \(ErrorKit.userFriendlyMessage(for: error))")
+    // Output: "Could not find database file."
+}
+```
+
+This makes it difficult to:
+- Understand which module or layer originally threw the error
+- Trace the error's path through your application
+- Group similar errors for analysis
+- Prioritize which errors to fix first
+
+### Solution: Error Chain Description
+
+ErrorKit's `errorChainDescription(for:)` function provides a comprehensive view of the entire error chain, showing you exactly how an error propagated through your application:
+
+```swift
+do {
+    try await updateUserProfile()
+} catch {
+    // 🎯 Always use this for debug logging
+    Logger().error("\(ErrorKit.errorChainDescription(for: error))")
+    
+    // Output shows the complete chain:
+    // ProfileError
+    // └─ DatabaseError
+    //    └─ FileError.notFound(path: "/Users/data.db")
+    //       └─ userFriendlyMessage: "Could not find database file."
+}
+```
+
+This hierarchical view tells you:
+1. Where the error originated (FileError)
+2. How it was wrapped (DatabaseError → ProfileError)
+3. What exactly went wrong (file not found)
+4. The user-friendly message (reported to users)
+
+For errors conforming to the `Catching` protocol, you get the complete error wrapping chain. This is why it's important for your own error types and any Swift packages you develop to adopt both `Throwable` and `Catching` - it not only makes them work better with typed throws but also enables automatic extraction of the full error chain.
+
+Even for errors that don't conform to `Catching`, you still get valuable information since most Swift errors are enums. The error chain description will show you the exact enum case (e.g., `FileError.notFound`), making it easy to search your codebase for the error's origin. This is much better than the default cryptic message you get for enum cases when using `localizedDescription`.
+
+### Error Analytics with Grouping IDs
+
+To help prioritize which errors to fix, ErrorKit provides `groupingID(for:)` that generates stable identifiers for errors sharing the exact same type structure and enum cases:
+
+```swift
+struct ErrorTracker {
+    static func log(_ error: Error) {
+        // Get a stable ID that ignores dynamic parameters
+        let groupID = ErrorKit.groupingID(for: error) // e.g. "3f9d2a"
+        
+        Analytics.track(
+            event: "error_occurred",
+            properties: [
+                "error_group": groupID,
+                "error_details": ErrorKit.errorChainDescription(for: error)
+            ]
+        )
+    }
+}
+```
+
+The grouping ID generates the same identifier for errors that have identical:
+- Error type hierarchy
+- Enum cases in the chain
+
+But it ignores:
+- Dynamic parameters (file paths, field names, etc.)
+- User-friendly messages (which might be localized or dynamic)
+
+For example, these errors have the same grouping ID since they differ only in their dynamic path parameters:
+```swift
+// Both generate groupID: "3f9d2a"
+ProfileError
+└─ DatabaseError
+   └─ FileError.notFound(path: "/Users/john/data.db")
+      └─ userFriendlyMessage: "Could not find database file."
+
+ProfileError
+└─ DatabaseError
+   └─ FileError.notFound(path: "/Users/jane/backup.db")
+      └─ userFriendlyMessage: "Die Backup-Datenbank konnte nicht gefunden werden."
+```
+
+This precise grouping allows you to:
+- Track true error frequencies in analytics without noise from dynamic data
+- Create meaningful charts of most common error patterns
+- Make data-driven decisions about which errors to fix first
+- Monitor error trends over time
+
+### Summary
+
+ErrorKit's debugging tools transform error handling from a black box into a transparent system. By combining `errorChainDescription` for debugging with `groupingID` for analytics, you get deep insight into error flows while maintaining the ability to track and prioritize issues effectively. This is particularly powerful when combined with ErrorKit's `Catching` protocol, creating a comprehensive system for error handling, debugging, and monitoring.
