@@ -15,7 +15,11 @@ import Foundation
 ///                 userFriendlyMessage: String(localized: "The business data doesn't meet required criteria")
 ///             )
 ///         }
-///         // Continue with business logic
+///
+///         // Automatically wrap any other errors if needed
+///         try GenericError.catch {
+///             try validateAdditionalRules(data)
+///         }
 ///     }
 /// }
 /// ```
@@ -33,7 +37,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public struct GenericError: Throwable {
+public struct GenericError: Throwable, Catching {
    /// A user-friendly message describing the error.
    public let userFriendlyMessage: String
 
@@ -55,5 +59,31 @@ public struct GenericError: Throwable {
    /// - Parameter userFriendlyMessage: A clear, actionable message that will be shown to the user.
    public init(userFriendlyMessage: String) {
       self.userFriendlyMessage = userFriendlyMessage
+   }
+
+   /// Creates a new generic error that wraps another error.
+   /// Used internally by the ``catch(_:)`` function to automatically wrap any thrown errors.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct FileProcessor {
+   ///     func processUserData() throws(GenericError) {
+   ///         // Explicit throwing for validation
+   ///         guard isValidPath(userDataPath) else {
+   ///             throw GenericError(userFriendlyMessage: "Invalid file path selected")
+   ///         }
+   ///
+   ///         // Automatically wrap any file system or JSON errors
+   ///         let userData = try GenericError.catch {
+   ///             let data = try Data(contentsOf: userDataPath)
+   ///             return try JSONDecoder().decode(UserData.self, from: data)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// - Parameter error: The error to be wrapped.
+   public static func caught(_ error: Error) -> Self {
+      GenericError(userFriendlyMessage: ErrorKit.userFriendlyMessage(for: error))
    }
 }

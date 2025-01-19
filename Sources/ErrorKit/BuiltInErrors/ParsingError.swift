@@ -27,7 +27,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum ParsingError: Throwable {
+public enum ParsingError: Throwable, Catching {
    /// The input was invalid and could not be parsed.
    ///
    /// # Example
@@ -75,6 +75,35 @@ public enum ParsingError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during parsing or data transformation, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include JSON decoding errors, format validation errors, or any other errors encountered during data parsing.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct ProfileParser {
+   ///     func parseUserProfile(data: Data) throws(ParsingError) {
+   ///         // Regular error for missing data
+   ///         guard !data.isEmpty else {
+   ///             throw ParsingError.missingField(field: "profile_data")
+   ///         }
+   ///
+   ///         // Automatically wrap JSON decoding and validation errors
+   ///         let profile = try ParsingError.catch {
+   ///             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+   ///             return try UserProfile(validating: json)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the parsing operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -92,6 +121,8 @@ public enum ParsingError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }

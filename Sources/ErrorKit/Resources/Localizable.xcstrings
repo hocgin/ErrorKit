@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Failed to connect to the database. Please try again later."
+            "value" : "Unable to establish a connection to the database. Check your network settings and try again."
           }
         }
       }
@@ -18,7 +18,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "An error occurred while performing the operation: %@. Please try again."
+            "value" : "The database operation for %@ could not be completed. Please retry the action."
           }
         }
       }
@@ -29,7 +29,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The %1$@ record could not be found.%2$@ Please check and try again."
+            "value" : "The %1$@ record%2$@ was not found in the database. Verify the details and try again."
           }
         }
       }
@@ -40,7 +40,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The file %@ could not be found. Please check the file path."
+            "value" : "The file %@ could not be located. Please verify the file path and try again."
           }
         }
       }
@@ -51,7 +51,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "There was an issue reading the file %@. Please try again."
+            "value" : "An error occurred while attempting to read the file %@. Please check file permissions and try again."
           }
         }
       }
@@ -62,7 +62,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "There was an issue writing to the file %@. Please try again."
+            "value" : "Unable to write to the file %@. Ensure you have the necessary permissions and try again."
           }
         }
       }
@@ -73,7 +73,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The request was malformed (%1$lld): %2$@. Please review and try again."
+            "value" : "There was an issue with the request (Code: %1$lld). %2$@. Please review and retry."
           }
         }
       }
@@ -84,7 +84,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The data received from the server could not be processed. Please try again."
+            "value" : "Unable to process the server's response. Please try again or contact support if the issue persists."
           }
         }
       }
@@ -95,7 +95,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "No internet connection is available. Please check your network settings and try again."
+            "value" : "Unable to connect to the internet. Please check your network settings and try again."
           }
         }
       }
@@ -106,7 +106,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The server encountered an error (Code: %lld)."
+            "value" : "The server encountered an error (Code: %lld). "
           }
         }
       }
@@ -117,7 +117,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The request timed out. Please try again later."
+            "value" : "The network request took too long to complete. Please check your connection and try again."
           }
         }
       }
@@ -128,7 +128,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The operation was canceled. Please try again if necessary."
+            "value" : "The operation was canceled at your request. You can retry the action if needed."
           }
         }
       }
@@ -139,18 +139,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The operation could not be completed due to a failed dependency: %@."
-          }
-        }
-      }
-    },
-    "BuiltInErrors.OperationError.unknownFailure" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "The operation failed due to an unknown reason: %@. Please try again or contact support."
+            "value" : "The operation could not be started because a required component failed to initialize: %@. Please restart the application or contact support."
           }
         }
       }
@@ -161,7 +150,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The provided input is invalid: %@. Please correct it and try again."
+            "value" : "The provided input could not be processed correctly: %@. Please review the input and ensure it matches the expected format."
           }
         }
       }
@@ -172,7 +161,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "A required field is missing: %@. Please review and try again."
+            "value" : "The required information is incomplete. The %@ field is missing and must be provided to continue."
           }
         }
       }
@@ -183,7 +172,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The %@ permission was denied. Please enable it in Settings to continue."
+            "value" : "Access to %@ was declined. To use this feature, please enable the permission in your device Settings."
           }
         }
       }
@@ -194,7 +183,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The %@ permission has not been determined. Please try again or check your Settings."
+            "value" : "Permission for %@ has not been confirmed. Please review and grant access in your device Settings."
           }
         }
       }
@@ -205,7 +194,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The %@ permission is restricted. This may be due to parental controls or other system restrictions."
+            "value" : "Access to %@ is currently restricted. This may be due to system settings or parental controls."
           }
         }
       }
@@ -216,7 +205,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The operation cannot be performed because the state is already finalized."
+            "value" : "This item has already been finalized and cannot be modified. Please create a new version if changes are needed."
           }
         }
       }
@@ -227,7 +216,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The operation cannot proceed due to an invalid state: %@."
+            "value" : "The current state prevents this action: %@. Please ensure all requirements are met and try again."
           }
         }
       }
@@ -238,7 +227,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "A required condition was not met: %@. Please review and try again."
+            "value" : "A required condition was not met: %@. Please complete all prerequisites before proceeding."
           }
         }
       }
@@ -249,7 +238,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@ exceeds the maximum allowed length of %2$lld characters. Please shorten it."
+            "value" : "The %1$@ field cannot be longer than %2$lld characters. Please shorten your input and try again."
           }
         }
       }
@@ -260,7 +249,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "The value provided for %@ is invalid. Please correct it."
+            "value" : "The value entered for %@ is not in the correct format. Please review the requirements and try again."
           }
         }
       }
@@ -271,7 +260,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%@ is a required field. Please provide a value."
+            "value" : "Please provide a value for %@. This information is required to proceed."
           }
         }
       }

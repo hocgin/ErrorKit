@@ -27,7 +27,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum StateError: Throwable {
+public enum StateError: Throwable, Catching {
    /// The required state was not met to proceed with the operation.
    ///
    /// # Example
@@ -88,6 +88,36 @@ public enum StateError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred due to state management issues, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include state transition errors, validation errors, or any other errors encountered during state-dependent operations.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct OrderProcessor {
+   ///     func finalizeOrder(_ order: Order) throws(StateError) {
+   ///         // Regular error for invalid state
+   ///         guard order.status == .verified else {
+   ///             throw StateError.invalidState(description: "Order must be verified")
+   ///         }
+   ///
+   ///         // Automatically wrap payment and inventory state errors
+   ///         try StateError.catch {
+   ///             let paymentResult = try paymentGateway.processPayment(order.payment)
+   ///             try inventoryManager.reserveItems(order.items)
+   ///             try order.moveToState(.finalized)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the state-dependent operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -111,6 +141,8 @@ public enum StateError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }

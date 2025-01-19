@@ -34,7 +34,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum DatabaseError: Throwable {
+public enum DatabaseError: Throwable, Catching {
    /// The database connection failed.
    ///
    /// # Example
@@ -100,6 +100,38 @@ public enum DatabaseError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// Represents a child error (either from your own error types or unknown system errors) that was wrapped into this error type.
+   /// This case is used internally by the ``catch(_:)`` function to store any errors thrown by the wrapped code.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct UserRepository {
+   ///     func fetchUserDetails(id: String) throws(DatabaseError) {
+   ///         // Check if user exists - simple case with explicit error
+   ///         guard let user = database.findUser(id: id) else {
+   ///             throw DatabaseError.recordNotFound(entity: "User", identifier: id)
+   ///         }
+   ///
+   ///         // Any errors from parsing or file access are automatically wrapped
+   ///         let preferences = try DatabaseError.catch {
+   ///             let prefsData = try fileManager.contents(ofFile: user.preferencesPath)
+   ///             return try JSONDecoder().decode(UserPreferences.self, from: prefsData)
+   ///         }
+   ///
+   ///         // Use the loaded preferences
+   ///         user.applyPreferences(preferences)
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping unknown errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that was wrapped into this error type.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -124,6 +156,8 @@ public enum DatabaseError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }

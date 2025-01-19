@@ -34,7 +34,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum FileError: Throwable {
+public enum FileError: Throwable, Catching {
    /// The file could not be found.
    ///
    /// # Example
@@ -95,6 +95,35 @@ public enum FileError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during a file operation, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include system-level file errors, encoding/decoding errors, or any other errors encountered during file operations.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct DocumentStorage {
+   ///     func saveDocument(_ document: Document) throws(FileError) {
+   ///         // Regular error for missing file
+   ///         guard fileExists(document.path) else {
+   ///             throw FileError.fileNotFound(fileName: document.name)
+   ///         }
+   ///
+   ///         // Automatically wrap encoding and file system errors
+   ///         try FileError.catch {
+   ///             let data = try JSONEncoder().encode(document)
+   ///             try data.write(to: document.url, options: .atomic)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the file operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -118,6 +147,8 @@ public enum FileError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }

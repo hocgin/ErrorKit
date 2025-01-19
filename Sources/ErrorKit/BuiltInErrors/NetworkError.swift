@@ -39,7 +39,7 @@ import Foundation
 ///     }
 /// }
 /// ```
-public enum NetworkError: Throwable {
+public enum NetworkError: Throwable, Catching {
    /// No internet connection is available.
    ///
    /// # Example
@@ -145,6 +145,35 @@ public enum NetworkError: Throwable {
    /// ```
    case generic(userFriendlyMessage: String)
 
+   /// An error that occurred during a network operation, wrapped into this error type using the ``catch(_:)`` function.
+   /// This could include URLSession errors, SSL/TLS errors, or any other errors encountered during network communication.
+   ///
+   /// # Example
+   /// ```swift
+   /// struct APIClient {
+   ///     func fetchUserProfile(id: String) throws(NetworkError) {
+   ///         // Regular error for no connectivity
+   ///         guard isNetworkReachable else {
+   ///             throw NetworkError.noInternet
+   ///         }
+   ///
+   ///         // Automatically wrap URLSession and decoding errors
+   ///         let profile = try NetworkError.catch {
+   ///             let (data, response) = try await URLSession.shared.data(from: userProfileURL)
+   ///             return try JSONDecoder().decode(UserProfile.self, from: data)
+   ///         }
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// The `caught` case stores the original error while maintaining type safety through typed throws.
+   /// Instead of manually catching and wrapping system errors, use the ``catch(_:)`` function
+   /// which automatically wraps any thrown errors into this case.
+   ///
+   /// - Parameters:
+   ///   - error: The original error that occurred during the network operation.
+   case caught(Error)
+
    /// A user-friendly error message suitable for display to end users.
    public var userFriendlyMessage: String {
       switch self {
@@ -185,6 +214,8 @@ public enum NetworkError: Throwable {
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
+      case .caught(let error):
+         return ErrorKit.userFriendlyMessage(for: error)
       }
    }
 }
