@@ -148,12 +148,19 @@ public enum DatabaseError: Throwable, Catching {
             bundle: .module
          )
       case .recordNotFound(let entity, let identifier):
-         let idMessage = identifier.map { " with ID \($0)" } ?? ""
-         return String(
-            localized: "BuiltInErrors.DatabaseError.recordNotFound",
-            defaultValue: "The \(entity) record\(idMessage) was not found in the database. Verify the details and try again.",
-            bundle: .module
-         )
+         if let identifier {
+            return String(
+               localized: "BuiltInErrors.DatabaseError.recordNotFoundWithID",
+               defaultValue: "The \(entity) record with ID \(identifier) was not found in the database. Verify the details and try again.",
+               bundle: .module
+            )
+         } else {
+            return String(
+               localized: "BuiltInErrors.DatabaseError.recordNotFound",
+               defaultValue: "The \(entity) record was not found in the database. Verify the details and try again.",
+               bundle: .module
+            )
+         }
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage
       case .caught(let error):
