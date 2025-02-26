@@ -10,6 +10,8 @@ ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate co
 - [Typed Throws for System Functions](#typed-throws-for-system-functions)
 - [Error Nesting with Catching](#error-nesting-with-catching)
 - [Error Chain Debugging](#error-chain-debugging)
+- [Attach Log Files](#attach-log-files)
+- [Live Error Analytics](#live-error-analytics)
 
 ## The Problem with Swift's Error Protocol
 
@@ -544,3 +546,17 @@ This precise grouping allows you to:
 ### Summary
 
 ErrorKit's debugging tools transform error handling from a black box into a transparent system. By combining `errorChainDescription` for debugging with `groupingID` for analytics, you get deep insight into error flows while maintaining the ability to track and prioritize issues effectively. This is particularly powerful when combined with ErrorKit's `Catching` protocol, creating a comprehensive system for error handling, debugging, and monitoring.
+
+
+## Attach Log File
+
+ErrorKit makes it super easy to attach a log file with relevant console output data to user bug reports.
+
+TODO: continue here
+
+
+## Life Error Analytics
+
+ErrorKit comes with hooks that make it easy to connect the reporting of errors to analytics service so you can find out which errors your users are confronted with most, without them having to contact you! This is great to proactively track issues in your app, track how they're evolving after you make a bug fix release or generally to make decisions on what to fix first!
+
+TODO: continue here
