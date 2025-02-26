@@ -249,8 +249,7 @@
             "value" : "無法建立與數據庫的連接。請檢查你的網絡設置並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.operationFailed" : {
       "localizations" : {
@@ -500,8 +499,7 @@
             "value" : "無法完成 %@ 的數據庫操作。請重試該操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.recordNotFound" : {
       "localizations" : {
@@ -751,11 +749,9 @@
             "value" : "在數據庫中找不到 %1$@ 記錄。請核實細節並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.recordNotFoundWithID" : {
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1003,8 +999,7 @@
             "value" : "ID 為 %2$@ 的 %1$@ 記錄在資料庫中未找到。請核實詳細資訊後再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.fileNotFound" : {
       "localizations" : {
@@ -1254,8 +1249,7 @@
             "value" : "無法找到 文件 %@。請檢查文件路徑並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.readError" : {
       "localizations" : {
@@ -1505,8 +1499,7 @@
             "value" : "嘗試讀取 文件 %@ 時發生錯誤。請檢查文件權限並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.writeError" : {
       "localizations" : {
@@ -1756,8 +1749,7 @@
             "value" : "無法寫入 文件 %@。請確保你擁有必要的權限並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.badRequest" : {
       "localizations" : {
@@ -2007,8 +1999,7 @@
             "value" : "請求出現問題 (代碼: %1$lld)。%2$@。請檢查並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.decodingFailure" : {
       "localizations" : {
@@ -2258,8 +2249,7 @@
             "value" : "無法處理伺服器的回應。請重試，如問題持續存在，請聯繫支援。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.noInternet" : {
       "localizations" : {
@@ -2509,8 +2499,7 @@
             "value" : "無法連接到互聯網。請檢查網絡設置，然後重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.serverError" : {
       "localizations" : {
@@ -2760,8 +2749,7 @@
             "value" : "伺服器發生錯誤 (代碼: %lld)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.timeout" : {
       "localizations" : {
@@ -3011,8 +2999,7 @@
             "value" : "網絡請求花了太長時間未能完成。請檢查你的連線，然後重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.OperationError.canceled" : {
       "localizations" : {
@@ -3262,8 +3249,7 @@
             "value" : "該操作因你的要求被取消。你可以在需要時重試該操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.OperationError.dependencyFailed" : {
       "localizations" : {
@@ -3513,8 +3499,7 @@
             "value" : "無法啟動該操作，因為所需的組件無法初始化: %@。請重新啟動應用程式或聯繫支援。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ParsingError.invalidInput" : {
       "localizations" : {
@@ -3764,8 +3749,7 @@
             "value" : "提供的輸入無法正確處理：%@。請檢查輸入並確保它符合預期格式。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ParsingError.missingField" : {
       "localizations" : {
@@ -4015,8 +3999,7 @@
             "value" : "所需的信息不完整。%@ 欄位缺失，必須提供以繼續。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.denied" : {
       "localizations" : {
@@ -4266,8 +4249,7 @@
             "value" : "訪問 %@ 被拒絕。要使用此功能，請在設備設定中啟用權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.notDetermined" : {
       "localizations" : {
@@ -4517,8 +4499,7 @@
             "value" : "%@ 的權限尚未確認。請檢查並在設備設定中授予訪問權。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.restricted" : {
       "localizations" : {
@@ -4768,8 +4749,7 @@
             "value" : "訪問 %@ 目前受到限制。這可能是由於系統設置或家長控制。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.alreadyFinalized" : {
       "localizations" : {
@@ -5019,8 +4999,7 @@
             "value" : "該項目已經完成，不可修改。如需更改，請創建新版本。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.invalidState" : {
       "localizations" : {
@@ -5270,8 +5249,7 @@
             "value" : "當前狀態不允許此操作：%@。請確保滿足所有要求後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.preconditionFailed" : {
       "localizations" : {
@@ -5521,8 +5499,7 @@
             "value" : "未滿足必要條件：%@。請在繼續之前完成所有先決條件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.inputTooLong" : {
       "localizations" : {
@@ -5772,8 +5749,7 @@
             "value" : "請縮短您的輸入，再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.invalidInput" : {
       "localizations" : {
@@ -6023,8 +5999,7 @@
             "value" : "輸入的%@值格式不正確。請檢查要求，然後再次嘗試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.missingField" : {
       "localizations" : {
@@ -6274,8 +6249,7 @@
             "value" : "請提供%@的值。此信息是必需的才能繼續。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.default" : {
       "localizations" : {
@@ -6525,8 +6499,7 @@
             "value" : "發生文件系統錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileNoSuchFile" : {
       "localizations" : {
@@ -6776,8 +6749,7 @@
             "value" : "找不到此文件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileReadNoPermission" : {
       "localizations" : {
@@ -7027,8 +6999,7 @@
             "value" : "您沒有權限閱讀此文件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileWriteOutOfSpace" : {
       "localizations" : {
@@ -7278,8 +7249,7 @@
             "value" : "磁碟空間不足，無法完成操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSManagedObjectValidationError" : {
       "localizations" : {
@@ -7529,8 +7499,7 @@
             "value" : "發生對象驗證錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError" : {
       "localizations" : {
@@ -7780,8 +7749,7 @@
             "value" : "資料存儲與當前模型版本不兼容。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError" : {
       "localizations" : {
@@ -8031,8 +7999,7 @@
             "value" : "無法打開持久存儲。請檢查您的存儲或權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError" : {
       "localizations" : {
@@ -8282,8 +8249,7 @@
             "value" : "保存數據失敗。請再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError" : {
       "localizations" : {
@@ -8533,8 +8499,7 @@
             "value" : "缺少必要屬性。請填寫所有必填字段。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError" : {
       "localizations" : {
@@ -8784,8 +8749,7 @@
             "value" : "保存時發生多個驗證錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError" : {
       "localizations" : {
@@ -9035,8 +8999,7 @@
             "value" : "關係缺少所需的相關對象。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.default" : {
       "localizations" : {
@@ -9286,8 +9249,7 @@
             "value" : "發生地圖錯誤：%@。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.directionsNotFound" : {
       "localizations" : {
@@ -9537,8 +9499,7 @@
             "value" : "找不到指定路線的方向。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.loadingThrottled" : {
       "localizations" : {
@@ -9788,8 +9749,7 @@
             "value" : "地圖載入受到限制。請稍候片刻再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.placemarkNotFound" : {
       "localizations" : {
@@ -10039,8 +9999,7 @@
             "value" : "無法找到所請求的地標。請檢查地點詳情。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.serverFailure" : {
       "localizations" : {
@@ -10290,8 +10249,7 @@
             "value" : "MapKit 伺服器返回了一個錯誤。請稍後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.unknown" : {
       "localizations" : {
@@ -10541,8 +10499,7 @@
             "value" : "MapKit 中發生了一個未知錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.default" : {
       "localizations" : {
@@ -10792,8 +10749,7 @@
             "value" : "系統發生錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.EACCES" : {
       "localizations" : {
@@ -11043,8 +10999,7 @@
             "value" : "權限被拒絕。請檢查你的文件權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.EBADF" : {
       "localizations" : {
@@ -11294,8 +11249,7 @@
             "value" : "無效的文件描述符。文件可能已關閉或無效。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.ENOSPC" : {
       "localizations" : {
@@ -11545,8 +11499,7 @@
             "value" : "設備上沒有剩餘空間。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.cannotFindHost" : {
       "localizations" : {
@@ -11796,8 +11749,7 @@
             "value" : "無法找到伺服器。請檢查 URL 或你的網絡。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.default" : {
       "localizations" : {
@@ -12047,8 +11999,7 @@
             "value" : "發生了網絡錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.networkConnectionLost" : {
       "localizations" : {
@@ -12298,8 +12249,7 @@
             "value" : "網絡連接已丟失。請重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.notConnectedToInternet" : {
       "localizations" : {
@@ -12549,8 +12499,7 @@
             "value" : "你未連接到互聯網。請檢查你的連接。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.timedOut" : {
       "localizations" : {
@@ -12800,8 +12749,7 @@
             "value" : "請求超時。請稍後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.corruptFile" : {
       "localizations" : {
@@ -13051,8 +12999,7 @@
             "value" : "該文件已損壞或以不可讀的格式存在。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileExists" : {
       "localizations" : {
@@ -13302,8 +13249,7 @@
             "value" : "該文件或目錄已存在。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileLocked" : {
       "localizations" : {
@@ -13553,8 +13499,7 @@
             "value" : "該文件已鎖定，無法修改。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileNotFound" : {
       "localizations" : {
@@ -13804,8 +13749,7 @@
             "value" : "未找到指定的文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileTooLarge" : {
       "localizations" : {
@@ -14055,8 +13999,7 @@
             "value" : "該文件過大，無法處理。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.invalidFileName" : {
       "localizations" : {
@@ -14306,8 +14249,7 @@
             "value" : "該文件名無效，無法使用。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.noReadPermission" : {
       "localizations" : {
@@ -14557,8 +14499,7 @@
             "value" : "你沒有權限閱讀此文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.noWritePermission" : {
       "localizations" : {
@@ -14808,8 +14749,7 @@
             "value" : "你沒有權限寫入此文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.outOfSpace" : {
       "localizations" : {
@@ -15059,8 +14999,7 @@
             "value" : "磁碟空間不足，無法完成操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.readError" : {
       "localizations" : {
@@ -15310,8 +15249,7 @@
             "value" : "讀取文件時發生未知錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.unsupportedEncoding" : {
       "localizations" : {
@@ -15561,8 +15499,7 @@
             "value" : "文件的字符编码不受支持。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.volumeReadOnly" : {
       "localizations" : {
@@ -15812,8 +15749,7 @@
             "value" : "存储卷是唯讀的，无法修改。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.writeError" : {
       "localizations" : {
@@ -16063,8 +15999,7 @@
             "value" : "写入文件时发生未知错误。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.badRequest" : {
       "localizations" : {
@@ -16314,8 +16249,7 @@
             "value" : "请求格式不正确（400）。请检查并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.badURL" : {
       "localizations" : {
@@ -16565,8 +16499,7 @@
             "value" : "网址格式不正确。请检查并重试，或报告错误。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.cancelled" : {
       "localizations" : {
@@ -16816,8 +16749,7 @@
             "value" : "请求已被取消。如果这不是预期的，请重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.cannotFindHost" : {
       "localizations" : {
@@ -17067,8 +16999,7 @@
             "value" : "无法找到主机。请检查您的互联网连接并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.conflict" : {
       "localizations" : {
@@ -17318,8 +17249,7 @@
             "value" : "请求存在冲突（409）。请检查并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.forbidden" : {
       "localizations" : {
@@ -17569,8 +17499,7 @@
             "value" : "您没有权限访问此资源（403）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.methodNotAllowed" : {
       "localizations" : {
@@ -17820,8 +17749,7 @@
             "value" : "此资源不允许使用该HTTP方法（405）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.noNetwork" : {
       "localizations" : {
@@ -18071,8 +17999,7 @@
             "value" : "未找到网络连接。请检查你的互联网。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.notAcceptable" : {
       "localizations" : {
@@ -18322,8 +18249,7 @@
             "value" : "请求的资源无法产生可接受的响应（406）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.notFound" : {
       "localizations" : {
@@ -18573,8 +18499,7 @@
             "value" : "未能找到请求的资源（404）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.paymentRequired" : {
       "localizations" : {
@@ -18824,8 +18749,7 @@
             "value" : "访问此资源需要付款（402）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.requestTimeout" : {
       "localizations" : {
@@ -19075,8 +18999,7 @@
             "value" : "请求已超时（408）。请再试一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.serverError" : {
       "localizations" : {
@@ -19326,8 +19249,7 @@
             "value" : "服务器遇到错误（500）。请稍后再试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.sslError" : {
       "localizations" : {
@@ -19577,8 +19499,7 @@
             "value" : "发生了 SSL 错误。请检查服务器的证书。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.timeout" : {
       "localizations" : {
@@ -19828,8 +19749,7 @@
             "value" : "請求逾時。請再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.tooManyRequests" : {
       "localizations" : {
@@ -20079,8 +19999,7 @@
             "value" : "發送了太多請求。請稍等並再試一次 (429)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unauthorized" : {
       "localizations" : {
@@ -20330,8 +20249,7 @@
             "value" : "您未獲授權訪問此資源 (401)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unknown" : {
       "localizations" : {
@@ -20581,8 +20499,7 @@
             "value" : "從伺服器收到未知狀態碼：%lld"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unsupportedMediaType" : {
       "localizations" : {
@@ -20832,8 +20749,7 @@
             "value" : "该请求实体具有不受支持的媒体类型 (415)。"
           }
         }
-      },
-      "proofread" : true
+      }
     }
   },
   "version" : "1.0"
