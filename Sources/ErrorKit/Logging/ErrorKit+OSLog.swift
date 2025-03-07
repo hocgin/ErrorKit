@@ -94,6 +94,66 @@ extension ErrorKit {
       try logData.write(to: fileURL)
       return fileURL
    }
+
+   /// Creates a mail attachment containing log data from the unified logging system.
+   ///
+   /// This convenience function builds on the logging functionality to create a ready-to-use
+   /// mail attachment for including logs in support emails or bug reports.
+   ///
+   /// - Parameters:
+   ///   - duration: How far back in time to collect logs.
+   ///     For example, `.minutes(5)` collects logs from the last 5 minutes.
+   ///   - minLevel: The minimum log level to include (default: .notice).
+   ///     Higher levels include less but more important information:
+   ///     - `.debug`: All logs (very verbose)
+   ///     - `.info`: Informational logs and above
+   ///     - `.notice`: Notable events (default)
+   ///     - `.error`: Only errors and faults
+   ///     - `.fault`: Only critical errors
+   ///   - filename: Optional custom filename for the log attachment (default: "app_logs_[timestamp].txt")
+   ///
+   /// - Returns: A `MailAttachment` ready to be used with the mail composer
+   /// - Throws: Errors if log store access fails
+   ///
+   /// ## Example: Attach Logs to Support Email
+   /// ```swift
+   /// Button("Report Problem") {
+   ///     do {
+   ///         // Get logs from the last hour as a mail attachment
+   ///         let logAttachment = try ErrorKit.logAttachment(
+   ///             ofLast: .minutes(60),
+   ///             minLevel: .notice
+   ///         )
+   ///
+   ///         showMailComposer = true
+   ///     } catch {
+   ///         errorMessage = "Could not prepare logs: \(error.localizedDescription)"
+   ///         showError = true
+   ///     }
+   /// }
+   /// .mailComposer(
+   ///     isPresented: $showMailComposer,
+   ///     recipients: ["support@yourapp.com"],
+   ///     subject: "Bug Report",
+   ///     messageBody: "I encountered the following issue:",
+   ///     attachments: [logAttachment]
+   /// )
+   /// ```
+   public static func logAttachment(
+      ofLast duration: Duration,
+      minLevel: OSLogEntryLog.Level = .notice,
+      filename: String? = nil
+   ) throws -> MailAttachment {
+      let logData = try loggedData(ofLast: duration, minLevel: minLevel)
+
+      let attachmentFilename = filename ?? "app_logs_\(Date.now.formatted(.iso8601)).txt"
+
+      return MailAttachment(
+         data: logData,
+         mimeType: "text/plain",
+         filename: attachmentFilename
+      )
+   }
 }
 
 extension Duration {
