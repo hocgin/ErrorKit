@@ -1,3 +1,4 @@
+#if canImport(OSLog)
 import Foundation
 import OSLog
 
@@ -202,3 +203,4 @@ extension Duration {
       self.minutes(hours * 60)
    }
 }
+#endif

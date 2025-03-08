@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "A file system error occurred: %@" : {
+
+    },
+    "A mandatory property is missing. Please fill all required fields." : {
+
+    },
+    "A MapKit error occurred: %@" : {
+
+    },
+    "A network error occurred: %@" : {
+
+    },
+    "A relationship is missing required related objects." : {
+
+    },
+    "A required condition was not met: %@. Please complete all prerequisites before proceeding." : {
+
+    },
+    "A system error occurred: %@" : {
+
+    },
+    "Access to %@ is currently restricted. This may be due to system settings or parental controls." : {
+
+    },
+    "Access to %@ was declined. To use this feature, please enable the permission in your device Settings." : {
+
+    },
+    "An error occurred while attempting to read the file %@. Please check file permissions and try again." : {
+
+    },
+    "An object validation error occurred." : {
+
+    },
+    "An unknown error occurred in MapKit." : {
+
+    },
+    "An unknown error occurred while reading the file." : {
+
+    },
+    "An unknown error occurred while writing the file." : {
+
+    },
+    "An unknown status code was received from the server: %lld" : {
+
+    },
+    "Bad file descriptor. The file may be closed or invalid." : {
+
+    },
     "BuiltInErrors.DatabaseError.connectionFailed" : {
       "localizations" : {
         "ar" : {
@@ -6250,6 +6298,9 @@
           }
         }
       }
+    },
+    "Cannot find host. Please check your internet connection and try again." : {
+
     },
     "EnhancedDescriptions.CocoaError.default" : {
       "localizations" : {
@@ -12751,8 +12802,10 @@
         }
       }
     },
+    "Failed to save the data. Please try again." : {
+
+    },
     "Logging.MailComposer.dismissButton" : {
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -13004,7 +13057,6 @@
     },
     "Logging.MailComposer.notAvailableMessage" : {
       "comment" : "%@ is typically replaced by the email address of the support contact, e.g. 'support@example.com' – so this would read like '... contact support at: support@example.com'",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -13255,7 +13307,6 @@
       }
     },
     "Logging.MailComposer.notAvailableTitle" : {
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -13504,6 +13555,186 @@
           }
         }
       }
+    },
+    "Map loading is being throttled. Please wait a moment and try again." : {
+
+    },
+    "Multiple validation errors occurred while saving." : {
+
+    },
+    "No directions could be found for the specified route." : {
+
+    },
+    "No network connection found. Please check your internet." : {
+
+    },
+    "Payment is required to access this resource (402)." : {
+
+    },
+    "Permission denied. Please check your file permissions." : {
+
+    },
+    "Permission for %@ has not been confirmed. Please review and grant access in your device Settings." : {
+
+    },
+    "Please provide a value for %@. This information is required to proceed." : {
+
+    },
+    "Please try again later." : {
+
+    },
+    "The %@ field cannot be longer than %lld characters. Please shorten your input and try again." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %1$@ field cannot be longer than %2$lld characters. Please shorten your input and try again."
+          }
+        }
+      }
+    },
+    "The %@ record was not found in the database. Verify the details and try again." : {
+
+    },
+    "The %@ record with ID %@ was not found in the database. Verify the details and try again." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %1$@ record with ID %2$@ was not found in the database. Verify the details and try again."
+          }
+        }
+      }
+    },
+    "The current state prevents this action: %@. Please ensure all requirements are met and try again." : {
+
+    },
+    "The data store is incompatible with the current model version." : {
+
+    },
+    "The database operation for %@ could not be completed. Please retry the action." : {
+
+    },
+    "The file %@ could not be located. Please verify the file path and try again." : {
+
+    },
+    "The file could not be found." : {
+
+    },
+    "The file is corrupted or in an unreadable format." : {
+
+    },
+    "The file is locked and cannot be modified." : {
+
+    },
+    "The file is too large to be processed." : {
+
+    },
+    "The file name is invalid and cannot be used." : {
+
+    },
+    "The file or directory already exists." : {
+
+    },
+    "The file's character encoding is not supported." : {
+
+    },
+    "The HTTP method is not allowed for this resource (405)." : {
+
+    },
+    "The MapKit server returned an error. Please try again later." : {
+
+    },
+    "The network connection was lost. Please try again." : {
+
+    },
+    "The network request took too long to complete. Please check your connection and try again." : {
+
+    },
+    "The operation could not be started because a required component failed to initialize: %@. Please restart the application or contact support." : {
+
+    },
+    "The operation was canceled at your request. You can retry the action if needed." : {
+
+    },
+    "The provided input could not be processed correctly: %@. Please review the input and ensure it matches the expected format." : {
+
+    },
+    "The request entity has an unsupported media type (415)." : {
+
+    },
+    "The request timed out (408). Please try again." : {
+
+    },
+    "The request timed out. Please try again later." : {
+
+    },
+    "The request timed out. Please try again." : {
+
+    },
+    "The request was cancelled. Please try again if this wasn't intended." : {
+
+    },
+    "The request was malformed (400). Please review and try again." : {
+
+    },
+    "The requested placemark could not be found. Please check the location details." : {
+
+    },
+    "The requested resource cannot produce an acceptable response (406)." : {
+
+    },
+    "The requested resource could not be found (404)." : {
+
+    },
+    "The required information is incomplete. The %@ field is missing and must be provided to continue." : {
+
+    },
+    "The server encountered an error (500). Please try again later." : {
+
+    },
+    "The server encountered an error (Code: %lld). " : {
+
+    },
+    "The specified file or directory could not be found." : {
+
+    },
+    "The storage volume is read-only and cannot be modified." : {
+
+    },
+    "The URL is malformed. Please check it and try again or report a bug." : {
+
+    },
+    "The value entered for %@ is not in the correct format. Please review the requirements and try again." : {
+
+    },
+    "There is no space left on the device." : {
+
+    },
+    "There is not enough disk space to complete the operation." : {
+
+    },
+    "There was a conflict with the request (409). Please review and try again." : {
+
+    },
+    "There was an issue with the request (Code: %lld). %@. Please review and retry." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was an issue with the request (Code: %1$lld). %2$@. Please review and retry."
+          }
+        }
+      }
+    },
+    "There was an SSL error. Please check the server's certificate." : {
+
+    },
+    "This item has already been finalized and cannot be modified. Please create a new version if changes are needed." : {
+
+    },
+    "Too many requests have been sent. Please wait and try again (429)." : {
+
     },
     "TypedOverloads.FileManager.corruptFile" : {
       "localizations" : {
@@ -21504,6 +21735,42 @@
           }
         }
       }
+    },
+    "Unable to connect to the internet. Please check your network settings and try again." : {
+
+    },
+    "Unable to establish a connection to the database. Check your network settings and try again." : {
+
+    },
+    "Unable to find the server. Please check the URL or your network." : {
+
+    },
+    "Unable to open the persistent store. Please check your storage or permissions." : {
+
+    },
+    "Unable to process the server's response. Please try again or contact support if the issue persists." : {
+
+    },
+    "Unable to write to the file %@. Ensure you have the necessary permissions and try again." : {
+
+    },
+    "You are not authorized to access this resource (401)." : {
+
+    },
+    "You are not connected to the Internet. Please check your connection." : {
+
+    },
+    "You do not have permission to access this resource (403)." : {
+
+    },
+    "You do not have permission to read this file or directory." : {
+
+    },
+    "You do not have permission to read this file." : {
+
+    },
+    "You do not have permission to write to this file or directory." : {
+
     }
   },
   "version" : "1.0"

@@ -15,7 +15,7 @@ struct MailComposerView: UIViewControllerRepresentable {
    var recipients: [String]?
    var subject: String?
    var messageBody: String?
-   var attachments: [MailAttachment]?
+   var attachments: [MailAttachment?]
 
    func makeUIViewController(context: Context) -> MFMailComposeViewController {
       let composer = MFMailComposeViewController()
@@ -33,8 +33,8 @@ struct MailComposerView: UIViewControllerRepresentable {
          composer.setMessageBody(messageBody, isHTML: false)
       }
 
-      if let attachments {
-         for attachment in attachments {
+      for attachment in attachments {
+         if let attachment {
             composer.addAttachmentData(
                attachment.data,
                mimeType: attachment.mimeType,

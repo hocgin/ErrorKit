@@ -108,16 +108,14 @@ public enum ParsingError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .invalidInput(let input):
-         return String(
-            localized: "BuiltInErrors.ParsingError.invalidInput",
-            defaultValue: "The provided input could not be processed correctly: \(input). Please review the input and ensure it matches the expected format.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.ParsingError.invalidInput",
+            defaultValue: "The provided input could not be processed correctly: \(input). Please review the input and ensure it matches the expected format."
          )
       case .missingField(let field):
-         return String(
-            localized: "BuiltInErrors.ParsingError.missingField",
-            defaultValue: "The required information is incomplete. The \(field) field is missing and must be provided to continue.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.ParsingError.missingField",
+            defaultValue: "The required information is incomplete. The \(field) field is missing and must be provided to continue."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

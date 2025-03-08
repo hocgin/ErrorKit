@@ -122,22 +122,19 @@ public enum StateError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .invalidState(let description):
-         return String(
-            localized: "BuiltInErrors.StateError.invalidState",
-            defaultValue: "The current state prevents this action: \(description). Please ensure all requirements are met and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.StateError.invalidState",
+            defaultValue: "The current state prevents this action: \(description). Please ensure all requirements are met and try again."
          )
       case .alreadyFinalized:
-         return String(
-            localized: "BuiltInErrors.StateError.alreadyFinalized",
-            defaultValue: "This item has already been finalized and cannot be modified. Please create a new version if changes are needed.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.StateError.alreadyFinalized",
+            defaultValue: "This item has already been finalized and cannot be modified. Please create a new version if changes are needed."
          )
       case .preconditionFailed(let description):
-         return String(
-            localized: "BuiltInErrors.StateError.preconditionFailed",
-            defaultValue: "A required condition was not met: \(description). Please complete all prerequisites before proceeding.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.StateError.preconditionFailed",
+            defaultValue: "A required condition was not met: \(description). Please complete all prerequisites before proceeding."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

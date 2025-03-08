@@ -11,34 +11,29 @@ extension ErrorKit {
       case let urlError as URLError:
          switch urlError.code {
          case .notConnectedToInternet:
-            return String(
-               localized: "EnhancedDescriptions.URLError.notConnectedToInternet",
-               defaultValue: "You are not connected to the Internet. Please check your connection.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.URLError.notConnectedToInternet",
+               defaultValue: "You are not connected to the Internet. Please check your connection."
             )
          case .timedOut:
-            return String(
-               localized: "EnhancedDescriptions.URLError.timedOut",
-               defaultValue: "The request timed out. Please try again later.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.URLError.timedOut",
+               defaultValue: "The request timed out. Please try again later."
             )
          case .cannotFindHost:
-            return String(
-               localized: "EnhancedDescriptions.URLError.cannotFindHost",
-               defaultValue: "Unable to find the server. Please check the URL or your network.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.URLError.cannotFindHost",
+               defaultValue: "Unable to find the server. Please check the URL or your network."
             )
          case .networkConnectionLost:
-            return String(
-               localized: "EnhancedDescriptions.URLError.networkConnectionLost",
-               defaultValue: "The network connection was lost. Please try again.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.URLError.networkConnectionLost",
+               defaultValue: "The network connection was lost. Please try again."
             )
          default:
-            return String(
-               localized: "EnhancedDescriptions.URLError.default",
-               defaultValue: "A network error occurred: \(urlError.localizedDescription)",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.URLError.default",
+               defaultValue: "A network error occurred: \(urlError.localizedDescription)"
             )
          }
 
@@ -46,28 +41,24 @@ extension ErrorKit {
       case let cocoaError as CocoaError:
          switch cocoaError.code {
          case .fileNoSuchFile:
-            return String(
-               localized: "EnhancedDescriptions.CocoaError.fileNoSuchFile",
-               defaultValue: "The file could not be found.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CocoaError.fileNoSuchFile",
+               defaultValue: "The file could not be found."
             )
          case .fileReadNoPermission:
-            return String(
-               localized: "EnhancedDescriptions.CocoaError.fileReadNoPermission",
-               defaultValue: "You do not have permission to read this file.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CocoaError.fileReadNoPermission",
+               defaultValue: "You do not have permission to read this file."
             )
          case .fileWriteOutOfSpace:
-            return String(
-               localized: "EnhancedDescriptions.CocoaError.fileWriteOutOfSpace",
-               defaultValue: "There is not enough disk space to complete the operation.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CocoaError.fileWriteOutOfSpace",
+               defaultValue: "There is not enough disk space to complete the operation."
             )
          default:
-            return String(
-               localized: "EnhancedDescriptions.CocoaError.default",
-               defaultValue: "A file system error occurred: \(cocoaError.localizedDescription)",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CocoaError.default",
+               defaultValue: "A file system error occurred: \(cocoaError.localizedDescription)"
             )
          }
 
@@ -75,28 +66,24 @@ extension ErrorKit {
       case let posixError as POSIXError:
          switch posixError.code {
          case .ENOSPC:
-            return String(
-               localized: "EnhancedDescriptions.POSIXError.ENOSPC",
-               defaultValue: "There is no space left on the device.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.POSIXError.ENOSPC",
+               defaultValue: "There is no space left on the device."
             )
          case .EACCES:
-            return String(
-               localized: "EnhancedDescriptions.POSIXError.EACCES",
-               defaultValue: "Permission denied. Please check your file permissions.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.POSIXError.EACCES",
+               defaultValue: "Permission denied. Please check your file permissions."
             )
          case .EBADF:
-            return String(
-               localized: "EnhancedDescriptions.POSIXError.EBADF",
-               defaultValue: "Bad file descriptor. The file may be closed or invalid.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.POSIXError.EBADF",
+               defaultValue: "Bad file descriptor. The file may be closed or invalid."
             )
          default:
-            return String(
-               localized: "EnhancedDescriptions.POSIXError.default",
-               defaultValue: "A system error occurred: \(posixError.localizedDescription)",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.POSIXError.default",
+               defaultValue: "A system error occurred: \(posixError.localizedDescription)"
             )
          }
 

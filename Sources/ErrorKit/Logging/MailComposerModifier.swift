@@ -12,7 +12,7 @@ struct MailComposerModifier: ViewModifier {
    var recipient: String
    var subject: String?
    var messageBody: String?
-   var attachments: [MailAttachment]?
+   var attachments: [MailAttachment?]
 
    func body(content: Content) -> some View {
       content
@@ -85,7 +85,7 @@ extension View {
    ///             recipient: "support@yourapp.com",
    ///             subject: "App Feedback",
    ///             messageBody: "I encountered an issue while using the app:",
-   ///             attachments: [try? ErrorKit.logAttachment(ofLast: .minutes(10))].compactMap { $0 }
+   ///             attachments: [try? ErrorKit.logAttachment(ofLast: .minutes(10))]
    ///         )
    ///     }
    /// }
@@ -103,7 +103,7 @@ extension View {
       recipient: String,
       subject: String? = nil,
       messageBody: String? = nil,
-      attachments: [MailAttachment]? = nil
+      attachments: [MailAttachment?] = []
    ) -> some View {
       self.modifier(
          MailComposerModifier(

@@ -1,5 +1,9 @@
 import Foundation
+#if canImport(CryptoKit)
 import CryptoKit
+#else
+import Crypto
+#endif
 
 public enum ErrorKit {
    /// Provides enhanced, user-friendly, localized error descriptions for a wide range of system errors.
@@ -208,8 +212,13 @@ public enum ErrorKit {
       // Split at first occurrence of "(" or ":" to remove specific parameters and user-friendly messages
       let descriptionWithoutDetails = errorChainDescription.components(separatedBy: CharacterSet(charactersIn: "(:")).first!
 
-      let digest = SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
+      #if canImport(CryptoKit)
+      let digest = CryptoKit.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
+      let fullHash = Data(digest).compactMap { String(format: "%02x", $0) }.joined()
+      #else
+      let digest = Crypto.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
       let fullHash = digest.compactMap { String(format: "%02x", $0) }.joined()
+      #endif
 
       // Return first 6 characters for a shorter but still practically unique identifier
       return String(fullHash.prefix(6))

@@ -64,82 +64,69 @@ public enum FileManagerError: Throwable {
    public var userFriendlyMessage: String {
       switch self {
       case .fileNotFound:
-         String(
-            localized: "TypedOverloads.FileManager.fileNotFound",
-            defaultValue: "The specified file or directory could not be found.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.fileNotFound",
+            defaultValue: "The specified file or directory could not be found."
          )
       case .noReadPermission:
-         String(
-            localized: "TypedOverloads.FileManager.noReadPermission",
-            defaultValue: "You do not have permission to read this file or directory.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.noReadPermission",
+            defaultValue: "You do not have permission to read this file or directory."
          )
       case .noWritePermission:
-         String(
-            localized: "TypedOverloads.FileManager.noWritePermission",
-            defaultValue: "You do not have permission to write to this file or directory.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.noWritePermission",
+            defaultValue: "You do not have permission to write to this file or directory."
          )
       case .outOfSpace:
-         String(
-            localized: "TypedOverloads.FileManager.outOfSpace",
-            defaultValue: "There is not enough disk space to complete the operation.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.outOfSpace",
+            defaultValue: "There is not enough disk space to complete the operation."
          )
       case .invalidFileName:
-         String(
-            localized: "TypedOverloads.FileManager.invalidFileName",
-            defaultValue: "The file name is invalid and cannot be used.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.invalidFileName",
+            defaultValue: "The file name is invalid and cannot be used."
          )
       case .corruptFile:
-         String(
-            localized: "TypedOverloads.FileManager.corruptFile",
-            defaultValue: "The file is corrupted or in an unreadable format.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.corruptFile",
+            defaultValue: "The file is corrupted or in an unreadable format."
          )
       case .fileLocked:
-         String(
-            localized: "TypedOverloads.FileManager.fileLocked",
-            defaultValue: "The file is locked and cannot be modified.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.fileLocked",
+            defaultValue: "The file is locked and cannot be modified."
          )
       case .readError:
-         String(
-            localized: "TypedOverloads.FileManager.readError",
-            defaultValue: "An unknown error occurred while reading the file.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.readError",
+            defaultValue: "An unknown error occurred while reading the file."
          )
       case .writeError:
-         String(
-            localized: "TypedOverloads.FileManager.writeError",
-            defaultValue: "An unknown error occurred while writing the file.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.writeError",
+            defaultValue: "An unknown error occurred while writing the file."
          )
       case .unsupportedEncoding:
-         String(
-            localized: "TypedOverloads.FileManager.unsupportedEncoding",
-            defaultValue: "The file's character encoding is not supported.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.unsupportedEncoding",
+            defaultValue: "The file's character encoding is not supported."
          )
       case .fileTooLarge:
-         String(
-            localized: "TypedOverloads.FileManager.fileTooLarge",
-            defaultValue: "The file is too large to be processed.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.fileTooLarge",
+            defaultValue: "The file is too large to be processed."
          )
       case .volumeReadOnly:
-         String(
-            localized: "TypedOverloads.FileManager.volumeReadOnly",
-            defaultValue: "The storage volume is read-only and cannot be modified.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.volumeReadOnly",
+            defaultValue: "The storage volume is read-only and cannot be modified."
          )
       case .fileExists:
-         String(
-            localized: "TypedOverloads.FileManager.fileExists",
-            defaultValue: "The file or directory already exists.",
-            bundle: .module
+         String.localized(
+            key: "TypedOverloads.FileManager.fileExists",
+            defaultValue: "The file or directory already exists."
          )
       case .other(let error):
          ErrorKit.userFriendlyMessage(for: error)
