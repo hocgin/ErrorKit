@@ -10,8 +10,7 @@ ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate co
 - [Typed Throws for System Functions](#typed-throws-for-system-functions)
 - [Error Nesting with Catching](#error-nesting-with-catching)
 - [Error Chain Debugging](#error-chain-debugging)
-- [Attach Log Files](#attach-log-files)
-- [Live Error Analytics](#live-error-analytics)
+- [User Feedback with Error Logs](#user-feedback-with-error-logs)
 
 ## The Problem with Swift's Error Protocol
 
