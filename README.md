@@ -10,6 +10,7 @@ ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate co
 - [Typed Throws for System Functions](#typed-throws-for-system-functions)
 - [Error Nesting with Catching](#error-nesting-with-catching)
 - [Error Chain Debugging](#error-chain-debugging)
+- [User Feedback with Error Logs](#user-feedback-with-error-logs)
 
 ## The Problem with Swift's Error Protocol
 
@@ -544,3 +545,122 @@ This precise grouping allows you to:
 ### Summary
 
 ErrorKit's debugging tools transform error handling from a black box into a transparent system. By combining `errorChainDescription` for debugging with `groupingID` for analytics, you get deep insight into error flows while maintaining the ability to track and prioritize issues effectively. This is particularly powerful when combined with ErrorKit's `Catching` protocol, creating a comprehensive system for error handling, debugging, and monitoring.
+
+
+## User Feedback with Error Logs
+
+When users encounter issues in your app, getting enough context to diagnose the problem can be challenging. Users rarely know what information you need, and reproducing issues without logs is often impossible. 😕
+
+ErrorKit makes it simple to add diagnostic log collection to your app, providing crucial context for bug reports and support requests.
+
+### The Power of System Logs
+
+ErrorKit leverages Apple's unified logging system (`OSLog`/`Logger`) to collect valuable diagnostic information. If you're not already using structured logging, here's a quick primer:
+
+```swift
+import OSLog
+
+// Log at appropriate levels
+Logger().debug("Detailed connection info: \(details)")     // Development debugging
+Logger().info("User tapped on \(button)")                  // General information
+Logger().notice("Successfully loaded user profile")        // Important events
+Logger().error("Failed to parse server response")          // Errors that should be fixed
+Logger().fault("Database corruption detected")             // Critical system failures
+```
+
+ErrorKit can collect these logs based on level, giving you control over how much detail to include in reports. 3rd-party frameworks that also use Apple's unified logging system will be included so you get a full picture of what happened in your app, not just what you logged yourself. 
+
+### Creating a Feedback Button with Automatic Log Collection
+
+The easiest way to implement a support system is using the `.mailComposer` SwiftUI modifier combined with `logAttachment`:
+
+```swift
+struct ContentView: View {
+    @State private var showMailComposer = false
+    
+    var body: some View {
+        Form {
+            // Your app content here
+            
+            Button("Report a Problem") {
+                showMailComposer = true
+            }
+            .mailComposer(
+                isPresented: $showMailComposer,
+                recipient: "support@yourapp.com",
+                subject: "<AppName> Bug Report",
+                messageBody: """
+                   Please describe what happened:
+                   
+                   
+                   
+                   ----------------------------------
+                   [Please do not remove the information below]
+                   
+                   App version: \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown")
+                   Build: \(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown")
+                   Device: \(UIDevice.current.model)
+                   iOS: \(UIDevice.current.systemVersion)
+                   """,
+                attachments: [
+                    try? ErrorKit.logAttachment(ofLast: .minutes(30), minLevel: .notice)
+                ]
+            )
+        }
+    }
+}
+```
+
+This creates a simple "Report a Problem" button that:
+1. Opens a pre-filled email composer
+2. Includes useful device and app information
+3. Automatically attaches recent system logs
+4. Provides space for the user to describe the issue
+
+The above is just an example, feel free to adjust it to your needs and include any additional info needed.
+
+### Alternative Methods for More Control
+
+If you need more control over log handling, ErrorKit offers two additional approaches:
+
+#### 1. Getting Log Data Directly
+
+For sending logs to your own backend or processing them in-app:
+
+```swift
+let logData = try ErrorKit.loggedData(
+    ofLast: .minutes(10),
+    minLevel: .notice
+)
+
+// Use the data with your custom reporting system
+analyticsService.sendLogs(data: logData)
+```
+
+#### 2. Exporting to a Temporary File
+
+For sharing logs via other mechanisms:
+
+```swift
+let logFileURL = try ErrorKit.exportLogFile(
+    ofLast: .hours(1),
+    minLevel: .error
+)
+
+// Share the log file
+let activityVC = UIActivityViewController(
+    activityItems: [logFileURL],
+    applicationActivities: nil
+)
+present(activityVC, animated: true)
+```
+
+### Benefits of Automatic Log Collection
+
+- **Better bug reports**: Get the context you need without asking users for technical details
+- **Faster issue resolution**: See exactly what happened leading up to the problem
+- **Lower support burden**: Reduce back-and-forth communications with users
+- **User satisfaction**: Demonstrate that you take their problems seriously
+- **Developer sanity**: Stop trying to reproduce issues with insufficient information
+
+By implementing a feedback button with automatic log collection, you transform the error reporting experience for both users and developers. Users can report issues with a single tap, and you get the diagnostic information you need to fix problems quickly.

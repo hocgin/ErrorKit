@@ -108,16 +108,14 @@ public enum OperationError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .dependencyFailed(let dependency):
-         return String(
-            localized: "BuiltInErrors.OperationError.dependencyFailed",
-            defaultValue: "The operation could not be started because a required component failed to initialize: \(dependency). Please restart the application or contact support.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.OperationError.dependencyFailed",
+            defaultValue: "The operation could not be started because a required component failed to initialize: \(dependency). Please restart the application or contact support."
          )
       case .canceled:
-         return String(
-            localized: "BuiltInErrors.OperationError.canceled",
-            defaultValue: "The operation was canceled at your request. You can retry the action if needed.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.OperationError.canceled",
+            defaultValue: "The operation was canceled at your request. You can retry the action if needed."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

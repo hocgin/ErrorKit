@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 /// An enumeration that represents various errors that can occur when performing network requests with `URLSession`.
 public enum URLSessionError: Throwable {
@@ -68,120 +71,101 @@ public enum URLSessionError: Throwable {
    public var userFriendlyMessage: String {
       switch self {
       case .timeout:
-         return String(
-            localized: "TypedOverloads.URLSession.timeout",
-            defaultValue: "The request timed out. Please try again.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.timeout",
+            defaultValue: "The request timed out. Please try again."
          )
       case .noNetwork:
-         return String(
-            localized: "TypedOverloads.URLSession.noNetwork",
-            defaultValue: "No network connection found. Please check your internet.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.noNetwork",
+            defaultValue: "No network connection found. Please check your internet."
          )
       case .cannotFindHost:
-         return String(
-            localized: "TypedOverloads.URLSession.cannotFindHost",
-            defaultValue: "Cannot find host. Please check your internet connection and try again.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.cannotFindHost",
+            defaultValue: "Cannot find host. Please check your internet connection and try again."
          )
       case .badURL:
-         return String(
-            localized: "TypedOverloads.URLSession.badURL",
-            defaultValue: "The URL is malformed. Please check it and try again or report a bug.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.badURL",
+            defaultValue: "The URL is malformed. Please check it and try again or report a bug."
          )
       case .cancelled:
-         return String(
-            localized: "TypedOverloads.URLSession.cancelled",
-            defaultValue: "The request was cancelled. Please try again if this wasn't intended.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.cancelled",
+            defaultValue: "The request was cancelled. Please try again if this wasn't intended."
          )
       case .sslError:
-         return String(
-            localized: "TypedOverloads.URLSession.sslError",
-            defaultValue: "There was an SSL error. Please check the server's certificate.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.sslError",
+            defaultValue: "There was an SSL error. Please check the server's certificate."
          )
       case .networkError(let error):
          return ErrorKit.userFriendlyMessage(for: error)
       case .unauthorized:
-         return String(
-            localized: "TypedOverloads.URLSession.unauthorized",
-            defaultValue: "You are not authorized to access this resource (401).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.unauthorized",
+            defaultValue: "You are not authorized to access this resource (401)."
          )
       case .paymentRequired:
-         return String(
-            localized: "TypedOverloads.URLSession.paymentRequired",
-            defaultValue: "Payment is required to access this resource (402).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.paymentRequired",
+            defaultValue: "Payment is required to access this resource (402)."
          )
       case .forbidden:
-         return String(
-            localized: "TypedOverloads.URLSession.forbidden",
-            defaultValue: "You do not have permission to access this resource (403).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.forbidden",
+            defaultValue: "You do not have permission to access this resource (403)."
          )
       case .notFound:
-         return String(
-            localized: "TypedOverloads.URLSession.notFound",
-            defaultValue: "The requested resource could not be found (404).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.notFound",
+            defaultValue: "The requested resource could not be found (404)."
          )
       case .methodNotAllowed:
-         return String(
-            localized: "TypedOverloads.URLSession.methodNotAllowed",
-            defaultValue: "The HTTP method is not allowed for this resource (405).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.methodNotAllowed",
+            defaultValue: "The HTTP method is not allowed for this resource (405)."
          )
       case .notAcceptable:
-         return String(
-            localized: "TypedOverloads.URLSession.notAcceptable",
-            defaultValue: "The requested resource cannot produce an acceptable response (406).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.notAcceptable",
+            defaultValue: "The requested resource cannot produce an acceptable response (406)."
          )
       case .requestTimeout:
-         return String(
-            localized: "TypedOverloads.URLSession.requestTimeout",
-            defaultValue: "The request timed out (408). Please try again.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.requestTimeout",
+            defaultValue: "The request timed out (408). Please try again."
          )
       case .conflict:
-         return String(
-            localized: "TypedOverloads.URLSession.conflict",
-            defaultValue: "There was a conflict with the request (409). Please review and try again.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.conflict",
+            defaultValue: "There was a conflict with the request (409). Please review and try again."
          )
       case .unsupportedMediaType:
-         return String(
-            localized: "TypedOverloads.URLSession.unsupportedMediaType",
-            defaultValue: "The request entity has an unsupported media type (415).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.unsupportedMediaType",
+            defaultValue: "The request entity has an unsupported media type (415)."
          )
       case .tooManyRequests:
-         return String(
-            localized: "TypedOverloads.URLSession.tooManyRequests",
-            defaultValue: "Too many requests have been sent. Please wait and try again (429).",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.tooManyRequests",
+            defaultValue: "Too many requests have been sent. Please wait and try again (429)."
          )
       case .badRequest:
-         return String(
-            localized: "TypedOverloads.URLSession.badRequest",
-            defaultValue: "The request was malformed (400). Please review and try again.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.badRequest",
+            defaultValue: "The request was malformed (400). Please review and try again."
          )
       case .serverError:
-         return String(
-            localized: "TypedOverloads.URLSession.serverError",
-            defaultValue: "The server encountered an error (500). Please try again later.",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.serverError",
+            defaultValue: "The server encountered an error (500). Please try again later."
          )
       case .unknownStatusCode(let statusCode):
-         return String(
-            localized: "TypedOverloads.URLSession.unknown",
-            defaultValue: "An unknown status code was received from the server: \(statusCode)",
-            bundle: .module
+         return String.localized(
+            key: "TypedOverloads.URLSession.unknown",
+            defaultValue: "An unknown status code was received from the server: \(statusCode)"
          )
       case .other(let error):
          return ErrorKit.userFriendlyMessage(for: error)

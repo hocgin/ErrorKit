@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "A file system error occurred: %@" : {
+
+    },
+    "A mandatory property is missing. Please fill all required fields." : {
+
+    },
+    "A MapKit error occurred: %@" : {
+
+    },
+    "A network error occurred: %@" : {
+
+    },
+    "A relationship is missing required related objects." : {
+
+    },
+    "A required condition was not met: %@. Please complete all prerequisites before proceeding." : {
+
+    },
+    "A system error occurred: %@" : {
+
+    },
+    "Access to %@ is currently restricted. This may be due to system settings or parental controls." : {
+
+    },
+    "Access to %@ was declined. To use this feature, please enable the permission in your device Settings." : {
+
+    },
+    "An error occurred while attempting to read the file %@. Please check file permissions and try again." : {
+
+    },
+    "An object validation error occurred." : {
+
+    },
+    "An unknown error occurred in MapKit." : {
+
+    },
+    "An unknown error occurred while reading the file." : {
+
+    },
+    "An unknown error occurred while writing the file." : {
+
+    },
+    "An unknown status code was received from the server: %lld" : {
+
+    },
+    "Bad file descriptor. The file may be closed or invalid." : {
+
+    },
     "BuiltInErrors.DatabaseError.connectionFailed" : {
       "localizations" : {
         "ar" : {
@@ -249,8 +297,7 @@
             "value" : "無法建立與數據庫的連接。請檢查你的網絡設置並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.operationFailed" : {
       "localizations" : {
@@ -500,8 +547,7 @@
             "value" : "無法完成 %@ 的數據庫操作。請重試該操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.recordNotFound" : {
       "localizations" : {
@@ -751,11 +797,9 @@
             "value" : "在數據庫中找不到 %1$@ 記錄。請核實細節並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.DatabaseError.recordNotFoundWithID" : {
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -1003,8 +1047,7 @@
             "value" : "ID 為 %2$@ 的 %1$@ 記錄在資料庫中未找到。請核實詳細資訊後再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.fileNotFound" : {
       "localizations" : {
@@ -1254,8 +1297,7 @@
             "value" : "無法找到 文件 %@。請檢查文件路徑並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.readError" : {
       "localizations" : {
@@ -1505,8 +1547,7 @@
             "value" : "嘗試讀取 文件 %@ 時發生錯誤。請檢查文件權限並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.FileError.writeError" : {
       "localizations" : {
@@ -1756,8 +1797,7 @@
             "value" : "無法寫入 文件 %@。請確保你擁有必要的權限並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.badRequest" : {
       "localizations" : {
@@ -2007,8 +2047,7 @@
             "value" : "請求出現問題 (代碼: %1$lld)。%2$@。請檢查並重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.decodingFailure" : {
       "localizations" : {
@@ -2258,8 +2297,7 @@
             "value" : "無法處理伺服器的回應。請重試，如問題持續存在，請聯繫支援。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.noInternet" : {
       "localizations" : {
@@ -2509,8 +2547,7 @@
             "value" : "無法連接到互聯網。請檢查網絡設置，然後重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.serverError" : {
       "localizations" : {
@@ -2760,8 +2797,7 @@
             "value" : "伺服器發生錯誤 (代碼: %lld)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.NetworkError.timeout" : {
       "localizations" : {
@@ -3011,8 +3047,7 @@
             "value" : "網絡請求花了太長時間未能完成。請檢查你的連線，然後重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.OperationError.canceled" : {
       "localizations" : {
@@ -3262,8 +3297,7 @@
             "value" : "該操作因你的要求被取消。你可以在需要時重試該操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.OperationError.dependencyFailed" : {
       "localizations" : {
@@ -3513,8 +3547,7 @@
             "value" : "無法啟動該操作，因為所需的組件無法初始化: %@。請重新啟動應用程式或聯繫支援。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ParsingError.invalidInput" : {
       "localizations" : {
@@ -3764,8 +3797,7 @@
             "value" : "提供的輸入無法正確處理：%@。請檢查輸入並確保它符合預期格式。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ParsingError.missingField" : {
       "localizations" : {
@@ -4015,8 +4047,7 @@
             "value" : "所需的信息不完整。%@ 欄位缺失，必須提供以繼續。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.denied" : {
       "localizations" : {
@@ -4266,8 +4297,7 @@
             "value" : "訪問 %@ 被拒絕。要使用此功能，請在設備設定中啟用權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.notDetermined" : {
       "localizations" : {
@@ -4517,8 +4547,7 @@
             "value" : "%@ 的權限尚未確認。請檢查並在設備設定中授予訪問權。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.PermissionError.restricted" : {
       "localizations" : {
@@ -4768,8 +4797,7 @@
             "value" : "訪問 %@ 目前受到限制。這可能是由於系統設置或家長控制。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.alreadyFinalized" : {
       "localizations" : {
@@ -5019,8 +5047,7 @@
             "value" : "該項目已經完成，不可修改。如需更改，請創建新版本。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.invalidState" : {
       "localizations" : {
@@ -5270,8 +5297,7 @@
             "value" : "當前狀態不允許此操作：%@。請確保滿足所有要求後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.StateError.preconditionFailed" : {
       "localizations" : {
@@ -5521,8 +5547,7 @@
             "value" : "未滿足必要條件：%@。請在繼續之前完成所有先決條件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.inputTooLong" : {
       "localizations" : {
@@ -5772,8 +5797,7 @@
             "value" : "請縮短您的輸入，再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.invalidInput" : {
       "localizations" : {
@@ -6023,8 +6047,7 @@
             "value" : "輸入的%@值格式不正確。請檢查要求，然後再次嘗試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "BuiltInErrors.ValidationError.missingField" : {
       "localizations" : {
@@ -6274,8 +6297,10 @@
             "value" : "請提供%@的值。此信息是必需的才能繼續。"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "Cannot find host. Please check your internet connection and try again." : {
+
     },
     "EnhancedDescriptions.CocoaError.default" : {
       "localizations" : {
@@ -6525,8 +6550,7 @@
             "value" : "發生文件系統錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileNoSuchFile" : {
       "localizations" : {
@@ -6776,8 +6800,7 @@
             "value" : "找不到此文件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileReadNoPermission" : {
       "localizations" : {
@@ -7027,8 +7050,7 @@
             "value" : "您沒有權限閱讀此文件。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CocoaError.fileWriteOutOfSpace" : {
       "localizations" : {
@@ -7278,8 +7300,7 @@
             "value" : "磁碟空間不足，無法完成操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSManagedObjectValidationError" : {
       "localizations" : {
@@ -7529,8 +7550,7 @@
             "value" : "發生對象驗證錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError" : {
       "localizations" : {
@@ -7780,8 +7800,7 @@
             "value" : "資料存儲與當前模型版本不兼容。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError" : {
       "localizations" : {
@@ -8031,8 +8050,7 @@
             "value" : "無法打開持久存儲。請檢查您的存儲或權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError" : {
       "localizations" : {
@@ -8282,8 +8300,7 @@
             "value" : "保存數據失敗。請再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError" : {
       "localizations" : {
@@ -8533,8 +8550,7 @@
             "value" : "缺少必要屬性。請填寫所有必填字段。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError" : {
       "localizations" : {
@@ -8784,8 +8800,7 @@
             "value" : "保存時發生多個驗證錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError" : {
       "localizations" : {
@@ -9035,8 +9050,7 @@
             "value" : "關係缺少所需的相關對象。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.default" : {
       "localizations" : {
@@ -9286,8 +9300,7 @@
             "value" : "發生地圖錯誤：%@。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.directionsNotFound" : {
       "localizations" : {
@@ -9537,8 +9550,7 @@
             "value" : "找不到指定路線的方向。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.loadingThrottled" : {
       "localizations" : {
@@ -9788,8 +9800,7 @@
             "value" : "地圖載入受到限制。請稍候片刻再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.placemarkNotFound" : {
       "localizations" : {
@@ -10039,8 +10050,7 @@
             "value" : "無法找到所請求的地標。請檢查地點詳情。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.serverFailure" : {
       "localizations" : {
@@ -10290,8 +10300,7 @@
             "value" : "MapKit 伺服器返回了一個錯誤。請稍後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.MKError.unknown" : {
       "localizations" : {
@@ -10541,8 +10550,7 @@
             "value" : "MapKit 中發生了一個未知錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.default" : {
       "localizations" : {
@@ -10792,8 +10800,7 @@
             "value" : "系統發生錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.EACCES" : {
       "localizations" : {
@@ -11043,8 +11050,7 @@
             "value" : "權限被拒絕。請檢查你的文件權限。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.EBADF" : {
       "localizations" : {
@@ -11294,8 +11300,7 @@
             "value" : "無效的文件描述符。文件可能已關閉或無效。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.POSIXError.ENOSPC" : {
       "localizations" : {
@@ -11545,8 +11550,7 @@
             "value" : "設備上沒有剩餘空間。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.cannotFindHost" : {
       "localizations" : {
@@ -11796,8 +11800,7 @@
             "value" : "無法找到伺服器。請檢查 URL 或你的網絡。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.default" : {
       "localizations" : {
@@ -12047,8 +12050,7 @@
             "value" : "發生了網絡錯誤：%@"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.networkConnectionLost" : {
       "localizations" : {
@@ -12298,8 +12300,7 @@
             "value" : "網絡連接已丟失。請重試。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.notConnectedToInternet" : {
       "localizations" : {
@@ -12549,8 +12550,7 @@
             "value" : "你未連接到互聯網。請檢查你的連接。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "EnhancedDescriptions.URLError.timedOut" : {
       "localizations" : {
@@ -12800,8 +12800,941 @@
             "value" : "請求超時。請稍後再試。"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "Failed to save the data. Please try again." : {
+
+    },
+    "Logging.MailComposer.dismissButton" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إغلاق"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Затвори"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descartar"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakládání"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afvis"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schließen"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Απόρριψη"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dismiss"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descartar"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descartar"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hylkää"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disposer"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "בעיה"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "छोड़ें"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatvori"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eltávolítás"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutup"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閉じる"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Жабу"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutup"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sluiten"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dispensar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descartar"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Închide"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zavrieť"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ปิด"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kapat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрити"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bỏ qua"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關閉"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "關閉"
+          }
+        }
+      }
+    },
+    "Logging.MailComposer.notAvailableMessage" : {
+      "comment" : "%@ is typically replaced by the email address of the support contact, e.g. 'support@example.com' – so this would read like '... contact support at: support@example.com'",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جهازك غير مكون لإرسال الرسائل الإلكترونية. يرجى إعداد تطبيق البريد أو استخدام طريقة أخرى للتواصل مع الدعم على: %@"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вашето устройство не е конфигурирано да изпраща имейли. Моля, настройте приложението Mail или използвайте друг метод, за да се свържете с поддръжката на: %@"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El teu dispositiu no està configurat per enviar correus electrònics. Si us plau, configura l'aplicació Mail o utilitza un altre mètode per contactar amb el suport a: %@"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaše zařízení není nakonfigurováno pro odesílání emailů. Prosím, nastavte aplikaci Mail nebo použijte jinou metodu k tomu, abyste kontaktovali podporu na: %@"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din enhed er ikke konfigureret til at sende e-mails. Venligst opsæt Mail-appen eller brug en anden metode til at kontakte support på: %@."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dein Gerät ist nicht für den Versand von E-Mails konfiguriert. Bitte richte die Mail-App ein oder nutze eine andere Methode, um den Support zu kontaktieren unter: %@"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Η συσκευή σας δεν είναι ρυθμισμένη για να αποστέλλει email. Παρακαλώ ρυθμίστε την εφαρμογή Mail ή χρησιμοποιήστε άλλη μέθοδο για να επικοινωνήσετε με την υποστήριξη στο: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your device is not configured to send emails. Please set up the Mail app or use another method to contact support at: %@"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your device is not configured to send emails. Please set up the Mail app or use another method to contact support at: %@"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your device is not configured to send emails. Please set up the Mail app or use another method to contact support at: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu dispositivo no está configurado para enviar correos electrónicos. Por favor, configura la app de Mail o utiliza otro método para contactar con el soporte en: %@"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu dispositivo no está configurado para enviar correos electrónicos. Por favor, configura la aplicación de correo o usa otro método para contactar a soporte en: %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laiteasi ei ole konfiguroitu lähettämään sähköposteja. Aseta Mail-sovellus tai käytä muuta tapaa ottaaksesi yhteyttä tukeen: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre appareil n'est pas configuré pour envoyer des e-mails. Veuillez configurer l'application Mail ou utiliser une autre méthode pour contacter le support à l'adresse : %@."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre appareil n'est pas configuré pour envoyer des courriels. Veuillez configurer l'application Mail ou utiliser une autre méthode pour contacter le support à : %@."
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "המכשיר שלך לא מוגדר לשלוח מיילים. בבקשה הגדר את אפליקציית המייל או השתמש בדרך אחרת ליצור קשר עם התמיכה ב: %@"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपका डिवाइस ईमेल भेजने के लिए कॉन्फ़िगर नहीं है। कृपया मेल ऐप सेट करें या सहायता से संपर्क करने के लिए किसी अन्य विधि का उपयोग करें: %@"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaš uređaj nije konfiguriran za slanje e-pošte. Molimo postavite aplikaciju Mail ili upotrijebite drugi način za kontaktiranje podrške na: %@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A készüléked nincs beállítva e-mailek küldésére. Kérlek, állítsd be a Mail alkalmazást, vagy használj más módszert az ügyfélszolgálat elérhetőségéhez: %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perangkat Anda tidak dikonfigurasi untuk mengirim email. Silakan atur aplikasi Mail atau gunakan metode lain untuk menghubungi dukungan di: %@."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo dispositivo non è configurato per inviare email. Configura l'app Mail o utilizza un altro metodo per contattare il supporto a: %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お使いのデバイスはメールを送信するように設定されていません。メールアプリを設定するか、他の方法でサポートに連絡してください: %@"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сіздің құрылғыңыз электронды пошта жіберуге конфигурацияланбаған. Пошта қолданбасын орнатыңыз немесе техникалық қолдау көрсету үшін басқа әдісті пайдаланыңыз: %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 장치는 이메일을 보내도록 설정되어 있지 않습니다. 메일 앱을 설정하시거나 다음 방법을 사용하여 지원 팀에 연락해 주십시오: %@"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peranti anda tidak dikonfigurasi untuk menghantar emel. Sila tetapkan aplikasi Mail atau gunakan kaedah lain untuk menghubungi sokongan di: %@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enheten din er ikke konfigurert for å sende e-poster. Vennligst sett opp Mail-appen eller bruk en annen metode for å kontakte support på: %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je apparaat is niet geconfigureerd om e-mails te verzenden. Stel de Mail-app in of gebruik een andere methode om ondersteuning te contacteren op: %@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twoje urządzenie nie jest skonfigurowane do wysyłania e-maili. Ustaw aplikację Mail lub skorzystaj z innej metody, aby skontaktować się z pomocą pod adresem: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seu dispositivo não está configurado para enviar e-mails. Por favor, configure o aplicativo de e-mail ou use outro método para entrar em contato com o suporte em: %@"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O seu dispositivo não está configurado para enviar emails. Por favor, configure a aplicação Mail ou utilize outro método para contactar o suporte em: %@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dispozitivul tău nu este configurat pentru a trimite e-mailuri. Te rugăm să configurezi aplicația Mail sau să folosești o altă metodă pentru a contacta suportul la: %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На твоём устройстве не настроена отправка писем. Пожалуйста, настрой приложение Mail или используй другой способ, чтобы связаться со службой поддержки по адресу: %@"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tvoje zariadenie nie je nastavené na posielanie e-mailov. Prosím, nastav aplikáciu Mail alebo použij iný spôsob, ako kontaktovať podporu na: %@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din enhet är inte konfigurerad för att skicka mejl. Vänligen ställ in Mail-appen eller använd en annan metod för att kontakta support på: %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "อุปกรณ์ของคุณไม่สามารถส่งอีเมลได้ กรุณาตั้งค่าแอป Mail หรือลองใช้วิธีอื่นในการติดต่อสนับสนุนที่: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cihazınız e-posta göndermek üzere ayarlanmamış. Lütfen Mail uygulamasını ayarlayın veya destekle iletişim kurmak için başka bir yöntem kullanın: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш пристрій не налаштований для відправки електронних листів. Будь ласка, налаштуйте програму Пошта або скористайтеся іншим способом, щоб зв’язатися з підтримкою за адресою: %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thiết bị của bạn chưa được cấu hình để gửi email. Vui lòng thiết lập ứng dụng Mail hoặc sử dụng phương thức khác để liên hệ với bộ phận hỗ trợ tại: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您的设备未配置为发送电子邮件。请设置邮件应用或使用其他方法联系支持：%@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您的設備未設定為發送電子郵件。請設置郵件應用程式或使用其他方法聯繫支持：%@."
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "你的設備尚未配置以發送電子郵件。請設置郵件應用程式或使用其他方法聯絡支援：%@"
+          }
+        }
+      }
+    },
+    "Logging.MailComposer.notAvailableTitle" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "البريد غير متوفر"
+          }
+        },
+        "bg" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имейлът не е наличен"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correu No Disponible"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email není k dispozici"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail ikke tilgængelig"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Nicht Verfügbar"
+          }
+        },
+        "el" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Η Mail δεν είναι διαθέσιμη"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Not Available"
+          }
+        },
+        "en-AU" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Not Available"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Not Available"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo no disponible"
+          }
+        },
+        "es-419" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo No Disponible"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posti ei saatavilla"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail non disponible"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Courrier non disponible"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "אימייל לא זמין"
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मेल उपलब्ध नहीं है"
+          }
+        },
+        "hr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-pošta nije dostupna"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A Mail nem elérhető"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Tidak Tersedia"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Non Disponibile"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メールが使用できません"
+          }
+        },
+        "kk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пошта қолжетімсіз"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메일 사용 불가능"
+          }
+        },
+        "ms" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emel Tidak Tersedia"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-post ikke tilgjengelig"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Niet Beschikbaar"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail niedostępny"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-mail Não Disponível"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Não Disponível"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail indisponibil"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почта недоступна"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail nie je k dispozícii"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E-post inte tillgänglig"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ไม่สามารถใช้งาน Mail ได้"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Mevcut Değil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пошта недоступна"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mail Không Khả Dụng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "邮件不可用"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "郵件不可用"
+          }
+        },
+        "zh-HK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "郵件不可用"
+          }
+        }
+      }
+    },
+    "Map loading is being throttled. Please wait a moment and try again." : {
+
+    },
+    "Multiple validation errors occurred while saving." : {
+
+    },
+    "No directions could be found for the specified route." : {
+
+    },
+    "No network connection found. Please check your internet." : {
+
+    },
+    "Payment is required to access this resource (402)." : {
+
+    },
+    "Permission denied. Please check your file permissions." : {
+
+    },
+    "Permission for %@ has not been confirmed. Please review and grant access in your device Settings." : {
+
+    },
+    "Please provide a value for %@. This information is required to proceed." : {
+
+    },
+    "Please try again later." : {
+
+    },
+    "The %@ field cannot be longer than %lld characters. Please shorten your input and try again." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %1$@ field cannot be longer than %2$lld characters. Please shorten your input and try again."
+          }
+        }
+      }
+    },
+    "The %@ record was not found in the database. Verify the details and try again." : {
+
+    },
+    "The %@ record with ID %@ was not found in the database. Verify the details and try again." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "The %1$@ record with ID %2$@ was not found in the database. Verify the details and try again."
+          }
+        }
+      }
+    },
+    "The current state prevents this action: %@. Please ensure all requirements are met and try again." : {
+
+    },
+    "The data store is incompatible with the current model version." : {
+
+    },
+    "The database operation for %@ could not be completed. Please retry the action." : {
+
+    },
+    "The file %@ could not be located. Please verify the file path and try again." : {
+
+    },
+    "The file could not be found." : {
+
+    },
+    "The file is corrupted or in an unreadable format." : {
+
+    },
+    "The file is locked and cannot be modified." : {
+
+    },
+    "The file is too large to be processed." : {
+
+    },
+    "The file name is invalid and cannot be used." : {
+
+    },
+    "The file or directory already exists." : {
+
+    },
+    "The file's character encoding is not supported." : {
+
+    },
+    "The HTTP method is not allowed for this resource (405)." : {
+
+    },
+    "The MapKit server returned an error. Please try again later." : {
+
+    },
+    "The network connection was lost. Please try again." : {
+
+    },
+    "The network request took too long to complete. Please check your connection and try again." : {
+
+    },
+    "The operation could not be started because a required component failed to initialize: %@. Please restart the application or contact support." : {
+
+    },
+    "The operation was canceled at your request. You can retry the action if needed." : {
+
+    },
+    "The provided input could not be processed correctly: %@. Please review the input and ensure it matches the expected format." : {
+
+    },
+    "The request entity has an unsupported media type (415)." : {
+
+    },
+    "The request timed out (408). Please try again." : {
+
+    },
+    "The request timed out. Please try again later." : {
+
+    },
+    "The request timed out. Please try again." : {
+
+    },
+    "The request was cancelled. Please try again if this wasn't intended." : {
+
+    },
+    "The request was malformed (400). Please review and try again." : {
+
+    },
+    "The requested placemark could not be found. Please check the location details." : {
+
+    },
+    "The requested resource cannot produce an acceptable response (406)." : {
+
+    },
+    "The requested resource could not be found (404)." : {
+
+    },
+    "The required information is incomplete. The %@ field is missing and must be provided to continue." : {
+
+    },
+    "The server encountered an error (500). Please try again later." : {
+
+    },
+    "The server encountered an error (Code: %lld). " : {
+
+    },
+    "The specified file or directory could not be found." : {
+
+    },
+    "The storage volume is read-only and cannot be modified." : {
+
+    },
+    "The URL is malformed. Please check it and try again or report a bug." : {
+
+    },
+    "The value entered for %@ is not in the correct format. Please review the requirements and try again." : {
+
+    },
+    "There is no space left on the device." : {
+
+    },
+    "There is not enough disk space to complete the operation." : {
+
+    },
+    "There was a conflict with the request (409). Please review and try again." : {
+
+    },
+    "There was an issue with the request (Code: %lld). %@. Please review and retry." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There was an issue with the request (Code: %1$lld). %2$@. Please review and retry."
+          }
+        }
+      }
+    },
+    "There was an SSL error. Please check the server's certificate." : {
+
+    },
+    "This item has already been finalized and cannot be modified. Please create a new version if changes are needed." : {
+
+    },
+    "Too many requests have been sent. Please wait and try again (429)." : {
+
     },
     "TypedOverloads.FileManager.corruptFile" : {
       "localizations" : {
@@ -13051,8 +13984,7 @@
             "value" : "該文件已損壞或以不可讀的格式存在。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileExists" : {
       "localizations" : {
@@ -13302,8 +14234,7 @@
             "value" : "該文件或目錄已存在。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileLocked" : {
       "localizations" : {
@@ -13553,8 +14484,7 @@
             "value" : "該文件已鎖定，無法修改。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileNotFound" : {
       "localizations" : {
@@ -13804,8 +14734,7 @@
             "value" : "未找到指定的文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.fileTooLarge" : {
       "localizations" : {
@@ -14055,8 +14984,7 @@
             "value" : "該文件過大，無法處理。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.invalidFileName" : {
       "localizations" : {
@@ -14306,8 +15234,7 @@
             "value" : "該文件名無效，無法使用。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.noReadPermission" : {
       "localizations" : {
@@ -14557,8 +15484,7 @@
             "value" : "你沒有權限閱讀此文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.noWritePermission" : {
       "localizations" : {
@@ -14808,8 +15734,7 @@
             "value" : "你沒有權限寫入此文件或目錄。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.outOfSpace" : {
       "localizations" : {
@@ -15059,8 +15984,7 @@
             "value" : "磁碟空間不足，無法完成操作。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.readError" : {
       "localizations" : {
@@ -15310,8 +16234,7 @@
             "value" : "讀取文件時發生未知錯誤。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.unsupportedEncoding" : {
       "localizations" : {
@@ -15561,8 +16484,7 @@
             "value" : "文件的字符编码不受支持。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.volumeReadOnly" : {
       "localizations" : {
@@ -15812,8 +16734,7 @@
             "value" : "存储卷是唯讀的，无法修改。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.FileManager.writeError" : {
       "localizations" : {
@@ -16063,8 +16984,7 @@
             "value" : "写入文件时发生未知错误。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.badRequest" : {
       "localizations" : {
@@ -16314,8 +17234,7 @@
             "value" : "请求格式不正确（400）。请检查并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.badURL" : {
       "localizations" : {
@@ -16565,8 +17484,7 @@
             "value" : "网址格式不正确。请检查并重试，或报告错误。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.cancelled" : {
       "localizations" : {
@@ -16816,8 +17734,7 @@
             "value" : "请求已被取消。如果这不是预期的，请重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.cannotFindHost" : {
       "localizations" : {
@@ -17067,8 +17984,7 @@
             "value" : "无法找到主机。请检查您的互联网连接并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.conflict" : {
       "localizations" : {
@@ -17318,8 +18234,7 @@
             "value" : "请求存在冲突（409）。请检查并重试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.forbidden" : {
       "localizations" : {
@@ -17569,8 +18484,7 @@
             "value" : "您没有权限访问此资源（403）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.methodNotAllowed" : {
       "localizations" : {
@@ -17820,8 +18734,7 @@
             "value" : "此资源不允许使用该HTTP方法（405）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.noNetwork" : {
       "localizations" : {
@@ -18071,8 +18984,7 @@
             "value" : "未找到网络连接。请检查你的互联网。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.notAcceptable" : {
       "localizations" : {
@@ -18322,8 +19234,7 @@
             "value" : "请求的资源无法产生可接受的响应（406）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.notFound" : {
       "localizations" : {
@@ -18573,8 +19484,7 @@
             "value" : "未能找到请求的资源（404）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.paymentRequired" : {
       "localizations" : {
@@ -18824,8 +19734,7 @@
             "value" : "访问此资源需要付款（402）。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.requestTimeout" : {
       "localizations" : {
@@ -19075,8 +19984,7 @@
             "value" : "请求已超时（408）。请再试一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.serverError" : {
       "localizations" : {
@@ -19326,8 +20234,7 @@
             "value" : "服务器遇到错误（500）。请稍后再试。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.sslError" : {
       "localizations" : {
@@ -19577,8 +20484,7 @@
             "value" : "发生了 SSL 错误。请检查服务器的证书。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.timeout" : {
       "localizations" : {
@@ -19828,8 +20734,7 @@
             "value" : "請求逾時。請再試一次。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.tooManyRequests" : {
       "localizations" : {
@@ -20079,8 +20984,7 @@
             "value" : "發送了太多請求。請稍等並再試一次 (429)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unauthorized" : {
       "localizations" : {
@@ -20330,8 +21234,7 @@
             "value" : "您未獲授權訪問此資源 (401)。"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unknown" : {
       "localizations" : {
@@ -20581,8 +21484,7 @@
             "value" : "從伺服器收到未知狀態碼：%lld"
           }
         }
-      },
-      "proofread" : true
+      }
     },
     "TypedOverloads.URLSession.unsupportedMediaType" : {
       "localizations" : {
@@ -20832,8 +21734,43 @@
             "value" : "该请求实体具有不受支持的媒体类型 (415)。"
           }
         }
-      },
-      "proofread" : true
+      }
+    },
+    "Unable to connect to the internet. Please check your network settings and try again." : {
+
+    },
+    "Unable to establish a connection to the database. Check your network settings and try again." : {
+
+    },
+    "Unable to find the server. Please check the URL or your network." : {
+
+    },
+    "Unable to open the persistent store. Please check your storage or permissions." : {
+
+    },
+    "Unable to process the server's response. Please try again or contact support if the issue persists." : {
+
+    },
+    "Unable to write to the file %@. Ensure you have the necessary permissions and try again." : {
+
+    },
+    "You are not authorized to access this resource (401)." : {
+
+    },
+    "You are not connected to the Internet. Please check your connection." : {
+
+    },
+    "You do not have permission to access this resource (403)." : {
+
+    },
+    "You do not have permission to read this file or directory." : {
+
+    },
+    "You do not have permission to read this file." : {
+
+    },
+    "You do not have permission to write to this file or directory." : {
+
     }
   },
   "version" : "1.0"

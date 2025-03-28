@@ -11,46 +11,39 @@ extension ErrorKit {
          switch nsError.code {
 
          case NSPersistentStoreSaveError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError",
-               defaultValue: "Failed to save the data. Please try again.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSPersistentStoreSaveError",
+               defaultValue: "Failed to save the data. Please try again."
             )
          case NSValidationMultipleErrorsError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError",
-               defaultValue: "Multiple validation errors occurred while saving.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSValidationMultipleErrorsError",
+               defaultValue: "Multiple validation errors occurred while saving."
             )
          case NSValidationMissingMandatoryPropertyError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError",
-               defaultValue: "A mandatory property is missing. Please fill all required fields.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSValidationMissingMandatoryPropertyError",
+               defaultValue: "A mandatory property is missing. Please fill all required fields."
             )
          case NSValidationRelationshipLacksMinimumCountError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError",
-               defaultValue: "A relationship is missing required related objects.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSValidationRelationshipLacksMinimumCountError",
+               defaultValue: "A relationship is missing required related objects."
             )
          case NSPersistentStoreIncompatibleVersionHashError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError",
-               defaultValue: "The data store is incompatible with the current model version.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSPersistentStoreIncompatibleVersionHashError",
+               defaultValue: "The data store is incompatible with the current model version."
             )
          case NSPersistentStoreOpenError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError",
-               defaultValue: "Unable to open the persistent store. Please check your storage or permissions.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSPersistentStoreOpenError",
+               defaultValue: "Unable to open the persistent store. Please check your storage or permissions."
             )
          case NSManagedObjectValidationError:
-            return String(
-               localized: "EnhancedDescriptions.CoreData.NSManagedObjectValidationError",
-               defaultValue: "An object validation error occurred.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.CoreData.NSManagedObjectValidationError",
+               defaultValue: "An object validation error occurred."
             )
          default:
             return nil

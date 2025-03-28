@@ -8,40 +8,34 @@ extension ErrorKit {
       if let mkError = error as? MKError {
          switch mkError.code {
          case .unknown:
-            return String(
-               localized: "EnhancedDescriptions.MKError.unknown",
-               defaultValue: "An unknown error occurred in MapKit.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.unknown",
+               defaultValue: "An unknown error occurred in MapKit."
             )
          case .serverFailure:
-            return String(
-               localized: "EnhancedDescriptions.MKError.serverFailure",
-               defaultValue: "The MapKit server returned an error. Please try again later.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.serverFailure",
+               defaultValue: "The MapKit server returned an error. Please try again later."
             )
          case .loadingThrottled:
-            return String(
-               localized: "EnhancedDescriptions.MKError.loadingThrottled",
-               defaultValue: "Map loading is being throttled. Please wait a moment and try again.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.loadingThrottled",
+               defaultValue: "Map loading is being throttled. Please wait a moment and try again."
             )
          case .placemarkNotFound:
-            return String(
-               localized: "EnhancedDescriptions.MKError.placemarkNotFound",
-               defaultValue: "The requested placemark could not be found. Please check the location details.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.placemarkNotFound",
+               defaultValue: "The requested placemark could not be found. Please check the location details."
             )
          case .directionsNotFound:
-            return String(
-               localized: "EnhancedDescriptions.MKError.directionsNotFound",
-               defaultValue: "No directions could be found for the specified route.",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.directionsNotFound",
+               defaultValue: "No directions could be found for the specified route."
             )
          default:
-            return String(
-               localized: "EnhancedDescriptions.MKError.default",
-               defaultValue: "A MapKit error occurred: \(mkError.localizedDescription)",
-               bundle: .module
+            return String.localized(
+               key: "EnhancedDescriptions.MKError.default",
+               defaultValue: "A MapKit error occurred: \(mkError.localizedDescription)"
             )
          }
       }

@@ -20,11 +20,13 @@ enum ErrorKitTests {
          #expect(ErrorKit.userFriendlyMessage(for: SomeLocalizedError()) == "Something failed. It failed because it wanted to. Try again later.")
       }
 
+      #if canImport(CryptoKit)
       @Test
       static func nsError() {
          let nsError = NSError(domain: "SOME", code: 1245, userInfo: [NSLocalizedDescriptionKey: "Something failed."])
          #expect(ErrorKit.userFriendlyMessage(for: nsError) == "[SOME: 1245] Something failed.")
       }
+      #endif
 
       @Test
       static func throwable() async throws {
@@ -51,6 +53,7 @@ enum ErrorKitTests {
          )
       }
 
+      #if canImport(CryptoKit)
       @Test
       static func nsError() {
          let nsError = NSError(domain: "SOME", code: 1245, userInfo: [NSLocalizedDescriptionKey: "Something failed."])
@@ -61,6 +64,7 @@ enum ErrorKitTests {
             """
          #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
+      #endif
 
       @Test
       static func throwableStruct() {
@@ -163,6 +167,7 @@ enum ErrorKitTests {
          #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
 
+      #if canImport(CryptoKit)
       @Test
       static func deeplyNestedThrowablesWithNSErrorLeaf() {
          let nsError = NSError(domain: "SOME", code: 1245, userInfo: [NSLocalizedDescriptionKey: "Something failed."])
@@ -184,6 +189,7 @@ enum ErrorKitTests {
             """
          #expect(generatedErrorChainDescription == expectedErrorChainDescription)
       }
+      #endif
    }
 
    // TODO: add more tests for more specific errors such as CoreData, MapKit – and also nested errors!

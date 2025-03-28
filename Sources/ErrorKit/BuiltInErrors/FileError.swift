@@ -128,22 +128,19 @@ public enum FileError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .fileNotFound(let fileName):
-         return String(
-            localized: "BuiltInErrors.FileError.fileNotFound",
-            defaultValue: "The file \(fileName) could not be located. Please verify the file path and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.FileError.fileNotFound",
+            defaultValue: "The file \(fileName) could not be located. Please verify the file path and try again."
          )
       case .readFailed(let fileName):
-         return String(
-            localized: "BuiltInErrors.FileError.readError",
-            defaultValue: "An error occurred while attempting to read the file \(fileName). Please check file permissions and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.FileError.readError",
+            defaultValue: "An error occurred while attempting to read the file \(fileName). Please check file permissions and try again."
          )
       case .writeFailed(let fileName):
-         return String(
-            localized: "BuiltInErrors.FileError.writeError",
-            defaultValue: "Unable to write to the file \(fileName). Ensure you have the necessary permissions and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.FileError.writeError",
+            defaultValue: "Unable to write to the file \(fileName). Ensure you have the necessary permissions and try again."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

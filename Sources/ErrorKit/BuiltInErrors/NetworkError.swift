@@ -178,39 +178,38 @@ public enum NetworkError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .noInternet:
-         return String(
-            localized: "BuiltInErrors.NetworkError.noInternet",
-            defaultValue: "Unable to connect to the internet. Please check your network settings and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.NetworkError.noInternet",
+            defaultValue: "Unable to connect to the internet. Please check your network settings and try again."
          )
       case .timeout:
-         return String(
-            localized: "BuiltInErrors.NetworkError.timeout",
-            defaultValue: "The network request took too long to complete. Please check your connection and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.NetworkError.timeout",
+            defaultValue: "The network request took too long to complete. Please check your connection and try again."
          )
       case .badRequest(let code, let message):
-         return String(
-            localized: "BuiltInErrors.NetworkError.badRequest",
-            defaultValue: "There was an issue with the request (Code: \(code)). \(message). Please review and retry.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.NetworkError.badRequest",
+            defaultValue: "There was an issue with the request (Code: \(code)). \(message). Please review and retry."
          )
       case .serverError(let code, let message):
-         let defaultMessage = String(
-            localized: "BuiltInErrors.NetworkError.serverError",
-            defaultValue: "The server encountered an error (Code: \(code)). ",
-            bundle: .module
+         let defaultMessage = String.localized(
+            key: "BuiltInErrors.NetworkError.serverError",
+            defaultValue: "The server encountered an error (Code: \(code)). "
          )
+
          if let message = message {
             return defaultMessage + message
          } else {
-            return defaultMessage + "Please try again later."
+            return defaultMessage + String.localized(
+               key: "Common.Message.tryAgainLater",
+               defaultValue: "Please try again later."
+            )
          }
       case .decodingFailure:
-         return String(
-            localized: "BuiltInErrors.NetworkError.decodingFailure",
-            defaultValue: "Unable to process the server's response. Please try again or contact support if the issue persists.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.NetworkError.decodingFailure",
+            defaultValue: "Unable to process the server's response. Please try again or contact support if the issue persists."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

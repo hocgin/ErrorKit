@@ -136,22 +136,19 @@ public enum ValidationError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .invalidInput(let field):
-         return String(
-            localized: "BuiltInErrors.ValidationError.invalidInput",
-            defaultValue: "The value entered for \(field) is not in the correct format. Please review the requirements and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.ValidationError.invalidInput",
+            defaultValue: "The value entered for \(field) is not in the correct format. Please review the requirements and try again."
          )
       case .missingField(let field):
-         return String(
-            localized: "BuiltInErrors.ValidationError.missingField",
-            defaultValue: "Please provide a value for \(field). This information is required to proceed.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.ValidationError.missingField",
+            defaultValue: "Please provide a value for \(field). This information is required to proceed."
          )
       case .inputTooLong(let field, let maxLength):
-         return String(
-            localized: "BuiltInErrors.ValidationError.inputTooLong",
-            defaultValue: "The \(field) field cannot be longer than \(maxLength) characters. Please shorten your input and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.ValidationError.inputTooLong",
+            defaultValue: "The \(field) field cannot be longer than \(maxLength) characters. Please shorten your input and try again."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

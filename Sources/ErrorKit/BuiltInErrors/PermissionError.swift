@@ -129,22 +129,19 @@ public enum PermissionError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .denied(let permission):
-         return String(
-            localized: "BuiltInErrors.PermissionError.denied",
-            defaultValue: "Access to \(permission) was declined. To use this feature, please enable the permission in your device Settings.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.PermissionError.denied",
+            defaultValue: "Access to \(permission) was declined. To use this feature, please enable the permission in your device Settings."
          )
       case .restricted(let permission):
-         return String(
-            localized: "BuiltInErrors.PermissionError.restricted",
-            defaultValue: "Access to \(permission) is currently restricted. This may be due to system settings or parental controls.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.PermissionError.restricted",
+            defaultValue: "Access to \(permission) is currently restricted. This may be due to system settings or parental controls."
          )
       case .notDetermined(let permission):
-         return String(
-            localized: "BuiltInErrors.PermissionError.notDetermined",
-            defaultValue: "Permission for \(permission) has not been confirmed. Please review and grant access in your device Settings.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.PermissionError.notDetermined",
+            defaultValue: "Permission for \(permission) has not been confirmed. Please review and grant access in your device Settings."
          )
       case .generic(let userFriendlyMessage):
          return userFriendlyMessage

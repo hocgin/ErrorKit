@@ -136,29 +136,25 @@ public enum DatabaseError: Throwable, Catching {
    public var userFriendlyMessage: String {
       switch self {
       case .connectionFailed:
-         return String(
-            localized: "BuiltInErrors.DatabaseError.connectionFailed",
-            defaultValue: "Unable to establish a connection to the database. Check your network settings and try again.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.DatabaseError.connectionFailed",
+            defaultValue: "Unable to establish a connection to the database. Check your network settings and try again."
          )
       case .operationFailed(let context):
-         return String(
-            localized: "BuiltInErrors.DatabaseError.operationFailed",
-            defaultValue: "The database operation for \(context) could not be completed. Please retry the action.",
-            bundle: .module
+         return String.localized(
+            key: "BuiltInErrors.DatabaseError.operationFailed",
+            defaultValue: "The database operation for \(context) could not be completed. Please retry the action."
          )
       case .recordNotFound(let entity, let identifier):
          if let identifier {
-            return String(
-               localized: "BuiltInErrors.DatabaseError.recordNotFoundWithID",
-               defaultValue: "The \(entity) record with ID \(identifier) was not found in the database. Verify the details and try again.",
-               bundle: .module
+            return String.localized(
+               key: "BuiltInErrors.DatabaseError.recordNotFoundWithID",
+               defaultValue: "The \(entity) record with ID \(identifier) was not found in the database. Verify the details and try again."
             )
          } else {
-            return String(
-               localized: "BuiltInErrors.DatabaseError.recordNotFound",
-               defaultValue: "The \(entity) record was not found in the database. Verify the details and try again.",
-               bundle: .module
+            return String.localized(
+               key: "BuiltInErrors.DatabaseError.recordNotFound",
+               defaultValue: "The \(entity) record was not found in the database. Verify the details and try again."
             )
          }
       case .generic(let userFriendlyMessage):
