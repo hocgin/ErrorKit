@@ -243,3 +243,7 @@ ErrorKit's debugging tools transform error handling from a black box into a tran
 
 - ``Catching``
 - ``Throwable``
+
+### Continue Reading
+
+- <doc:Built-in-Error-Types>

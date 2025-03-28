@@ -149,3 +149,7 @@ By contributing enhanced descriptions, you help improve error handling for the e
 - ``ErrorKit/userFriendlyMapKitMessage(for:)``
 - ``ErrorKit/userFriendlyCloudKitMessage(for:)``
 - ``ErrorKit/userFriendlyStoreKitMessage(for:)``
+
+### Continue Reading
+
+- <doc:Typed-Throws-and-Error-Nesting>

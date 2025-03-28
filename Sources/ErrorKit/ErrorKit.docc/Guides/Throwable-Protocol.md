@@ -173,3 +173,7 @@ Any type that conforms to `Throwable` automatically conforms to `Error`, so you 
 ### Error Handling
 
 - ``ErrorKit/userFriendlyMessage(for:)``
+
+### Continue Reading
+
+- <doc:Enhanced-Error-Descriptions>
