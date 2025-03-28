@@ -43,9 +43,56 @@ do {
 
 Your custom message never appears! This happens because Swift's `Error` protocol is bridged to `NSError` behind the scenes, which uses a completely different system for error messages with `domain`, `code`, and `userInfo` dictionaries.
 
+### The "Official" Solution: LocalizedError
+
+Swift does provide `LocalizedError` as the officially recommended solution for customizing error messages. However, this protocol has serious issues that make it confusing and error-prone:
+
+```swift
+enum NetworkError: LocalizedError {
+   case noConnectionToServer
+   case parsingFailed
+
+   var errorDescription: String? { // Optional String!
+      switch self {
+      case .noConnectionToServer: "No connection to the server."
+      case .parsingFailed: "Data parsing failed."
+      }
+   }
+   
+   // Other optional properties that are often ignored
+   var failureReason: String? { nil }
+   var recoverySuggestion: String? { nil }
+   var helpAnchor: String? { nil }
+}
+```
+
+The problems with `LocalizedError` include:
+- All properties are optional (`String?`) - no compiler enforcement
+- Only `errorDescription` affects `localizedDescription` - the others are often ignored
+- `failureReason` and `recoverySuggestion` are rarely used by Apple frameworks
+- `helpAnchor` is an outdated concept rarely used in modern development
+- You still need to use String(localized:) for proper localization
+
+This makes `LocalizedError` both confusing and error-prone, especially for developers new to Swift.
+
 ### The Solution: Throwable Protocol
 
-ErrorKit introduces the `Throwable` protocol to solve this problem:
+ErrorKit introduces the `Throwable` protocol to solve these problems:
+
+```swift
+public protocol Throwable: LocalizedError {
+   var userFriendlyMessage: String { get }
+}
+```
+
+The `Throwable` protocol is designed to be:
+- Named to align with Swift's `throw` keyword for intuitive discovery
+- Following Swift's naming convention (`able` suffix like `Codable`)
+- Requiring a single, non-optional `userFriendlyMessage` property
+- Extending `LocalizedError` for compatibility with existing systems
+- Simple and clear with just one requirement
+
+Here's how you use it:
 
 ```swift
 enum NetworkError: Throwable {
@@ -72,7 +119,7 @@ do {
 }
 ```
 
-The `Throwable` protocol handles all the mapping between your custom messages and Swift's error system, so you get exactly the behavior you'd expect.
+The `Throwable` protocol handles all the mapping between your custom messages and Swift's error system through a default implementation of `LocalizedError.errorDescription` that returns your `userFriendlyMessage`.
 
 ### Quick Start with Raw Values
 

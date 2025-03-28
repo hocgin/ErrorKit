@@ -11,6 +11,20 @@ Simplify bug reports with automatic log collection from Apple's unified logging 
 
 When users encounter issues in your app, getting enough context to diagnose the problem is crucial. ErrorKit makes it simple to add diagnostic log collection to your app, providing valuable context for bug reports and support requests.
 
+### The Challenge of User Feedback
+
+When users report problems, they often lack the technical knowledge to provide the necessary details:
+- They don't know what information you need to diagnose the issue
+- They can't easily access system logs or technical details
+- They may struggle to reproduce complex issues on demand
+- The steps they describe might be incomplete or unclear
+
+Without proper context, developers face significant challenges:
+- Time wasted in back-and-forth communications asking for more information
+- Difficulty reproducing issues that occur only on specific devices or configurations
+- Inability to diagnose intermittent problems that happen infrequently
+- Frustration for both users and developers as issues remain unresolved
+
 ### The Power of System Logs
 
 ErrorKit leverages Apple's unified logging system (`OSLog`/`Logger`) to collect valuable diagnostic information. If you're not already using structured logging, here's a quick introduction:
@@ -45,6 +59,16 @@ Apple's logging system offers significant advantages over `print()` statements:
 - System-wide integration
 - Persistence across app launches
 - Console integration for debugging
+
+### Comprehensive Log Collection
+
+A key advantage of ErrorKit's log collection is that it captures not just your app's logs, but also relevant logs from:
+
+1. **Third-party frameworks** that use Apple's unified logging system
+2. **System components** your app interacts with (networking, file system, etc.)
+3. **Background processes** related to your app's functionality
+
+This gives you a complete picture of what was happening in and around your app when the issue occurred, not just the logs you explicitly added. This comprehensive context is often crucial for diagnosing complex issues that involve multiple components.
 
 ### Creating a Feedback Button
 
@@ -148,17 +172,60 @@ let activityVC = UIActivityViewController(
 present(activityVC, animated: true)
 ```
 
-### Benefits of Automatic Log Collection
+### Transforming the Support Experience
 
-Implementing a feedback button with automatic log collection transforms the error reporting experience:
+Implementing a feedback button with automatic log collection transforms the support experience for both users and developers:
 
-- **Better bug reports**: Get the context you need without asking users for technical details
-- **Faster issue resolution**: See exactly what happened leading up to the problem
-- **Lower support burden**: Reduce back-and-forth communications with users
-- **User satisfaction**: Demonstrate that you take their problems seriously
-- **Developer sanity**: Stop trying to reproduce issues with insufficient information
+#### For Users:
+- **Simplified Reporting**: Submit feedback with a single tap, no technical knowledge required
+- **No Technical Questions**: Avoid frustrating back-and-forth asking for technical details
+- **Faster Resolution**: Issues can be diagnosed and fixed more quickly
+- **Better Experience**: Shows users you take their problems seriously with professional tools
 
-By making it easy for users to provide detailed logs with minimal effort, you'll get higher quality bug reports and be able to fix issues more efficiently.
+#### For Developers:
+- **Complete Context**: See exactly what was happening when the issue occurred
+- **Reduced Support Burden**: Less time spent asking for additional information
+- **Better Reproduction**: More reliable reproduction steps based on log data
+- **Efficient Debugging**: Quickly identify patterns in error reports
+- **Developer Sanity**: Stop trying to reproduce issues with insufficient information
+
+The investment in proper log collection pays dividends in reduced support costs, faster issue resolution, and improved user satisfaction.
+
+### Best Practices for Logging
+
+To maximize the value of ErrorKit's log collection:
+
+1. **Use Apple's Logger Instead of Print**:
+   ```swift
+   // Instead of:
+   print("User logged in: \(username)")
+   
+   // Use:
+   Logger().info("User logged in: \(username, privacy: .private)")
+   ```
+
+2. **Choose Appropriate Log Levels**:
+   - `.debug` for developer details that are only needed during development
+   - `.info` for general tracking of normal app flow
+   - `.notice` for important events users would care about
+   - `.error` for problems that need fixing but don't prevent core functionality
+   - `.fault` for critical issues that break core functionality
+
+3. **Include Context in Logs**:
+   ```swift
+   // Instead of:
+   Logger().error("Failed to load")
+   
+   // Use:
+   Logger().error("Failed to load document \(documentId): \(error.localizedDescription)")
+   ```
+
+4. **Protect Sensitive Information**:
+   ```swift
+   Logger().info("Processing payment for user \(userId, privacy: .private)")
+   ```
+
+By implementing these best practices along with ErrorKit's log collection, you create a robust system for gathering the context needed to diagnose and fix issues efficiently.
 
 ## Topics
 

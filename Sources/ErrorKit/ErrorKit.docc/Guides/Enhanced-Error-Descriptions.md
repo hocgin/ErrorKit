@@ -42,16 +42,38 @@ do {
 
 This function works with any error type, including system errors and your own custom errors. It maintains all the benefits of your custom `Throwable` types while enhancing system errors with more helpful messages.
 
-### Community-Maintained Error Descriptions
+### Comprehensive Error Domain Coverage
 
-The enhanced error messages are maintained by the developer community. ErrorKit includes a growing collection of improved descriptions for common error domains:
+ErrorKit provides enhanced messages for errors from a wide range of system frameworks and domains:
 
-- Foundation (file operations, network requests)
-- CoreData (database operations)
-- MapKit (location and mapping errors)
+#### Foundation Domain
+- File operations (`fileExists`, `createDirectory`, etc.)
+- URL loading and networking errors
+- JSON and data parsing issues
+- User defaults and preferences
+- Bundle and resource loading
+
+#### CoreData Domain
+- Model validation errors
+- Persistence and migration issues
+- Fetch request execution errors
+- Save and merge conflicts
+
+#### MapKit and Location Domain
+- Permission and authorization errors
+- Geocoding failures
+- Navigation and routing issues
+- Region monitoring errors
+
+#### Other Supported Domains
+- CloudKit storage errors
+- StoreKit purchase failures
+- PhotoKit media access issues
+- HealthKit data retrieval errors
+- PassKit payment processing errors
 - And many more system frameworks
 
-All messages are fully localized, ensuring users receive them in their preferred language where available.
+The library's coverage grows with each release, focusing on the most common error scenarios that developers encounter. When you encounter a system error type that doesn't yet have an enhanced description, you can contribute your own (see Contributing section below).
 
 ### Works Seamlessly with Throwable
 
@@ -68,19 +90,51 @@ do {
 
 If the error already conforms to `Throwable`, its `userFriendlyMessage` is used. For system errors, ErrorKit provides an enhanced description from its community-maintained collection.
 
+### Localization Support
+
+All enhanced error messages are fully localized, ensuring users receive messages in their preferred language where available. ErrorKit uses standard localization patterns, making it easy to contribute translations for new languages.
+
 ### Contributing New Descriptions
 
-You can help improve ErrorKit by contributing better error descriptions:
+The enhanced error description system is designed to be community-driven. Here's how you can contribute:
 
-1. Identify a system error with a poor default message
-2. Create a clearer, more actionable alternative
-3. Submit a pull request to add your improvement
+1. **Identify Cryptic Messages**: When you encounter a system error with a poor default message, note the error domain and code.
 
-Great error messages should:
-- Be specific about what went wrong
-- Use plain language, not technical jargon
-- Suggest a resolution when possible
-- Be concise but informative
+2. **Craft a Better Message**: Create a clearer, more actionable alternative that follows these guidelines:
+   - Be specific about what went wrong
+   - Use plain language, not technical jargon
+   - Suggest a possible resolution when appropriate
+   - Keep messages concise but informative
+
+3. **Submit a Pull Request**: Add your improved description to the appropriate error domain file in the project. The PR should include:
+   - The original error's domain and code
+   - Your enhanced message
+   - A small test case demonstrating the error (if possible)
+   - Any relevant localization strings
+
+4. **Testing Your Change**: Use the `ErrorKit.userFriendlyMessage(for:)` function with the error you're enhancing to verify your change works properly.
+
+Example contribution for a network error:
+
+```swift
+// In NetworkErrorDescriptions.swift
+static func enhancedDescription(for error: NSError) -> String? {
+    switch (error.domain, error.code) {
+    // Existing cases...
+    
+    // New contribution
+    case (NSURLErrorDomain, NSURLErrorCannotDecodeRawData):
+        return String.localized(
+            key: "EnhancedErrors.Network.cannotDecodeRawData",
+            defaultValue: "The data received from the server is corrupted or in an unsupported format. Try again or contact support if the issue persists."
+        )
+    
+    // More cases...
+    }
+}
+```
+
+By contributing enhanced descriptions, you help improve error handling for the entire Swift developer community.
 
 ## Topics
 
@@ -88,8 +142,10 @@ Great error messages should:
 
 - ``ErrorKit/userFriendlyMessage(for:)``
 
-### Internal Helpers
+### Domain-Specific Handlers
 
 - ``ErrorKit/userFriendlyFoundationMessage(for:)``
 - ``ErrorKit/userFriendlyCoreDataMessage(for:)``
 - ``ErrorKit/userFriendlyMapKitMessage(for:)``
+- ``ErrorKit/userFriendlyCloudKitMessage(for:)``
+- ``ErrorKit/userFriendlyStoreKitMessage(for:)``

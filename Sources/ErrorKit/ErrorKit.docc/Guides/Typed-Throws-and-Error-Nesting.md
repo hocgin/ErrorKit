@@ -34,6 +34,51 @@ do {
 // No need for a catch-all since all possibilities are covered
 ```
 
+### System Function Overloads
+
+ErrorKit provides typed-throws overloads for common system APIs. To streamline discovery, these overloads use the same API names prefixed with "throwable":
+
+```swift
+// Standard system API
+try fileManager.createDirectory(at: url)
+
+// ErrorKit typed overload - same name with "throwable" prefix
+try fileManager.throwableCreateDirectory(at: url)
+```
+
+The overloaded versions:
+- Return the same results as the original functions
+- Throw specific error types with detailed information
+- Provide better error messages for common failures
+
+Available overloads include:
+
+#### FileManager Operations
+```swift
+// Creating directories
+try FileManager.default.throwableCreateDirectory(at: url)
+
+// Removing items
+try FileManager.default.throwableRemoveItem(at: url)
+
+// Copying files
+try FileManager.default.throwableCopyItem(at: sourceURL, to: destinationURL)
+
+// Moving files
+try FileManager.default.throwableMoveItem(at: sourceURL, to: destinationURL)
+```
+
+#### URLSession Operations
+```swift
+// Data tasks
+let (data, response) = try await URLSession.shared.throwableData(from: url)
+
+// Handling HTTP status codes
+try URLSession.shared.handleHTTPStatusCode(statusCode, data: data)
+```
+
+These typed overloads provide a more granular approach to error handling, allowing for precise error handling and improved user experience.
+
 ### The Problem: Error Propagation
 
 While typed throws improves type safety, it creates a challenge when propagating errors through multiple layers of an application. Without ErrorKit, you'd need to manually wrap errors at each layer:
@@ -90,14 +135,85 @@ func loadProfile(id: String) throws(ProfileError) {
 
 The `catch` function automatically wraps any errors thrown in its closure into the `caught` case, preserving both type safety and the error's original information.
 
-### How Catching Works
+### Best Practices for Using Catching
 
-The `Catching` protocol:
+To get the most out of the `Catching` protocol, follow these best practices:
 
-1. Requires a single `caught(Error)` case for storing wrapped errors
-2. Provides a static `catch` function for automatic error wrapping
-3. Preserves return values from the wrapped operation
-4. Maintains type safety with typed throws
+#### 1. When to Add Catching
+
+Add `Catching` conformance when:
+- Your error type might need to wrap errors from lower-level modules
+- You're using typed throws and calling functions that throw different error types
+- You want to create a hierarchy of errors for better organization
+
+You'll know you need `Catching` when you see yourself writing error wrapper cases like:
+```swift
+enum MyError: Error {
+    case specificError
+    case otherModuleError(OtherError) // If you're writing wrapper cases, you need Catching
+}
+```
+
+#### 2. Error Hierarchy Structure
+
+Keep your error hierarchies shallow when possible:
+- Aim for 2-3 levels at most (e.g., AppError → ModuleError → SystemError)
+- Use specific error cases for known errors, and `caught` for others
+- Consider organizing by module or feature rather than error type
+
+#### 3. Preserve User-Friendly Messages
+
+When implementing `userFriendlyMessage` for a `Catching` type:
+
+```swift
+var userFriendlyMessage: String {
+    switch self {
+    case .specificError:
+        return "A specific error occurred."
+    case .caught(let error):
+        // Use ErrorKit's enhanced messages for wrapped errors
+        return ErrorKit.userFriendlyMessage(for: error)
+    }
+}
+```
+
+This ensures that user-friendly messages propagate correctly through the error chain.
+
+#### 4. Use with Built-in Error Types
+
+All of ErrorKit's built-in error types already conform to `Catching`, so you can easily wrap system errors:
+
+```swift
+func saveUserData() throws(DatabaseError) {
+    // Automatically wraps SQLite errors, file system errors, etc.
+    try DatabaseError.catch {
+        try database.beginTransaction()
+        try database.execute(query)
+        try database.commit()
+    }
+}
+```
+
+#### 5. Clean-up and Recovery
+
+Consider implementing error recovery strategies at each level of your hierarchy:
+
+```swift
+func processData() throws(AppError) {
+    do {
+        try riskyOperation()
+    } catch let error as RecoverableError {
+        // Try to recover
+        if let recovered = try? error.recover() {
+            return recovered
+        }
+        // If recovery failed, propagate the error
+        throw AppError.caught(error)
+    } catch {
+        throw AppError.caught(error)
+    }
+}
+```
 
 ### Error Chain Debugging
 
@@ -122,6 +238,12 @@ This hierarchical view shows:
 2. How it was wrapped (DatabaseError → ProfileError)
 3. What exactly went wrong (file not found)
 4. The user-friendly message that would be shown to users
+
+This is particularly valuable when:
+- Using typed throws with nested errors
+- Debugging complex error flows across multiple modules
+- Understanding where and how errors are being wrapped
+- Investigating error handling in modular applications
 
 ### Error Analytics with Grouping IDs
 
@@ -161,3 +283,4 @@ The grouping ID generates the same identifier for errors that share the same typ
 - ``FileManager/throwableRemoveItem(at:)``
 - ``URLSession/throwableData(for:)``
 - ``URLSession/throwableData(from:)``
+- ``URLSession/handleHTTPStatusCode(_:data:)``
