@@ -79,6 +79,42 @@ try URLSession.shared.handleHTTPStatusCode(statusCode, data: data)
 
 These typed overloads provide a more granular approach to error handling, allowing for precise error handling and improved user experience.
 
+### Enhanced User Experience with Typed Throws
+
+Using typed throws allows developers to implement smarter error handling with specific responses to different error types:
+
+```swift
+do {
+  let (data, response) = try await URLSession.shared.throwableData(from: URL(string: "https://api.example.com/data")!)
+  // Process the data and response
+} catch {
+  // Error is of type `URLSessionError`
+  switch error {
+  case .timeout, .requestTimeout, .tooManyRequests:
+    // Automatically retry the request with a backoff strategy
+    retryWithExponentialBackoff()
+    
+  case .noNetwork:
+    // Show an SF Symbol indicating the user is offline plus a retry button
+    showOfflineView()
+    
+  case .unauthorized:
+    // Redirect the user to your login-flow (e.g. because token expired)
+    startAuthenticationFlow()
+    
+  default:
+    // Fall back to showing error message
+    showErrorAlert(message: error.localizedDescription)
+  }
+}
+```
+
+This specific error handling enables you to:
+- Implement automatic retry strategies for transient errors
+- Show UI appropriate to the specific error condition
+- Trigger authentication flows for permission issues
+- Provide a better overall user experience than generic error handling
+
 ### The Problem: Error Propagation
 
 While typed throws improves type safety, it creates a challenge when propagating errors through multiple layers of an application. Without ErrorKit, you'd need to manually wrap errors at each layer:
@@ -215,55 +251,18 @@ func processData() throws(AppError) {
 }
 ```
 
-### Error Chain Debugging
+### Working with Error Chain Debugging
 
-When using `Throwable` with the `Catching` protocol, you gain powerful debugging capabilities through ErrorKit's error chain visualization:
+For complete visibility into your error chains, ErrorKit provides powerful debugging tools that work perfectly with `Catching`. These tools are covered in detail in the [Error Chain Debugging](Error-Chain-Debugging) documentation. 
 
-```swift
-do {
-    try await updateUserProfile()
-} catch {
-    print(ErrorKit.errorChainDescription(for: error))
-    
-    // Output:
-    // ProfileError
-    // └─ DatabaseError
-    //    └─ FileError.notFound(path: "/Users/data.db")
-    //       └─ userFriendlyMessage: "Could not find database file."
-}
-```
+When using typed throws with the `Catching` protocol, you'll benefit greatly from these debugging capabilities, as they allow you to:
 
-This hierarchical view shows:
-1. Where the error originated (FileError)
-2. How it was wrapped (DatabaseError → ProfileError)
-3. What exactly went wrong (file not found)
-4. The user-friendly message that would be shown to users
+- Visualize the complete error chain hierarchy
+- Track errors through different application layers
+- Identify patterns in error propagation
+- Prioritize which errors to fix first
 
-This is particularly valuable when:
-- Using typed throws with nested errors
-- Debugging complex error flows across multiple modules
-- Understanding where and how errors are being wrapped
-- Investigating error handling in modular applications
-
-### Error Analytics with Grouping IDs
-
-For tracking error patterns in analytics, ErrorKit provides `groupingID(for:)`:
-
-```swift
-func trackError(_ error: Error) {
-    let groupID = ErrorKit.groupingID(for: error) // e.g. "3f9d2a"
-    
-    Analytics.track(
-        event: "error_occurred",
-        properties: [
-            "error_group": groupID,
-            "error_details": ErrorKit.errorChainDescription(for: error)
-        ]
-    )
-}
-```
-
-The grouping ID generates the same identifier for errors that share the same type hierarchy and enum cases, ignoring dynamic parameters and localized messages. This helps you identify common error patterns and prioritize fixes effectively.
+Be sure to explore the error chain debugging features to get the full benefit of ErrorKit's typed throws support.
 
 ## Topics
 
@@ -272,11 +271,6 @@ The grouping ID generates the same identifier for errors that share the same typ
 - ``Catching``
 - ``Catching/catch(_:)``
 
-### Error Chain Analysis
-
-- ``ErrorKit/errorChainDescription(for:)``
-- ``ErrorKit/groupingID(for:)``
-
 ### System Overloads
 
 - ``FileManager/throwableCreateDirectory(at:withIntermediateDirectories:attributes:)``
@@ -284,3 +278,7 @@ The grouping ID generates the same identifier for errors that share the same typ
 - ``URLSession/throwableData(for:)``
 - ``URLSession/throwableData(from:)``
 - ``URLSession/handleHTTPStatusCode(_:data:)``
+
+### Related Documentation
+
+- <doc:Error-Chain-Debugging>
