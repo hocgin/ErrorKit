@@ -124,11 +124,25 @@ enum ProfileError: Error {
     case validationFailed(field: String)
     case databaseError(DatabaseError)    // Wrapper case needed for database errors
     case networkError(NetworkError)      // Another wrapper for network errors
+
+    var errorDescription: String { /* ... */ }
 }
 
 func loadProfile(id: String) throws(ProfileError) {
+    // Regular error throwing for validation
+    guard id.isValidFormat else {
+        throw ProfileError.validationFailed(field: "id")
+    }
+
+    // Manually mapping nested errors
     do {
-        try database.loadUser(id)
+        let user = try database.loadUser(id)
+        do {
+            let settings = try fileSystem.readUserSettings(user.settingsPath)
+            return UserProfile(user: user, settings: settings)
+        } catch let error as NetworkError {
+            throw ProfileError.networkError(error) // Manual wrapping
+        }
     } catch let error as DatabaseError {
         throw ProfileError.databaseError(error) // Manual wrapping
     }
@@ -226,27 +240,6 @@ func saveUserData() throws(DatabaseError) {
         try database.beginTransaction()
         try database.execute(query)
         try database.commit()
-    }
-}
-```
-
-#### 5. Clean-up and Recovery
-
-Consider implementing error recovery strategies at each level of your hierarchy:
-
-```swift
-func processData() throws(AppError) {
-    do {
-        try riskyOperation()
-    } catch let error as RecoverableError {
-        // Try to recover
-        if let recovered = try? error.recover() {
-            return recovered
-        }
-        // If recovery failed, propagate the error
-        throw AppError.caught(error)
-    } catch {
-        throw AppError.caught(error)
     }
 }
 ```

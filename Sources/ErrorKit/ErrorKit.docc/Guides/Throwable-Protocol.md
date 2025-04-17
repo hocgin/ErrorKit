@@ -67,8 +67,8 @@ enum NetworkError: LocalizedError {
 ```
 
 The problems with `LocalizedError` include:
-- All properties are optional (`String?`) - no compiler enforcement
-- Only `errorDescription` affects `localizedDescription` - the others are often ignored
+- All properties are optional (`String?`) – no compiler enforcement
+- Only `errorDescription` affects `localizedDescription` – the others are often ignored
 - `failureReason` and `recoverySuggestion` are rarely used by Apple frameworks
 - `helpAnchor` is an outdated concept rarely used in modern development
 - You still need to use String(localized:) for proper localization
@@ -101,8 +101,10 @@ enum NetworkError: Throwable {
 
    var userFriendlyMessage: String {
       switch self {
-      case .noConnectionToServer: String(localized: "Unable to connect to the server.")
-      case .parsingFailed: String(localized: "Data parsing failed.")
+      case .noConnectionToServer:
+         String(localized: "Unable to connect to the server.")
+      case .parsingFailed:
+         String(localized: "Data parsing failed.")
       }
    }
 }

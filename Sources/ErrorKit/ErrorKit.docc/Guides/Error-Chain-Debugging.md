@@ -123,39 +123,6 @@ Under the hood, `errorChainDescription(for:)` uses Swift's reflection capabiliti
 
 This deep inspection reveals significantly more information than is available through standard error logging, particularly for complex error hierarchies.
 
-### Implementation Details
-
-Here's a simplified version of how the implementation works:
-
-```swift
-static func errorChainDescription(for error: Error) -> String {
-    return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
-}
-
-private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
-    let mirror = Mirror(reflecting: error)
-    
-    // For nested errors (Catching protocol)
-    if let caughtError = mirror.children.first(where: { $0.label == "caught" })?.value as? Error {
-        let currentErrorType = type(of: error)
-        let nextIndent = indent + "   "
-        return """
-            \(currentErrorType)
-            \(indent)└─ \(Self.chainDescription(for: caughtError, indent: nextIndent, enclosingType: type(of: caughtError)))
-            """
-    } else {
-        // This is a leaf node
-        let typeName = formatTypeName(error, enclosingType)
-        return """
-            \(typeName)
-            \(indent)└─ userFriendlyMessage: \"\(Self.userFriendlyMessage(for: error))\"
-            """
-    }
-}
-```
-
-This recursive approach ensures the complete error chain is captured, regardless of how deeply errors are nested.
-
 ### Use Cases and Benefits
 
 Error chain debugging transforms Swift's error handling from a black box into a transparent system:
