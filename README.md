@@ -102,6 +102,8 @@ struct ProfileRepository {
 }
 ```
 
+[Read more about Typed Throws and Error Nesting →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/typed-throws-and-error-nesting)
+
 ### Error Chain Debugging
 
 When using `Throwable` with the `Catching` protocol, you get powerful error chain debugging:
@@ -120,7 +122,7 @@ do {
 }
 ```
 
-[Read more about Typed Throws and Error Nesting →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/typed-throws-and-error-nesting)
+[Read more about Error Chain Debugging →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/error-chain-debugging)
 
 ## Ready-to-Use Tools
 
