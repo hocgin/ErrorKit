@@ -1,3 +1,7 @@
+![ErrorKit Logo](https://github.com/FlineDev/ErrorKit/blob/main/Logo.png?raw=true)
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFlineDev%2FErrorKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/FlineDev/ErrorKit)
+
 # ErrorKit
 
 Making error handling in Swift more intuitive and powerful with clearer messages, type safety, and user-friendly diagnostics.
