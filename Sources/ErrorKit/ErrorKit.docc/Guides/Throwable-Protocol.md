@@ -4,7 +4,7 @@ Making error messages work as expected in Swift with a more intuitive protocol.
 
 @Metadata {
    @PageImage(purpose: icon, source: "ErrorKit")
-   @PageImage(purpose: card, source: "Throwable")
+   @PageImage(purpose: card, source: "ThrowableProtocol")
 }
 
 ## Highlights

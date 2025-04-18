@@ -4,7 +4,7 @@ Stop reinventing common error types with ready-to-use standardized errors.
 
 @Metadata {
    @PageImage(purpose: icon, source: "ErrorKit")
-   @PageImage(purpose: card, source: "ErrorTypes")
+   @PageImage(purpose: card, source: "BuiltInErrorTypes")
 }
 
 ## Highlights

@@ -4,7 +4,7 @@ Simplify bug reports with automatic log collection from Apple's unified logging 
 
 @Metadata {
    @PageImage(purpose: icon, source: "ErrorKit")
-   @PageImage(purpose: card, source: "UserFeedback")
+   @PageImage(purpose: card, source: "UserFeedbackWithLogs")
 }
 
 ## Highlights

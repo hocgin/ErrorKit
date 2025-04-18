@@ -4,7 +4,7 @@ Making Swift 6's typed throws practical with seamless error propagation across l
 
 @Metadata {
    @PageImage(purpose: icon, source: "ErrorKit")
-   @PageImage(purpose: card, source: "TypedThrows")
+   @PageImage(purpose: card, source: "TypedThrowsAndNesting")
 }
 
 ## Highlights
