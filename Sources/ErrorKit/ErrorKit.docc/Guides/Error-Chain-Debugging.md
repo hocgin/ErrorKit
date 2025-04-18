@@ -16,6 +16,8 @@ One of the most challenging aspects of error handling in Swift is understanding 
 When logging errors in Swift, you typically lose context about how an error propagated through your application:
 
 ```swift
+do {
+    try await updateUserProfile()
 } catch {
     // 😕 Only shows the leaf error with no chain information
     Logger().error("Error occurred: \(error)")
@@ -104,50 +106,13 @@ ProfileError
       └─ userFriendlyMessage: "Die Backup-Datenbank konnte nicht gefunden werden."
 ```
 
-This precise grouping allows you to:
-- Track true error frequencies in analytics without noise from dynamic data
-- Create meaningful charts of most common error patterns
-- Make data-driven decisions about which errors to fix first
-- Monitor error trends over time
+This precise grouping allows you to track true error frequencies in analytics, create meaningful charts of common error patterns, and prioritize which errors to fix first.
 
-### How Error Chain Description Works
+### Implementation and Integration
 
-Under the hood, `errorChainDescription(for:)` uses Swift's reflection capabilities to examine the structure of error objects:
+Under the hood, `errorChainDescription(for:)` uses Swift's reflection to examine error objects, recursively traversing the error chain and formatting everything in a hierarchical tree structure with the user-friendly message at each leaf node.
 
-1. It inspects the error using Swift's `Mirror` type
-2. For errors conforming to `Catching`, it recursively traverses the error chain
-3. For enum errors, it extracts case names and associated values
-4. For struct or class errors, it includes type metadata
-5. It formats all this information in a hierarchical tree structure
-6. It appends the user-friendly message at each leaf node
-
-This deep inspection reveals significantly more information than is available through standard error logging, particularly for complex error hierarchies.
-
-### Use Cases and Benefits
-
-Error chain debugging transforms Swift's error handling from a black box into a transparent system:
-
-#### During Development
-- **Pinpoint error origins**: Quickly identify where errors originate
-- **Trace propagation paths**: See how errors flow through your application
-- **Debug complex interactions**: Understand cross-module error handling
-- **Identify wrapping patterns**: See which layers are adding context to errors
-
-#### In Production
-- **Analyze error patterns**: Group similar errors to find systemic issues
-- **Set priorities**: Focus on the most common error paths first
-- **Monitor trends**: Track error frequencies over time
-- **Improve user experience**: Use insights to prevent common errors
-
-#### For Support and Operations
-- **Better diagnostics**: Include error chains in crash reports
-- **Faster resolution**: Provide support with clear error context
-- **Root cause analysis**: Trace issues to their source
-- **Documentation**: Build a knowledge base of error patterns
-
-### Integration with Logging Systems
-
-To maximize the effectiveness of error chain debugging, integrate it with your logging system:
+To integrate with your logging system:
 
 ```swift
 extension Logger {
@@ -156,16 +121,9 @@ extension Logger {
         self.error("\(errorChain, privacy: .public)", file: file, function: function, line: line)
     }
 }
-
-// Usage
-do {
-    try riskyOperation()
-} catch {
-    logger.logError(error)
-}
 ```
 
-For crash reporting and analytics systems, include both the error chain and grouping ID:
+For crash reporting and analytics, include both the error chain and grouping ID:
 
 ```swift
 func reportCrash(_ error: Error) {
@@ -184,16 +142,8 @@ func reportCrash(_ error: Error) {
 To get the most out of error chain debugging:
 
 1. **Use `Catching` consistently**: Add `Catching` conformance to all your error types that might wrap other errors.
-
-2. **Preserve context when wrapping errors**: Add meaningful information at each level without overwhelming users.
-
-3. **Include error chain descriptions in logs**: Always use `errorChainDescription(for:)` when logging errors.
-
-4. **Group errors for analytics**: Use `groupingID(for:)` to track error frequencies.
-
-5. **Create visualizations**: Build dashboards showing most common error chains.
-
-6. **Document error flows**: Use error chains to update documentation and onboard new team members.
+2. **Include error chain descriptions in logs**: Always use `errorChainDescription(for:)` when logging errors.
+3. **Group errors for analytics**: Use `groupingID(for:)` to track error frequencies.
 
 ### Summary
 
