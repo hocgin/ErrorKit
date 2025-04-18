@@ -1,36 +1,19 @@
 # ErrorKit
 
-ErrorKit makes error handling in Swift more intuitive. It reduces boilerplate code while providing clearer insights into errors - helpful for users, fun for developers!
+Making error handling in Swift more intuitive and powerful with clearer messages, type safety, and user-friendly diagnostics.
 
-## The Problem with Swift's Error Protocol
+## Overview
 
-Swift's `Error` protocol appears simple with no requirements, but it's deceptively complex due to its historical NSError bridging. This leads to a common frustrating situation:
+Swift's error handling has several limitations that make it challenging to create robust, user-friendly applications:
+- The `Error` protocol's confusing behavior with `localizedDescription`
+- Hard-to-understand system error messages
+- Limited type safety in error propagation
+- Difficulties with error chain debugging (relevant for typed throws!)
+- Challenges in collecting meaningful feedback from users
 
-```swift
-enum NetworkError: Error {
-   case noConnectionToServer
-   case parsingFailed
+ErrorKit addresses these challenges with a suite of lightweight, interconnected features you can adopt progressively.
 
-   var errorDescription: String {
-      switch self {
-      case .noConnectionToServer: "No connection to the server."
-      case .parsingFailed: "Data parsing failed."
-      }
-   }
-}
-```
-
-When you catch and print this error, you'd expect to see your custom message. Instead, you get something completely different:
-
-```
-"The operation couldn't be completed. (ErrorKitDemo.NetworkError error 0.)"
-```
-
-This happens because Swift's `Error` protocol's bridging to `NSError` uses `domain`, `code`, and `userInfo` behind the scenes. Your `errorDescription` property doesn't integrate with this system as you might expect.
-
-## Key Features
-
-ErrorKit offers a suite of opt-in features to solve common error handling challenges. Use what you need and ignore the rest!
+## Core Features
 
 ### The Throwable Protocol
 
@@ -55,7 +38,7 @@ Now when catching this error, you'll see exactly what you expect:
 "Unable to connect to the server."
 ```
 
-For rapid development, you can do:
+For rapid development, you can use string raw values:
 
 ```swift
 enum NetworkError: String, Throwable {
@@ -64,11 +47,7 @@ enum NetworkError: String, Throwable {
 }
 ```
 
-The `Throwable` protocol automatically maps these raw values to your error messages, saving time during the initial development phase when you're implementing error types step by step.
-
-`Throwable` is not a secondary system – it's a drop-in replacement for `Error` that works perfectly with all existing error propagation. Any type that conforms to `Throwable` automatically conforms to `Error` without the confusion!
-
-[Read more about Throwable →](documentation/throwable)
+[Read more about Throwable →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/throwable-protocol)
 
 ### Enhanced Error Descriptions
 
@@ -84,31 +63,17 @@ do {
 }
 ```
 
-These enhanced descriptions are community-provided and fully localized mappings of common system errors to clearer, more actionable messages. Contributions are welcome – help improve error messages for everyone by submitting better descriptions for common errors!
+These enhanced descriptions are community-provided and fully localized mappings of common system errors to clearer, more actionable messages.
 
-[Read more about Enhanced Error Descriptions →](documentation/enhanced-descriptions)
+[Read more about Enhanced Error Descriptions →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/enhanced-error-descriptions)
 
-### Typed Throws with Error Nesting
+## Swift 6 Typed Throws Support
 
-These complementary features enable type-safe error handling and clean error propagation.
+Swift 6 introduces typed throws (`throws(ErrorType)`), bringing compile-time type checking to error handling. ErrorKit makes this powerful feature practical with solutions for its biggest challenges:
 
-#### Typed Throws
+### Error Nesting with Catching
 
-Type-specific `throws` declarations in Swift 6 provide compile-time checking of error handling:
-
-```swift
-do {
-  try FileManager.default.throwableCreateDirectory(at: directoryURL)
-} catch FileManagerError.noWritePermission {
-  // Handle specific error with custom logic
-} catch {
-  showErrorDialog(error.localizedDescription)
-}
-```
-
-#### Error Nesting with Catching
-
-The `Catching` protocol solves the biggest problem with error handling: nested errors. Whenever you see you're returning your error type but need to call functions that throw other error types, that's when you need `Catching`:
+The `Catching` protocol solves the biggest problem with error handling: nested errors.
 
 ```swift
 enum ProfileError: Throwable, Catching {
@@ -132,17 +97,14 @@ struct ProfileRepository {
             return UserProfile(user: user, settings: settings)
         }
         
-        // Use the loaded data
         return userData
     }
 }
 ```
 
-Note how `ProfileError.catch` wraps any errors from the database or file operations into the `caught` case while still passing through the return value when successful.
+### Error Chain Debugging
 
-#### Error Chain Debugging
-
-When using `Throwable` with the `Catching` protocol and its `catch` function, you get powerful error chain debugging to understand exactly how errors propagate through your app layers:
+When using `Throwable` with the `Catching` protocol, you get powerful error chain debugging:
 
 ```swift
 do {
@@ -158,7 +120,9 @@ do {
 }
 ```
 
-[Read more about Typed Throws and Error Nesting →](documentation/typed-throws-nesting)
+[Read more about Typed Throws and Error Nesting →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/typed-throws-and-error-nesting)
+
+## Ready-to-Use Tools
 
 ### Built-in Error Types
 
@@ -175,7 +139,7 @@ func fetchUserData() throws(DatabaseError) {
 
 Includes ready-to-use types like `DatabaseError`, `NetworkError`, `FileError`, `ValidationError`, `PermissionError`, and more - all conforming to both `Throwable` and `Catching` with localized messages.
 
-For quick one-off errors without defining a custom type, use `GenericError`:
+For quick one-off errors, use `GenericError`:
 
 ```swift
 func quickOperation() throws {
@@ -186,9 +150,7 @@ func quickOperation() throws {
 }
 ```
 
-`GenericError` is perfect during development when you need proper error messages without defining custom error types. You can always replace it with a more specific error type later when needed.
-
-[Read more about Built-in Error Types →](documentation/built-in-types)
+[Read more about Built-in Error Types →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/built-in-error-types)
 
 ### User Feedback with Error Logs
 
@@ -209,24 +171,149 @@ Button("Report a Problem") {
 )
 ```
 
-With just a simple SwiftUI modifier, you can automatically include all log messages from Apple's Logging system (OSLog). 
+With just a simple SwiftUI modifier, you can automatically include all log messages from Apple's unified logging system.
 
-Apple's unified logging system (`OSLog`/`Logger`) provides powerful structured logging that's better than using `print()`:
+[Read more about User Feedback and Logging →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/user-feedback-with-logs)
 
-```swift
-import OSLog
+## How These Features Work Together
 
-Logger().debug("Detailed connection info")              // Development debugging
-Logger().info("User tapped submit button")              // General information
-Logger().notice("Profile successfully loaded")          // Important events
-Logger().warning("Low disk space detected")             // Alias for error
-Logger().error("Failed to load user data")              // Errors that should be fixed
-```
+ErrorKit's features are designed to complement each other while remaining independently useful:
 
-ErrorKit can collect these logs based on level, giving you complete context for user-reported issues.
+1. **Start with improved error definitions** using `Throwable` for custom errors and `userFriendlyMessage(for:)` for system errors.
 
-[Read more about User Feedback and Logging →](documentation/user-feedback)
+2. **Add type safety with Swift 6 typed throws**, using the `Catching` protocol to solve nested error challenges. This pairs with error chain debugging to understand error flows through your app.
+
+3. **Save time with ready-made tools**: built-in error types for common scenarios and simple log collection for user feedback.
+
+## Adoption Path
+
+Here's a practical adoption strategy:
+
+1. Replace `Error` with `Throwable` in your custom error types
+2. Use `ErrorKit.userFriendlyMessage(for:)` when showing system errors
+3. Adopt built-in error types where they fit your needs
+4. Implement typed throws with `Catching` for more robust error flows
+5. Add error chain debugging to improve error visibility
+6. Integrate log collection with your feedback system
 
 ## Documentation
 
-Visit our [full documentation](https://FlineDev.github.io/ErrorKit/documentation/) for detailed guides on each feature. The documentation is organized into independent guides that you can adopt one at a time as needed. This README is just an overview of what's available in ErrorKit.
+For complete documentation visit:
+[ErrorKit Documentation](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit)
+
+## Showcase
+
+I created this library for my own Indie apps (download & rate them to thank me!):
+
+<table>
+  <tr>
+    <th>App Icon</th>
+    <th>App Name & Description</th>
+    <th>Supported Platforms</th>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6476773066?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/TranslateKit.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6476773066?pt=549314&ct=github.com&mt=8">
+        <strong>TranslateKit: App Localizer</strong>
+      </a>
+      <br />
+      Indie-focused app localization with unmatched accuracy. Fast & easy: AI & proofreading, 125+ languages, market insights. Budget-friendly, free to try.
+    </td>
+    <td>Mac</td>
+  </tr>
+    <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6502914189?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/FreemiumKit.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6502914189?pt=549314&ct=github.com&mt=8">
+        <strong>FreemiumKit: In-App Purchases</strong>
+      </a>
+      <br />
+      Simple In-App Purchases and Subscriptions for Apple Platforms: Automation, Paywalls, A/B Testing, Live Notifications, PPP, and more.
+    </td>
+    <td>iPhone, iPad, Mac, Vision</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6587583340?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/PleydiaOrganizer.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6587583340?pt=549314&ct=github.com&mt=8">
+        <strong>Pleydia Organizer: Movie & Series Renamer</strong>
+      </a>
+      <br />
+      Simple, fast, and smart media management for your Movie, TV Show and Anime collection.
+    </td>
+    <td>Mac</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6480134993?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/FreelanceKit.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6480134993?pt=549314&ct=github.com&mt=8">
+        <strong>FreelanceKit: Time Tracking</strong>
+      </a>
+      <br />
+      Simple & affordable time tracking with a native experience for all  devices. iCloud sync & CSV export included.
+    </td>
+    <td>iPhone, iPad, Mac, Vision</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6472669260?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/CrossCraft.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6472669260?pt=549314&ct=github.com&mt=8">
+        <strong>CrossCraft: Custom Crosswords</strong>
+      </a>
+      <br />
+      Create themed & personalized crosswords. Solve them yourself or share them to challenge others.
+    </td>
+    <td>iPhone, iPad, Mac, Vision</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6477829138?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/FocusBeats.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6477829138?pt=549314&ct=github.com&mt=8">
+        <strong>FocusBeats: Pomodoro + Music</strong>
+      </a>
+      <br />
+      Deep Focus with proven Pomodoro method & select Apple Music playlists & themes. Automatically pauses music during breaks.
+    </td>
+    <td>iPhone, iPad, Mac, Vision</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6478062053?pt=549314&ct=github.com&mt=8">
+        <img src="https://raw.githubusercontent.com/FlineDev/HandySwiftUI/main/Images/Apps/Posters.webp" width="64" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/app/apple-store/id6478062053?pt=549314&ct=github.com&mt=8">
+        <strong>Posters: Discover Movies at Home</strong>
+      </a>
+      <br />
+      Auto-updating & interactive posters for your home with trailers, showtimes, and links to streaming services.
+    </td>
+    <td>Vision</td>
+  </tr>
+</table>
