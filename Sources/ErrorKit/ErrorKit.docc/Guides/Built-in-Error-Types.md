@@ -19,27 +19,43 @@ Most applications deal with similar error categories – database issues, networ
 - Lack of standardized error messages
 
 ErrorKit's built-in types offer several advantages:
-- **Quick Start**: Begin with well-structured error handling without defining custom types
-- **Consistency**: Use standardized error cases and messages across your codebase
-- **Flexibility**: Easily transition to custom error types when you need more specific cases
-- **Discoverability**: Clear naming conventions make it easy to find the right error type
-- **Localization**: All error messages are pre-localized and user-friendly
+- **Quick Start** – Begin with well-structured error handling without defining custom types
+- **Consistency** – Use standardized error cases and messages across your codebase
+- **Flexibility** – Easily transition to custom error types when you need more specific cases
+- **Discoverability** – Clear naming conventions make it easy to find the right error type
+- **Localization** – All error messages are pre-localized and user-friendly
+
+### Available Error Types
+
+ErrorKit provides a comprehensive set of built-in error types, each designed to address common error scenarios in Swift applications:
+
+- **DatabaseError** – For database connection and query issues
+- **FileError** – For file system operations
+- **NetworkError** – For network requests and API communications
+- **ValidationError** – For input validation
+- **StateError** – For state management and transitions
+- **OperationError** – For operation execution issues
+- **PermissionError** – For permission-related concerns
+- **ParsingError** – For data parsing problems
+- **GenericError** – For quick custom error cases
+
+Each of these types conforms to both `Throwable` and `Catching` protocols, providing seamless integration with [typed throws](Typed-Throws-and-Error-Nesting) and the [error chain debugging](Error-Chain-Debugging) system.
 
 ### Ecosystem Impact
 
 As more Swift packages adopt these standardized error types, a powerful network effect emerges:
 
-- **Cross-package Communication**: Libraries can throw standard error types that applications understand and can handle intelligently
-- **Smart Error Handling**: Instead of just showing error messages, apps can provide specific UI or recovery actions for known error types
-- **Unified Error Experience**: Users experience consistent error handling patterns across different features and modules
-- **Reduced Learning Curve**: Developers can learn one set of error patterns that work across multiple packages
-- **Better Testing**: Standardized error types mean standardized testing patterns
+- **Cross-package Communication** – Libraries can throw standard error types that applications understand and can handle intelligently
+- **Smart Error Handling** – Instead of just showing error messages, apps can provide specific UI or recovery actions for known error types
+- **Unified Error Experience** – Users experience consistent error handling patterns across different features and modules
+- **Reduced Learning Curve** – Developers can learn one set of error patterns that work across multiple packages
+- **Better Testing** – Standardized error types mean standardized testing patterns
 
 This standardization creates a more cohesive error handling experience throughout the Swift ecosystem, similar to how `Codable` created a standard for data serialization.
 
-### DatabaseError
+## Database Error Handling
 
-For database operations and queries:
+The `DatabaseError` type addresses common database operation failures. Here's how you might use it:
 
 ```swift
 func fetchUserData(userId: String) throws(DatabaseError) {
@@ -60,16 +76,16 @@ func fetchUserData(userId: String) throws(DatabaseError) {
 }
 ```
 
-`DatabaseError` includes cases for common database failures:
-- `.connectionFailed` - Unable to connect to the database
-- `.operationFailed(context:)` - Query execution failed
-- `.recordNotFound(entity:identifier:)` - Requested record doesn't exist
-- `.caught(Error)` - For wrapping other errors
-- `.generic(userFriendlyMessage:)` - For custom one-off scenarios
+`DatabaseError` includes the following cases:
+- `.connectionFailed` – Unable to connect to the database
+- `.operationFailed(context:)` – Query execution failed
+- `.recordNotFound(entity:identifier:)` – Requested record doesn't exist
+- `.caught(Error)` – For wrapping other errors
+- `.generic(userFriendlyMessage:)` – For custom one-off scenarios
 
-#### Real-world Example
+### Core Data Example
 
-In a typical scenario with Core Data or SQLite:
+For context, here's how you might handle Core Data errors without ErrorKit:
 
 ```swift
 func updateProfile(name: String, bio: String) {
@@ -80,7 +96,7 @@ func updateProfile(name: String, bio: String) {
             try context.save()
         }
     } catch let error as NSError where error.domain == NSCocoaErrorDomain && error.code == NSValidationError {
-        // Standard approach - messy error handling
+        // Complex error checking with domain and code
         showAlert(message: "Invalid data provided.")
     } catch {
         showAlert(message: "Unknown error occurred.")
@@ -88,7 +104,7 @@ func updateProfile(name: String, bio: String) {
 }
 ```
 
-With ErrorKit:
+And here's the same function using ErrorKit:
 
 ```swift
 func updateProfile(name: String, bio: String) {
@@ -99,15 +115,17 @@ func updateProfile(name: String, bio: String) {
             try context.save()
         }
     } catch {
-        // Clear, standardized error handling
+        // Simpler error handling with better messages
         showAlert(message: ErrorKit.userFriendlyMessage(for: error))
     }
 }
 ```
 
-### NetworkError
+The advantage is clear: ErrorKit eliminates the need for complex error domain/code checking while providing more descriptive error messages to users.
 
-For network requests and API communications:
+## Network Error Handling
+
+The `NetworkError` type addresses common networking issues. Here's an example:
 
 ```swift
 func fetchProfileData() async throws(NetworkError) {
@@ -136,17 +154,18 @@ func fetchProfileData() async throws(NetworkError) {
 }
 ```
 
-`NetworkError` includes cases for common network issues:
-- `.noInternet` - No network connection available
-- `.timeout` - Request took too long to complete
-- `.badRequest(code:message:)` - Client-side HTTP errors (400-499)
-- `.serverError(code:message:)` - Server-side HTTP errors (500-599)
-- `.decodingFailure` - Error parsing the response data
-- `.caught(Error)` - For wrapping other errors
+`NetworkError` includes the following cases:
+- `.noInternet` – No network connection available
+- `.timeout` – Request took too long to complete
+- `.badRequest(code:message:)` – Client-side HTTP errors (400-499)
+- `.serverError(code:message:)` – Server-side HTTP errors (500-599)
+- `.decodingFailure` – Error parsing the response data
+- `.caught(Error)` – For wrapping other errors
+- `.generic(userFriendlyMessage:)` – For custom one-off scenarios
 
-#### Enhanced User Experience
+### Custom Error Handling
 
-With typed NetworkError, you can provide custom handling for different error cases:
+NetworkError enables enhanced user experiences through targeted handling:
 
 ```swift
 func fetchData() async {
@@ -156,17 +175,17 @@ func fetchData() async {
     } catch {
         state = .error
         
-        // Enhanced UX through specific error handling
+        // Specific handling for different network errors
         switch error {
         case NetworkError.noInternet, NetworkError.timeout:
             // Show offline mode with cached data + refresh button
             showOfflineView(with: cachedData)
             
-        case NetworkError.unauthorized:
+        case let networkError as URLSessionError where networkError == .unauthorized:
             // Trigger re-authentication flow
             showAuthenticationPrompt()
             
-        case NetworkError.serverError(let code, _) where code >= 500:
+        case let NetworkError.serverError(code, _) where code >= 500:
             // Show maintenance message for server errors
             showServerMaintenanceMessage()
             
@@ -178,9 +197,9 @@ func fetchData() async {
 }
 ```
 
-### FileError
+## File System Error Handling
 
-For file system operations:
+The `FileError` type addresses common file operations issues:
 
 ```swift
 func loadConfiguration() throws(FileError) {
@@ -200,15 +219,16 @@ func loadConfiguration() throws(FileError) {
 }
 ```
 
-`FileError` includes cases for common file issues:
-- `.fileNotFound(fileName:)` - File doesn't exist
-- `.readFailed(fileName:)` - Error reading from file
-- `.writeFailed(fileName:)` - Error writing to file
-- `.caught(Error)` - For wrapping other errors
+`FileError` includes the following cases:
+- `.fileNotFound(fileName:)` – File doesn't exist
+- `.readFailed(fileName:)` – Error reading from file
+- `.writeFailed(fileName:)` – Error writing to file
+- `.caught(Error)` – For wrapping other errors
+- `.generic(userFriendlyMessage:)` – For custom one-off scenarios
 
-### ValidationError
+## Validation Error Handling
 
-For input validation:
+The `ValidationError` type simplifies input validation:
 
 ```swift
 func validateRegistration(username: String, email: String, password: String) throws(ValidationError) {
@@ -228,19 +248,18 @@ func validateRegistration(username: String, email: String, password: String) thr
 }
 ```
 
-`ValidationError` includes cases for common validation issues:
-- `.invalidInput(field:)` - Input doesn't meet format requirements
-- `.missingField(field:)` - Required field is empty
-- `.inputTooLong(field:maxLength:)` - Input exceeds maximum length
-- `.caught(Error)` - For wrapping other errors
+`ValidationError` includes the following cases:
+- `.invalidInput(field:)` – Input doesn't meet format requirements
+- `.missingField(field:)` – Required field is empty
+- `.inputTooLong(field:maxLength:)` – Input exceeds maximum length
+- `.caught(Error)` – For wrapping other errors
+- `.generic(userFriendlyMessage:)` – For custom one-off scenarios
 
-### Other Built-in Types
+## Additional Error Types
 
-ErrorKit includes additional error types for common scenarios:
+### Permission Error Handling
 
-#### PermissionError
-
-For permission-related issues:
+The `PermissionError` type addresses authorization issues:
 
 ```swift
 func requestLocationAccess() throws(PermissionError) {
@@ -259,9 +278,9 @@ func requestLocationAccess() throws(PermissionError) {
 }
 ```
 
-#### StateError
+### State Error Handling
 
-For invalid state transitions or conditions:
+The `StateError` type manages invalid state transitions:
 
 ```swift
 func finalizeOrder(_ order: Order) throws(StateError) {
@@ -281,9 +300,9 @@ func finalizeOrder(_ order: Order) throws(StateError) {
 }
 ```
 
-#### OperationError
+### Operation Error Handling
 
-For operation failures, cancellations, etc.:
+The `OperationError` type handles execution failures:
 
 ```swift
 func executeOperation() async throws(OperationError) {
@@ -299,7 +318,26 @@ func executeOperation() async throws(OperationError) {
 }
 ```
 
-### Quick Error Creation with GenericError
+### Parsing Error Handling
+
+The `ParsingError` type addresses data parsing issues:
+
+```swift
+func parseUserData(from json: Data) throws(ParsingError) {
+    guard !json.isEmpty else {
+        throw ParsingError.invalidInput(input: "Empty JSON data")
+    }
+    
+    do {
+        let decoder = JSONDecoder()
+        return try decoder.decode(UserData.self, from: json)
+    } catch {
+        throw ParsingError.caught(error)
+    }
+}
+```
+
+## Generic Error Handling
 
 For one-off errors without defining custom types, use `GenericError`:
 
@@ -317,7 +355,7 @@ func quickOperation() throws {
 
 `GenericError` is perfect during rapid development or for one-off error cases that don't justify creating a full custom type. You can always replace it with a more specific error type later when needed.
 
-### Generic Case for Edge Cases
+## Flexible Error Handling with Generic Cases
 
 All built-in error types include a `.generic(userFriendlyMessage:)` case for edge cases:
 
@@ -332,7 +370,7 @@ func handleSpecialCase() throws(DatabaseError) {
 
 This allows you to use the specific error type for categorization while providing a custom message for unusual situations.
 
-### Contributing New Error Types
+## Contributing New Error Types
 
 If you find yourself:
 - Defining similar error types across projects
