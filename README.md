@@ -30,8 +30,10 @@ enum NetworkError: Throwable {
 
    var userFriendlyMessage: String {
       switch self {
-      case .noConnectionToServer: String(localized: "Unable to connect to the server.")
-      case .parsingFailed: String(localized: "Data parsing failed.")
+      case .noConnectionToServer:
+         String(localized: "Unable to connect to the server.")
+      case .parsingFailed:
+         String(localized: "Data parsing failed.")
       }
    }
 }
@@ -143,7 +145,7 @@ func fetchUserData() throws(DatabaseError) {
 }
 ```
 
-Includes ready-to-use types like `DatabaseError`, `NetworkError`, `FileError`, `ValidationError`, `PermissionError`, and more - all conforming to both `Throwable` and `Catching` with localized messages.
+Includes ready-to-use types like `DatabaseError`, `NetworkError`, `FileError`, `ValidationError`, `PermissionError`, and more – all conforming to both `Throwable` and `Catching` with localized messages.
 
 For quick one-off errors, use `GenericError`:
 
