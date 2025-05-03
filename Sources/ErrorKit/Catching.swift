@@ -135,7 +135,7 @@ extension Catching {
    ) throws(Self) -> ReturnType {
       do {
          return try operation()
-      } catch let error as Self {
+      } catch let error as Self {  // Avoid nesting if the error is already of the expected type
          throw error
       } catch {
          throw Self.caught(error)
@@ -182,7 +182,7 @@ extension Catching {
    ) async throws(Self) -> ReturnType {
       do {
          return try await operation()
-      } catch let error as Self {
+      } catch let error as Self {  // Avoid nesting if the error is already of the expected type
          throw error
       } catch {
          throw Self.caught(error)
