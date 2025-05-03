@@ -75,18 +75,18 @@ do {
 }
 ```
 
-If the error already conforms to `Throwable`, its `userFriendlyMessage` is used. For system errors, ErrorKit provides an enhanced description from its built-in mappings.
+If the error already conforms to `Throwable`, its `userFriendlyMessage` is used. For system errors, ErrorKit provides an enhanced description from its built-in mappers.
 
 ### Localization Support
 
-All enhanced error messages are fully localized using the `String.localized(key:defaultValue:)` pattern, ensuring users receive messages in their preferred language where available.
+All enhanced error messages are fully localized using the `String(localized:)` pattern, ensuring users receive messages in their preferred language where available.
 
 ### How It Works
 
 The `userFriendlyMessage(for:)` function follows this process to determine the best error message:
 
 1. If the error conforms to `Throwable`, it uses the error's own `userFriendlyMessage`
-2. It tries domain-specific handlers to find available enhanced versions
+2. It queries registered error mappers to find enhanced descriptions
 3. If the error conforms to `LocalizedError`, it combines its localized properties
 4. As a fallback, it formats the NSError domain and code along with the standard `localizedDescription`
 
@@ -95,32 +95,57 @@ The `userFriendlyMessage(for:)` function follows this process to determine the b
 You can help improve ErrorKit by contributing better error descriptions for common error types:
 
 1. Identify cryptic error messages from system frameworks
-2. Implement domain-specific handlers or extend existing ones (see folder `EnhancedDescriptions`)
+2. Implement domain-specific handlers or extend existing ones (see folder `ErrorMappers`)
 3. Use clear, actionable language that helps users understand what went wrong
 4. Include localization support for all messages (no need to actually localize, we'll take care)
 
 Example contribution to handle a new error type:
 
 ```swift
-// In ErrorKit+Foundation.swift
+// In FoundationErrorMapper.swift
 case let jsonError as NSError where jsonError.domain == NSCocoaErrorDomain && jsonError.code == 3840:
-    return String.localized(
-       key: "EnhancedDescriptions.JSONError.invalidFormat",
-       defaultValue: "The data couldn't be read because it isn't in the correct format."
-    )
+    return String(localized: "The data couldn't be read because it isn't in the correct format.")
 ```
+
+### Custom Error Mappers
+
+While ErrorKit focuses on enhancing system and framework errors, you can also create custom mappers for any library:
+
+```swift
+enum MyLibraryErrorMapper: ErrorMapper {
+    static func userFriendlyMessage(for error: Error) -> String? {
+        switch error {
+        case let libraryError as MyLibrary.Error:
+            switch libraryError {
+            case .apiKeyExpired:
+                return String(localized: "API key expired. Please update your credentials.")
+            default:
+                return nil
+            }
+        default:
+            return nil
+        }
+    }
+}
+
+// On app start:
+ErrorKit.registerMapper(MyLibraryErrorMapper.self)
+```
+
+This extensibility allows the community to create mappers for 3rd-party libraries with known error issues.
 
 ## Topics
 
 ### Essentials
 
 - ``ErrorKit/userFriendlyMessage(for:)``
+- ``ErrorMapper``
 
-### Domain-Specific Handlers
+### Built-in Mappers
 
-- ``ErrorKit/userFriendlyFoundationMessage(for:)``
-- ``ErrorKit/userFriendlyCoreDataMessage(for:)``
-- ``ErrorKit/userFriendlyMapKitMessage(for:)``
+- ``FoundationErrorMapper``
+- ``CoreDataErrorMapper``
+- ``MapKitErrorMapper``
 
 ### Continue Reading
 
