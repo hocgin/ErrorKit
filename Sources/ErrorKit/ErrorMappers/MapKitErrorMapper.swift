@@ -2,8 +2,8 @@
 import MapKit
 #endif
 
-extension ErrorKit {
-   static func userFriendlyMapKitMessage(for error: Error) -> String? {
+enum MapKitErrorMapper: ErrorMapper {
+   static func userFriendlyMessage(for error: Error) -> String? {
       #if canImport(MapKit)
       if let mkError = error as? MKError {
          switch mkError.code {

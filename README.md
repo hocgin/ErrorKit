@@ -1,5 +1,6 @@
 ![ErrorKit Logo](https://github.com/FlineDev/ErrorKit/blob/main/Logo.png?raw=true)
 
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFlineDev%2FErrorKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/FlineDev/ErrorKit)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FFlineDev%2FErrorKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/FlineDev/ErrorKit)
 
 # ErrorKit
@@ -69,7 +70,7 @@ do {
 }
 ```
 
-These enhanced descriptions are community-provided and fully localized mappings of common system errors to clearer, more actionable messages.
+These enhanced descriptions are community-provided and fully localized mappings of common system errors to clearer, more actionable messages. ErrorKit comes with built-in mappers for Foundation, CoreData, MapKit, and more. You can also create custom mappers for third-party libraries or your own error types.
 
 [Read more about Enhanced Error Descriptions →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/enhanced-error-descriptions)
 
@@ -179,7 +180,7 @@ Button("Report a Problem") {
 )
 ```
 
-With just a simple SwiftUI modifier, you can automatically include all log messages from Apple's unified logging system.
+With just a simple built-in SwiftUI modifier and the `logAttachment` helper function, you can easily include all log messages from Apple's unified logging system and let your users send them to you via email. Other integrations are also supported.
 
 [Read more about User Feedback and Logging →](https://swiftpackageindex.com/FlineDev/ErrorKit/documentation/errorkit/user-feedback-with-logs)
 
@@ -192,6 +193,8 @@ ErrorKit's features are designed to complement each other while remaining indepe
 2. **Add type safety with Swift 6 typed throws**, using the `Catching` protocol to solve nested error challenges. This pairs with error chain debugging to understand error flows through your app.
 
 3. **Save time with ready-made tools**: built-in error types for common scenarios and simple log collection for user feedback.
+
+4. **Extend with custom mappers**: Create error mappers for any library to improve error messages across your entire application.
 
 ## Adoption Path
 
