@@ -11,9 +11,13 @@ public enum ErrorKit {
    /// This function analyzes the given `Error` and returns a clearer, more helpful message than the default system-provided description.
    /// All descriptions are localized, ensuring that users receive messages in their preferred language where available.
    ///
-   /// The list of user-friendly messages is maintained and regularly improved by the developer community. Contributions are welcome—if you find bugs or encounter new errors, feel free to submit a pull request (PR) for review.
+   /// The function uses registered error mappers to generate contextual messages for errors from different frameworks and libraries.
+   /// ErrorKit includes built-in mappers for `Foundation`, `CoreData`, `MapKit`, and more.
+   /// You can extend ErrorKit's capabilities by registering custom mappers using ``registerMapper(_:)``.
+   /// Custom mappers are queried in reverse order, meaning user-provided mappers take precedence over built-in ones.
    ///
-   /// Errors from various domains, such as `Foundation`, `CoreData`, `MapKit`, and more, are supported. As the project evolves, additional domains may be included to ensure comprehensive coverage.
+   /// The list of user-friendly messages is maintained and regularly improved by the developer community.
+   /// Contributions are welcome—if you find bugs or encounter new errors, feel free to submit a pull request (PR) for review.
    ///
    /// - Parameter error: The `Error` instance for which a user-friendly message is needed.
    /// - Returns: A `String` containing an enhanced, localized, user-readable error message.
@@ -35,19 +39,14 @@ public enum ErrorKit {
          return throwable.userFriendlyMessage
       }
 
-      if let foundationDescription = Self.userFriendlyFoundationMessage(for: error) {
-         return foundationDescription
+      // Check if a custom mapping was registered (in reverse order to prefer user-provided over built-in mappings)
+      for errorMapper in self.errorMappers.reversed() {
+         if let mappedMessage = errorMapper.userFriendlyMessage(for: error) {
+            return mappedMessage
+         }
       }
 
-      if let coreDataDescription = Self.userFriendlyCoreDataMessage(for: error) {
-         return coreDataDescription
-      }
-
-      if let mapKitDescription = Self.userFriendlyMapKitMessage(for: error) {
-         return mapKitDescription
-      }
-
-      // LocalizedError: The recommended error type to conform to in Swift by default.
+      // LocalizedError: The officially recommended error type to conform to in Swift, prefer over NSError
       if let localizedError = error as? LocalizedError {
          return [
             localizedError.errorDescription,
@@ -56,10 +55,12 @@ public enum ErrorKit {
          ].compactMap(\.self).joined(separator: " ")
       }
 
-      // Default fallback (adds domain & code at least)
+      // Default fallback (adds domain & code at least) – since all errors conform to NSError
       let nsError = error as NSError
       return "[\(nsError.domain): \(nsError.code)] \(nsError.localizedDescription)"
    }
+
+   // MARK: - Error Chain
 
    /// Generates a detailed, hierarchical description of an error chain for debugging purposes.
    ///
@@ -153,6 +154,46 @@ public enum ErrorKit {
       return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
    }
 
+   private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
+      let mirror = Mirror(reflecting: error)
+
+      // Helper function to format the type name with optional metadata
+      func typeDescription(_ error: Error, enclosingType: Any.Type?) -> String {
+         let typeName = String(describing: type(of: error))
+
+         // For structs and classes (non-enums), append [Struct] or [Class]
+         if mirror.displayStyle != .enum {
+            let isClass = Swift.type(of: error) is AnyClass
+            return "\(typeName) [\(isClass ? "Class" : "Struct")]"
+         } else {
+            // For enums, include the full case description with type name
+            if let enclosingType {
+               return "\(enclosingType).\(error)"
+            } else {
+               return String(describing: error)
+            }
+         }
+      }
+
+      // Check if this is a nested error (conforms to Catching and has a caught case)
+      if let caughtError = mirror.children.first(where: { $0.label == "caught" })?.value as? Error {
+         let currentErrorType = type(of: error)
+         let nextIndent = indent + "   "
+         return """
+            \(currentErrorType)
+            \(indent)└─ \(Self.chainDescription(for: caughtError, indent: nextIndent, enclosingType: type(of: caughtError)))
+            """
+      } else {
+         // This is a leaf node
+         return """
+            \(typeDescription(error, enclosingType: enclosingType))
+            \(indent)└─ userFriendlyMessage: \"\(Self.userFriendlyMessage(for: error))\"
+            """
+      }
+   }
+
+   // MARK: - Grouping ID
+
    /// Generates a stable identifier that groups similar errors based on their type structure.
    ///
    /// While ``errorChainDescription(for:)`` provides a detailed view of an error chain including all parameters and messages,
@@ -224,41 +265,78 @@ public enum ErrorKit {
       return String(fullHash.prefix(6))
    }
 
-   private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
-      let mirror = Mirror(reflecting: error)
+   // MARK: - Error Mapping
 
-      // Helper function to format the type name with optional metadata
-      func typeDescription(_ error: Error, enclosingType: Any.Type?) -> String {
-         let typeName = String(describing: type(of: error))
-
-         // For structs and classes (non-enums), append [Struct] or [Class]
-         if mirror.displayStyle != .enum {
-            let isClass = Swift.type(of: error) is AnyClass
-            return "\(typeName) [\(isClass ? "Class" : "Struct")]"
-         } else {
-            // For enums, include the full case description with type name
-            if let enclosingType {
-               return "\(enclosingType).\(error)"
-            } else {
-               return String(describing: error)
-            }
-         }
+   /// Registers a custom error mapper to extend ErrorKit's error mapping capabilities.
+   ///
+   /// This function allows you to add your own error mapper for specific frameworks, libraries, or custom error types.
+   /// Registered mappers are queried in reverse order to ensure user-provided mappers takes precedence over built-in ones.
+   ///
+   /// # Usage
+   /// Register error mappers during your app's initialization, typically in the App's initializer or main function:
+   /// ```swift
+   /// @main
+   /// struct MyApp: App {
+   ///     init() {
+   ///         ErrorKit.registerMapper(MyDatabaseErrorMapper.self)
+   ///         ErrorKit.registerMapper(AuthenticationErrorMapper.self)
+   ///     }
+   ///
+   ///     var body: some Scene {
+   ///         // ...
+   ///     }
+   /// }
+   /// ```
+   ///
+   /// # Best Practices
+   /// - Register mappers early in your app's lifecycle
+   /// - Order matters: Register more specific mappers after general ones (last added is checked first)
+   /// - Avoid redundant mappers for the same error types (as this may lead to confusion)
+   ///
+   /// # Example Mapper
+   /// ```swift
+   /// enum PaymentServiceErrorMapper: ErrorMapper {
+   ///     static func userFriendlyMessage(for error: Error) -> String? {
+   ///         switch error {
+   ///         case let paymentError as PaymentService.Error:
+   ///             switch paymentError {
+   ///             case .cardDeclined:
+   ///                 return String(localized: "Payment declined. Please try a different card.")
+   ///             case .insufficientFunds:
+   ///                 return String(localized: "Insufficient funds. Please add money to your account.")
+   ///             case .expiredCard:
+   ///                 return String(localized: "Card expired. Please update your payment method.")
+   ///             default:
+   ///                 return nil
+   ///             }
+   ///         default:
+   ///             return nil
+   ///         }
+   ///     }
+   /// }
+   ///
+   /// ErrorKit.registerMapper(PaymentServiceErrorMapper.self)
+   /// ```
+   ///
+   /// - Parameter mapper: The error mapper type to register
+   public static func registerMapper(_ mapper: ErrorMapper.Type) {
+      self.errorMappersQueue.async(flags: .barrier) {
+         self._errorMappers.append(mapper)
       }
+   }
 
-      // Check if this is a nested error (conforms to Catching and has a caught case)
-      if let caughtError = mirror.children.first(where: { $0.label == "caught" })?.value as? Error {
-         let currentErrorType = type(of: error)
-         let nextIndent = indent + "   "
-         return """
-            \(currentErrorType)
-            \(indent)└─ \(Self.chainDescription(for: caughtError, indent: nextIndent, enclosingType: type(of: caughtError)))
-            """
-      } else {
-         // This is a leaf node
-         return """
-            \(typeDescription(error, enclosingType: enclosingType))
-            \(indent)└─ userFriendlyMessage: \"\(Self.userFriendlyMessage(for: error))\"
-            """
-      }
+   /// A built-in sync mechanism to avoid concurrent access to ``errorMappers``.
+   private static let errorMappersQueue = DispatchQueue(label: "ErrorKit.ErrorMappers", attributes: .concurrent)
+
+   /// The collection of error mappers that ErrorKit uses to generate user-friendly messages.
+   nonisolated(unsafe) private static var _errorMappers: [ErrorMapper.Type] = [
+      FoundationErrorMapper.self,
+      CoreDataErrorMapper.self,
+      MapKitErrorMapper.self,
+   ]
+
+   /// Provides thread-safe read access to `_errorMappers` using a concurrent queue.
+   private static var errorMappers: [ErrorMapper.Type] {
+      self.errorMappersQueue.sync { self._errorMappers }
    }
 }

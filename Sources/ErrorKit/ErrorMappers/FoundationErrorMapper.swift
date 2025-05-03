@@ -3,8 +3,8 @@ import Foundation
 import FoundationNetworking
 #endif
 
-extension ErrorKit {
-   static func userFriendlyFoundationMessage(for error: Error) -> String? {
+enum FoundationErrorMapper: ErrorMapper {
+   static func userFriendlyMessage(for error: Error) -> String? {
       switch error {
 
       // URLError: Networking errors

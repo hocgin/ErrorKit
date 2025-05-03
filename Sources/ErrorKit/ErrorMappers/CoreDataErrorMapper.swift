@@ -2,8 +2,8 @@
 import CoreData
 #endif
 
-extension ErrorKit {
-   static func userFriendlyCoreDataMessage(for error: Error) -> String? {
+enum CoreDataErrorMapper: ErrorMapper {
+   static func userFriendlyMessage(for error: Error) -> String? {
       #if canImport(CoreData)
       let nsError = error as NSError
 
