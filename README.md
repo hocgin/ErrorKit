@@ -122,7 +122,7 @@ When using `Throwable` with the `Catching` protocol, you get powerful error chai
 do {
     try await updateUserProfile()
 } catch {
-    Logger().error("\(ErrorKit.errorChainDescription(for: error))")
+    print(ErrorKit.errorChainDescription(for: error))
     
     // Output shows the complete error path:
     // ProfileError

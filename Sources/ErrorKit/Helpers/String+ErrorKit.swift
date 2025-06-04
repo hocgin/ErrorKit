@@ -39,7 +39,7 @@ extension String.StringInterpolation {
    /// type information, and nested structure. Ideal for logging and debugging.
    ///
    /// ```swift
-   /// Logger().error("Operation failed with:\n\(chain: error)")
+   /// print("Operation failed with:\n\(chain: error)")
    /// // Operation failed with:
    /// // DatabaseError
    /// // └─ FileError
@@ -58,7 +58,7 @@ extension String.StringInterpolation {
    /// type information, and nested structure. Ideal for logging and debugging.
    ///
    /// ```swift
-   /// Logger().error("Operation failed with:\n\(chain: error)")
+   /// print("Operation failed with:\n\(chain: error)")
    /// // Operation failed with:
    /// // DatabaseError
    /// // └─ FileError

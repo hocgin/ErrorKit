@@ -69,14 +69,27 @@ ErrorKit enhances string interpolation for error chain debugging. Use either `ch
 
 ```swift
 // Instead of:
-Logger().error("Update failed: \(ErrorKit.errorChainDescription(for: error))")
+print("Update failed:\n\(ErrorKit.errorChainDescription(for: error))")
 
 // You can simply use either:
-Logger().error("Update failed:\n\(chain: error)")
-Logger().error("Update failed:\n\(debug: error)")
+print("Update failed:\n\(chain: error)")
+print("Update failed:\n\(debug: error)")
 ```
 
 Use `\(error)` for user-facing messages, `\(chain: error)` or `\(debug: error)` for debugging.
+
+For `OSLog`/`Logger` there are dedicated convenience overloads taking a second `error` parameter:
+
+```swift
+// Instead of:
+Logger().error("Update failed:\n\(ErrorKit.errorChainDescription(for: error))")
+
+// You can simply use overloads like:
+Logger().error("Update failed", error: error)
+Logger().warning("Update failed", error: error)
+```
+
+There's no need to add a colon (`:`) or newline (`\n`) to the message, they will be added automatically.
 
 ### Error Analytics with Grouping IDs
 
