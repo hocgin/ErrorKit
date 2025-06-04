@@ -17,3 +17,13 @@ extension String {
    }
    #endif
 }
+
+extension String.StringInterpolation {
+   mutating public func appendInterpolation(error: some Error) {
+      appendInterpolation(ErrorKit.userFriendlyMessage(for: error))
+   }
+
+   mutating public func appendInterpolation(errorChain error: some Error) {
+      appendInterpolation(ErrorKit.errorChainDescription(for: error))
+   }
+}
