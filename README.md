@@ -67,6 +67,9 @@ do {
     // Better than localizedDescription, works with any error type
     print(ErrorKit.userFriendlyMessage(for: error))
     // "You are not connected to the Internet. Please check your connection."
+    
+    // String interpolation automatically uses userFriendlyMessage(for:)
+    print("Request failed: \(error)")
 }
 ```
 

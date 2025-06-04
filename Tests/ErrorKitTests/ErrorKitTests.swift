@@ -61,6 +61,45 @@ enum ErrorKitTests {
       }
    }
 
+   enum StringInterpolation {
+      @Test
+      static func implicitWithStruct() async throws {
+         #expect("\(SomeThrowable())" == "Something failed hard.")
+      }
+
+      @Test
+      static func implicitWithNestedError() async throws {
+         let nestedError = DatabaseError.caught(FileError.caught(PermissionError.denied(permission: "~/Downloads/Profile.png")))
+         #expect("\(nestedError)" == "Access to ~/Downloads/Profile.png was declined. To use this feature, please enable the permission in your device Settings.")
+      }
+
+      @Test
+      static func chainWithStruct() async throws {
+         #expect(
+            "\(chain: SomeThrowable())"
+            ==
+            """
+            SomeThrowable [Struct]
+            └─ userFriendlyMessage: "Something failed hard."
+            """
+         )
+      }
+
+      @Test
+      static func chainWithNestedError() async throws {
+         let nestedError = DatabaseError.caught(FileError.caught(PermissionError.denied(permission: "~/Downloads/Profile.png")))
+         #expect(
+            "\(chain: nestedError)"
+            ==
+            """
+            DatabaseError
+            └─ FileError
+               └─ PermissionError.denied(permission: "~/Downloads/Profile.png")
+                  └─ userFriendlyMessage: "Access to ~/Downloads/Profile.png was declined. To use this feature, please enable the permission in your device Settings."
+            """)
+      }
+   }
+
    enum ErrorChainDescription {
       @Test
       static func localizedError() {
