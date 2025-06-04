@@ -81,6 +81,22 @@ If the error already conforms to `Throwable`, its `userFriendlyMessage` is used.
 
 All enhanced error messages are fully localized using the `String(localized:)` pattern, ensuring users receive messages in their preferred language where available.
 
+### String Interpolation Convenience
+
+ErrorKit enhances Swift's string interpolation to automatically use `userFriendlyMessage(for:)`:
+
+```swift
+// Instead of:
+showAlert(message: "Save failed: \(ErrorKit.userFriendlyMessage(for: error))")
+
+// You can simply use:
+showAlert(message: "Save failed: \(error)")
+Text("Could not load data: \(error)")
+Logger().info("Sync completed with error: \(error)")
+```
+
+This works with any error type — both your custom `Throwable` errors and system errors.
+
 ### How It Works
 
 The `userFriendlyMessage(for:)` function follows this process to determine the best error message:

@@ -63,6 +63,21 @@ For errors conforming to the `Catching` protocol, you get the complete error wra
 
 Even for errors that don't conform to `Catching`, you still get valuable information since most Swift errors are enums. The error chain description will show you the exact enum case (e.g., `FileError.notFound`), making it easy to search your codebase for the error's origin. This is much better than the default cryptic message you get for enum cases when using `localizedDescription`.
 
+### String Interpolation for Debug Logging
+
+ErrorKit enhances string interpolation for error chain debugging. Use either `chain:` or `debug:` (they're aliases) to get the complete hierarchical description:
+
+```swift
+// Instead of:
+Logger().error("Update failed: \(ErrorKit.errorChainDescription(for: error))")
+
+// You can simply use either:
+Logger().error("Update failed:\n\(chain: error)")
+Logger().error("Update failed:\n\(debug: error)")
+```
+
+Use `\(error)` for user-facing messages, `\(chain: error)` or `\(debug: error)` for debugging.
+
 ### Error Analytics with Grouping IDs
 
 To help prioritize which errors to fix, ErrorKit provides `groupingID(for:)` that generates stable identifiers for errors sharing the exact same type structure and enum cases:
