@@ -168,7 +168,7 @@ public enum ErrorKit {
          } else {
             // For enums, include the full case description with type name
             if let enclosingType {
-               return "\(enclosingType).\(error)"
+               return "\(enclosingType).\(String(describing: error))"
             } else {
                return String(describing: error)
             }
