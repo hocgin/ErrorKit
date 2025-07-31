@@ -110,7 +110,8 @@ public enum OperationError: Throwable, Catching {
       case .dependencyFailed(let dependency):
          return String.localized(
             key: "BuiltInErrors.OperationError.dependencyFailed",
-            defaultValue: "The operation could not be started because a required component failed to initialize: \(dependency). Please restart the application or contact support."
+            defaultValue:
+               "The operation could not be started because a required component failed to initialize: \(dependency). Please restart the application or contact support."
          )
       case .canceled:
          return String.localized(

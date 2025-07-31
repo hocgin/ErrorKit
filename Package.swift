@@ -8,7 +8,7 @@ let package = Package(
    products: [.library(name: "ErrorKit", targets: ["ErrorKit"])],
    dependencies: [
       // CryptoKit is not available on Linux, so we need Swift Crypto
-      .package(url: "https://github.com/apple/swift-crypto.git", from: "3.11.0"),
+      .package(url: "https://github.com/apple/swift-crypto.git", from: "3.11.0")
    ],
    targets: [
       .target(
@@ -18,7 +18,7 @@ let package = Package(
                name: "Crypto",
                package: "swift-crypto",
                condition: .when(platforms: [.android, .linux, .openbsd, .wasi, .windows])
-            ),
+            )
          ],
          resources: [
             .process("Resources/Localizable.xcstrings"),

@@ -110,7 +110,8 @@ public enum ParsingError: Throwable, Catching {
       case .invalidInput(let input):
          return String.localized(
             key: "BuiltInErrors.ParsingError.invalidInput",
-            defaultValue: "The provided input could not be processed correctly: \(input). Please review the input and ensure it matches the expected format."
+            defaultValue:
+               "The provided input could not be processed correctly: \(input). Please review the input and ensure it matches the expected format."
          )
       case .missingField(let field):
          return String.localized(

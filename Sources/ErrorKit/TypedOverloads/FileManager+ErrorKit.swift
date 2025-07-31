@@ -136,7 +136,11 @@ public enum FileManagerError: Throwable {
 
 extension FileManager {
    /// A typed-throws overload of `createDirectory(at:)` that maps known errors to a custom ``FileManagerError`` enum for enhanced error handling.
-   public func throwableCreateDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool = false, attributes: [FileAttributeKey : Any]? = nil) throws(FileManagerError) {
+   public func throwableCreateDirectory(
+      at url: URL,
+      withIntermediateDirectories createIntermediates: Bool = false,
+      attributes: [FileAttributeKey: Any]? = nil
+   ) throws(FileManagerError) {
       do {
          try self.createDirectory(at: url, withIntermediateDirectories: createIntermediates, attributes: attributes)
       } catch {
@@ -145,7 +149,11 @@ extension FileManager {
    }
 
    /// A typed-throws overload of `createDirectory(atPath:)` that maps known errors to a custom ``FileManagerError`` enum for enhanced error handling.
-   public func throwableCreateDirectory(atPath path: String, withIntermediateDirectories createIntermediates: Bool = false, attributes: [FileAttributeKey : Any]? = nil) throws(FileManagerError) {
+   public func throwableCreateDirectory(
+      atPath path: String,
+      withIntermediateDirectories createIntermediates: Bool = false,
+      attributes: [FileAttributeKey: Any]? = nil
+   ) throws(FileManagerError) {
       do {
          try self.createDirectory(atPath: path, withIntermediateDirectories: createIntermediates, attributes: attributes)
       } catch {

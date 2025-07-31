@@ -201,10 +201,11 @@ public enum NetworkError: Throwable, Catching {
          if let message = message {
             return defaultMessage + message
          } else {
-            return defaultMessage + String.localized(
-               key: "Common.Message.tryAgainLater",
-               defaultValue: "Please try again later."
-            )
+            return defaultMessage
+               + String.localized(
+                  key: "Common.Message.tryAgainLater",
+                  defaultValue: "Please try again later."
+               )
          }
       case .decodingFailure:
          return String.localized(

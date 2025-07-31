@@ -1,6 +1,7 @@
 import Foundation
+
 #if canImport(FoundationNetworking)
-import FoundationNetworking
+   import FoundationNetworking
 #endif
 
 /// An enumeration that represents various errors that can occur when performing network requests with `URLSession`.
@@ -209,9 +210,9 @@ extension URLSession {
    /// A method to handle HTTP status codes and provide better error handling for different cases.
    public func handleHTTPStatusCode(_ statusCode: Int, data: Data?) throws -> Data? {
       switch statusCode {
-      case 200...299: // Success range
+      case 200...299:  // Success range
          return data
-      case 400...499: // Client errors
+      case 400...499:  // Client errors
          switch statusCode {
          case 401:
             throw URLSessionError.unauthorized(bodyData: data)
@@ -236,7 +237,7 @@ extension URLSession {
          default:
             throw URLSessionError.badRequest(bodyData: data)
          }
-      case 500...599: // Server errors
+      case 500...599:  // Server errors
          throw URLSessionError.serverError
       default:
          throw URLSessionError.unknownStatusCode(statusCode)

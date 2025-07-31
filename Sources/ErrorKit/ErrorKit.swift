@@ -1,8 +1,9 @@
 import Foundation
+
 #if canImport(CryptoKit)
-import CryptoKit
+   import CryptoKit
 #else
-import Crypto
+   import Crypto
 #endif
 
 public enum ErrorKit {
@@ -151,7 +152,7 @@ public enum ErrorKit {
    /// - Parameter error: The error to describe, potentially containing nested errors
    /// - Returns: A formatted string showing the complete error hierarchy with indentation
    public static func errorChainDescription(for error: Error) -> String {
-      return Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
+      Self.chainDescription(for: error, indent: "", enclosingType: type(of: error))
    }
 
    private static func chainDescription(for error: Error, indent: String, enclosingType: Any.Type?) -> String {
@@ -254,11 +255,11 @@ public enum ErrorKit {
       let descriptionWithoutDetails = errorChainDescription.components(separatedBy: CharacterSet(charactersIn: "(:")).first!
 
       #if canImport(CryptoKit)
-      let digest = CryptoKit.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
-      let fullHash = Data(digest).compactMap { String(format: "%02x", $0) }.joined()
+         let digest = CryptoKit.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
+         let fullHash = Data(digest).compactMap { String(format: "%02x", $0) }.joined()
       #else
-      let digest = Crypto.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
-      let fullHash = digest.compactMap { String(format: "%02x", $0) }.joined()
+         let digest = Crypto.SHA256.hash(data: Data(descriptionWithoutDetails.utf8))
+         let fullHash = digest.compactMap { String(format: "%02x", $0) }.joined()
       #endif
 
       // Return first 6 characters for a shorter but still practically unique identifier
