@@ -164,43 +164,13 @@
       ///
       /// Example:
       /// ```swift
-      /// let duration = Duration.hours(2)
+      /// let duration = Duration.seconds(7200) // 2 hours in seconds
       /// let timeInterval = duration.timeInterval // Converts to TimeInterval for compatibility
       /// ```
       ///
       /// - Returns: The duration as a `TimeInterval`, which represents the duration in seconds.
-      public var timeInterval: TimeInterval {
+      var timeInterval: TimeInterval {
          TimeInterval(self.components.seconds) + (TimeInterval(self.components.attoseconds) / 1_000_000_000_000_000_000)
-      }
-
-      /// Constructs a `Duration` given a number of minutes represented as a `BinaryInteger`.
-      ///
-      /// This is helpful for precise time measurements, such as cooking timers, short breaks, or meeting durations.
-      ///
-      /// Example:
-      /// ```swift
-      /// let fifteenMinutesDuration = Duration.minutes(15) // Creates a Duration of 15 minutes
-      /// ```
-      ///
-      /// - Parameter minutes: The number of minutes.
-      /// - Returns: A `Duration` representing the given number of minutes.
-      public static func minutes<T: BinaryInteger>(_ minutes: T) -> Duration {
-         self.seconds(minutes * 60)
-      }
-
-      /// Constructs a `Duration` given a number of hours represented as a `BinaryInteger`.
-      ///
-      /// Can be used to schedule events or tasks that are several hours long.
-      ///
-      /// Example:
-      /// ```swift
-      /// let eightHoursDuration = Duration.hours(8) // Creates a Duration of 8 hours
-      /// ```
-      ///
-      /// - Parameter hours: The number of hours.
-      /// - Returns: A `Duration` representing the given number of hours.
-      public static func hours<T: BinaryInteger>(_ hours: T) -> Duration {
-         self.minutes(hours * 60)
       }
    }
 #endif
