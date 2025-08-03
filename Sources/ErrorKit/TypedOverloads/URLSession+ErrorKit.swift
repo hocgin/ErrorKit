@@ -180,7 +180,7 @@ extension URLSession {
       do {
          return try await self.data(for: request)
       } catch {
-         throw mapToThrowable(error: error as NSError)
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 
@@ -189,7 +189,7 @@ extension URLSession {
       do {
          return try await self.data(from: url)
       } catch {
-         throw mapToThrowable(error: error as NSError)
+         throw self.mapToThrowable(error: error as NSError)
       }
    }
 

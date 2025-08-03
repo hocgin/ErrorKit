@@ -33,7 +33,7 @@
             composer.setMessageBody(messageBody, isHTML: false)
          }
 
-         for attachment in attachments {
+         for attachment in self.attachments {
             if let attachment {
                composer.addAttachmentData(
                   attachment.data,
